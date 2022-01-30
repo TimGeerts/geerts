@@ -267,6 +267,32 @@
       },
       "tags": [],
       "implicitDependencies": ["wivipro"]
+    },
+    "wivipro-home": {
+      "projectType": "library",
+      "root": "libs/wivipro/home",
+      "sourceRoot": "libs/wivipro/home/src",
+      "prefix": "geerts",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wivipro/home"],
+          "options": {
+            "jestConfig": "libs/wivipro/home/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/wivipro/home/src/**/*.ts",
+              "libs/wivipro/home/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

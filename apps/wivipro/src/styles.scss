@@ -12,8 +12,78 @@ $dark: #212121;
 
 // wivipro vars
 $body-bg: $light;
+$content-bg: #ddd7a5;
 
 html,
 body {
+  font-size: 16px;
   background-color: $body-bg;
+  color: $dark;
+}
+
+.header {
+  background-color: $primary;
+  color: $light;
+}
+
+.menu {
+  background-color: $content-bg;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  ul {
+    margin-top: 7px;
+    li {
+      display: inline;
+      a {
+        font-size: 1.1rem;
+        padding: 6px 3px 2px 3px;
+        margin-right: 20px;
+        text-decoration: none;
+        &.active,
+        &:hover {
+          color: $primary;
+          border-bottom: 2px solid $primary;
+        }
+      }
+    }
+  }
+}
+
+.content .row {
+  margin-top: 10px;
+  background-color: $content-bg;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: $primary url('assets/footer.jpg') repeat-x;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  color: #a5a591;
+
+  strong {
+    color: #ecebcf;
+  }
+
+  a {
+    color: #a5a591;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: $light;
+    }
+  }
+
+  .social {
+    font-size: 2.5rem;
+    a {
+      margin-right: 0.6rem !important;
+      line-height: 0;
+      &:hover {
+        color: $light;
+      }
+    }
+  }
 }

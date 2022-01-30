@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@geerts/ui": ["libs/ui/src/index.ts"]
+      "@geerts/ui": ["libs/ui/src/index.ts"],
+      "@geerts/wivipro/home": ["libs/wivipro/home/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,3 +1,105 @@
 <div>
-  <h2 class="bg-primary">Wivipro xxx</h2>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <h1>Wivipro</h1>
+      </div>
+      <div class="row menu">
+        <ul id="menu">
+          <li>
+            <a id="home" class="active" href="http://www.wivipro.com">Home</a>
+          </li>
+          <li><a id="1" class="internal" href="huwelijk">Huwelijk</a></li>
+          <li><a id="2" class="internal" href="geboorte">Geboorte</a></li>
+          <li><a id="3" class="internal" href="manden">Onze creaties</a></li>
+          <li>
+            <a id="7" href="http://www.wivipro-webshop.be" target="_blank"
+              >Webwinkel</a
+            >
+          </li>
+          <!-- <li><a id="4" class="internal" href="contact">Contact</a></li> -->
+          <li><a id="5" class="internal" href="groothandel">Groothandel</a></li>
+          <li>
+            <a
+              id="6"
+              class="shop groothandel"
+              style="display: none"
+              href="/Shop/Overview?groothandel=true"
+              >Webwinkel (groothandel)</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <div class="footer small">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <address>
+            <strong>Contact</strong><br /><br />
+            Tel: +32 (0)3 665 26 48<br />
+            GSM: +32 (0)474 222 085<br />
+            Email: <a href="mailto:info@wivipro.be">info@wivipro.be</a><br />
+          </address>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <address>
+            <strong>Legal</strong><br /><br />
+            BTW: BE 0812 026 788<br />
+            Record: BE86 6528 3312 0150<br />
+            <a
+              href="https://www.dropbox.com/s/j3czcyok2p3hwto/Algemene%20Verkoopsvoorwaarden.pdf?dl=0"
+              target="_blank"
+              >Verkoopsvoorwaarden</a
+            ><br />
+          </address>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <address>
+            <strong>Download</strong><br /><br />
+            <a
+              href="https://www.dropbox.com/s/a4rti18ffecysv8/geboorte.pdf?dl=0"
+              target="_blank"
+              >Prijslijst geboortedrukwerk</a
+            ><br />
+            <a
+              href="https://www.dropbox.com/s/utu0zw9iczcth0u/huwelijk.pdf?dl=0"
+              target="_blank"
+              >Prijslijst huwelijksdrukwerk</a
+            ><br />
+            <a
+              href="https://www.dropbox.com/s/dchjpu880leok6b/jubileum.pdf?dl=0"
+              target="_blank"
+              >Prijslijst jubileumdrukwerk</a
+            ><br />
+          </address>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <address>
+            <strong>Social</strong>
+            <br /><br />
+            <div class="social d-flex">
+              <a href="#" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+              <a href="#" target="_blank" title="Instagram">
+                <i class="fab fa-instagram-square"></i>
+              </a>
+              <a href="#" target="_blank" title="Pinterest">
+                <i class="fab fa-pinterest-square"></i>
+              </a>
+            </div>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
