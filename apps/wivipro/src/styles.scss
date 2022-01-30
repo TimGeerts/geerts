@@ -1,0 +1,19 @@
+// override bootstrap theme vars (bootstrap 5.1.3)
+$primary: #855f3d;
+$secondary: #dfd9a9;
+$success: #4caf50;
+$info: #29b6f6;
+$warning: #ffeb3b;
+$danger: #b71c1c;
+$light: #ecebcf;
+$dark: #212121;
+
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
+// wivipro vars
+$body-bg: $light;
+
+html,
+body {
+  background-color: $body-bg;
+}

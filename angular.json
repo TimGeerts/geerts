@@ -145,6 +145,128 @@
         }
       },
       "tags": []
+    },
+    "wivipro": {
+      "projectType": "application",
+      "root": "apps/wivipro",
+      "sourceRoot": "apps/wivipro/src",
+      "prefix": "geerts",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/wivipro",
+            "index": "apps/wivipro/src/index.html",
+            "main": "apps/wivipro/src/main.ts",
+            "polyfills": "apps/wivipro/src/polyfills.ts",
+            "tsConfig": "apps/wivipro/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/wivipro/src/favicon.ico",
+              "apps/wivipro/src/assets"
+            ],
+            "styles": ["apps/wivipro/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/wivipro/src/environments/environment.ts",
+                  "with": "apps/wivipro/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "wivipro:build:production"
+            },
+            "development": {
+              "browserTarget": "wivipro:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wivipro:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/wivipro/src/**/*.ts",
+              "apps/wivipro/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/wivipro"],
+          "options": {
+            "jestConfig": "apps/wivipro/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "wivipro-e2e": {
+      "root": "apps/wivipro-e2e",
+      "sourceRoot": "apps/wivipro-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/wivipro-e2e/cypress.json",
+            "devServerTarget": "wivipro:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wivipro:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/wivipro-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["wivipro"]
     }
   }
 }
