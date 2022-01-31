@@ -1,0 +1,15 @@
+<div class="horizontal-card {{ type }}" [ngClass]="{ rtl: rtl }">
+  <!-- <a class="horizontal-card__img_link" href="#"> -->
+
+  <img *ngIf="img" class="horizontal-card__img" [src]="img" alt="Image Title" />
+
+  <!-- </a> -->
+  <div class="horizontal-card__text">
+    <h1 class="horizontal-card__title blue">
+      <ng-content select="[card-title]"></ng-content>
+    </h1>
+    <div class="horizontal-card__preview-txt">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

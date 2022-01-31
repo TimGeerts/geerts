@@ -9,11 +9,11 @@ $light: #ecebcf;
 $dark: #212121;
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Roboto:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Bilbo+Swash+Caps&family=Roboto:wght@100;300;400;700&display=swap');
 
 // wivipro vars
 $body-bg: $light;
-$content-bg: #ddd7a5;
+$content-bg: #d7ceb2;
 
 html,
 body,
@@ -32,7 +32,9 @@ body,
 
 .content {
   flex: 1 0 auto;
-  background-color: $content-bg;
+  // background-color: rgba($content-bg, 0.6);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .footer {
   flex-shrink: 0;
@@ -58,11 +60,14 @@ body {
 }
 
 .menu {
+  display: none;
   background-color: $content-bg;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  font-family: 'Baloo 2', cursive;
   ul {
-    margin-top: 7px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     li {
       display: inline;
       a {
@@ -70,19 +75,17 @@ body {
         padding: 6px 3px 2px 3px;
         margin-right: 20px;
         text-decoration: none;
+        &.active {
+          font-weight: 500;
+        }
         &.active,
         &:hover {
           color: $primary;
-          border-bottom: 2px solid $primary;
+          border-bottom: 3px solid $primary;
         }
       }
     }
   }
-}
-
-.content .row {
-  margin-top: 10px;
-  background-color: $content-bg;
 }
 
 .footer {
