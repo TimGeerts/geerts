@@ -9,10 +9,34 @@ $light: #ecebcf;
 $dark: #212121;
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Roboto:wght@100;300;400;700&display=swap');
 
 // wivipro vars
 $body-bg: $light;
 $content-bg: #ddd7a5;
+
+html,
+body,
+.wrapper {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.0625rem;
+  height: 100%;
+  color: $dark;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+  background-color: $content-bg;
+}
+.footer {
+  flex-shrink: 0;
+}
 
 html,
 body {
@@ -24,6 +48,13 @@ body {
 .header {
   background-color: $primary;
   color: $light;
+  .brand {
+    align-items: center;
+    .title {
+      font-family: 'Bilbo Swash Caps', cursive;
+      font-size: 6rem;
+    }
+  }
 }
 
 .menu {
@@ -55,12 +86,9 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background: $primary url('assets/footer.jpg') repeat-x;
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: #a5a591;
 
   strong {
@@ -73,6 +101,12 @@ body {
     &:hover {
       text-decoration: underline;
       color: $light;
+    }
+  }
+
+  .hours {
+    td:nth-child(1) {
+      padding-right: 0.75rem;
     }
   }
 
