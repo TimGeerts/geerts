@@ -9,8 +9,10 @@ import { Component, Input } from '@angular/core';
 })
 export class HorizontalCardComponent {
   @Input() type: 'dark' | 'light' = 'light';
+  @Input() title = '';
   @Input() img = '';
   @Input() rtl = false;
+
   constructor() {
     //not empty
   }

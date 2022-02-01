@@ -13,7 +13,7 @@ $dark: #212121;
 
 // wivipro vars
 $body-bg: $light;
-$content-bg: #d7ceb2;
+$accent: #d7ceb2;
 
 html,
 body,
@@ -24,6 +24,7 @@ body,
   letter-spacing: 0.0625rem;
   height: 100%;
   color: $dark;
+  text-rendering: optimizeLegibility;
 }
 .wrapper {
   display: flex;
@@ -47,27 +48,13 @@ body {
   color: $dark;
 }
 
-.header {
-  background-color: $primary;
-  color: $light;
-  .brand {
-    align-items: center;
-    .title {
-      font-family: 'Bilbo Swash Caps', cursive;
-      font-size: 6rem;
-    }
-  }
-}
-
-.menu {
-  display: none;
-  background-color: $content-bg;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+.nav {
   font-family: 'Baloo 2', cursive;
+
   ul {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    padding-left: 0;
     li {
       display: inline;
       a {
@@ -86,6 +73,34 @@ body {
       }
     }
   }
+  .profile a {
+    margin-right: 0;
+  }
+}
+
+.header {
+  background-color: $primary;
+  color: $light;
+  .brand {
+    align-items: center;
+    .title {
+      font-family: 'Bilbo Swash Caps', cursive;
+      font-size: 6rem;
+    }
+    .subtitle {
+      img {
+        height: 50px;
+      }
+    }
+  }
+}
+
+.menu {
+  // display: none;
+  // background-color: $content-bg;
+  // border-top-left-radius: 8px;
+  // border-top-right-radius: 8px;
+  font-family: 'Baloo 2', cursive;
 }
 
 .footer {
@@ -123,4 +138,12 @@ body {
       }
     }
   }
+}
+
+p.extra-info {
+  font-size: 0.875em;
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 4px solid $accent;
+  opacity: 0.8;
 }

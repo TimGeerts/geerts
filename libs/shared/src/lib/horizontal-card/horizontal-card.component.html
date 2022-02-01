@@ -5,11 +5,14 @@
 
   <!-- </a> -->
   <div class="horizontal-card__text">
-    <h1 class="horizontal-card__title blue">
-      <ng-content select="[card-title]"></ng-content>
+    <h1 class="horizontal-card__title">
+      {{title}}
     </h1>
     <div class="horizontal-card__preview-txt">
       <ng-content></ng-content>
+    </div>
+    <div class="horizontal-card__links">
+      <ng-content select="[card-links]"></ng-content>
     </div>
   </div>
 </div>
