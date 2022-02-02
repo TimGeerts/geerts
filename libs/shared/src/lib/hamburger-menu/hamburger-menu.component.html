@@ -1,0 +1,22 @@
+<div class="sm-hamburger {{ class }}" (click)="showMenu = !showMenu">
+  <i
+    class="fas fa-bars"
+    [ngClass]="{ 'fa-bars': !showMenu, 'fa-times': showMenu }"
+  ></i>
+</div>
+
+<ul class="mobile-menu d-md-none" [ngClass]="{ 'd-block': showMenu }">
+  <li *ngFor="let item of menuItems">
+    <a
+      href="#"
+      title="{{ item.label }}"
+      *ngIf="item.routerLink"
+      routerLink="{{ item.routerLink }}"
+      routerLinkActive="active"
+      >{{ item.label }}</a
+    >
+    <a *ngIf="item.extLink" href="{{ item.extLink }}" target="_blank">{{
+      item.label
+    }}</a>
+  </li>
+</ul>

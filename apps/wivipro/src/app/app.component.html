@@ -1,46 +1,28 @@
 <div class="wrapper">
   <div class="nav container d-flex justify-content-between">
-    <geerts-horizontal-menu class="d-none d-md-block">
-      <geerts-horizontal-menu-item
-        routerLink="/about"
-        label="Over ons"
-      ></geerts-horizontal-menu-item>
-      <geerts-horizontal-menu-item
-        routerLink="/presentation"
-        label="Onze creaties"
-      ></geerts-horizontal-menu-item>
-      <geerts-horizontal-menu-item
-        extLink="http://www.wivipro-webshop.be"
-        label="Webshop"
-      ></geerts-horizontal-menu-item>
-      <geerts-horizontal-menu-item
-        routerLink="/wholesale"
-        label="Groothandel"
-      ></geerts-horizontal-menu-item>
+    <geerts-horizontal-menu class="d-none d-md-block" [menuItems]="menuItems">
     </geerts-horizontal-menu>
 
     <div class="profile d-none d-md-block">
       <ul>
         <li>
           <a href="#">
-            <i class="fas fa-user"></i>
-            <span class="ms-2">aanmelden</span>
+            <span class="ms-2">Aanmelden</span>
           </a>
         </li>
       </ul>
     </div>
   </div>
   <div class="header">
+    <geerts-hamburger-menu class="d-md-none" [menuItems]="menuItems">
+    </geerts-hamburger-menu>
     <div class="container">
-      <div class="sm-hamburger d-md-none">
-        <i class="fas fa-bars"></i>
-      </div>
       <div class="sm-user d-md-none">
         <i class="fas fa-user"></i>
       </div>
       <div class="brand d-flex flex-lg-row flex-column">
         <div class="title">Wivipro</div>
-        <div class="subtitle ms-4 mb-2 ps-2">
+        <div class="subtitle ms-4 mb-2 ps-2 d-none d-md-block">
           <img src="assets/prinsjes.png" />
         </div>
       </div>

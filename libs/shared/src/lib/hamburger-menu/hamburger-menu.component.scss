@@ -1,0 +1,43 @@
+.sm-hamburger {
+  position: absolute;
+  top: 0.3rem;
+  left: 1.6rem;
+  font-size: 1.7rem;
+  color: var(--bs-light);
+  cursor: pointer;
+}
+ul.mobile-menu {
+  position: absolute;
+  top: 3rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.6rem;
+  list-style-type: none;
+  display: none;
+  background-color: var(--bs-primary);
+  li {
+    padding-bottom: 0.5rem;
+    a {
+      color: var(--bs-light);
+      font-size: 1.1rem;
+      padding: 6px 3px 2px 3px;
+      margin-right: 20px;
+      text-decoration: none;
+      &.active {
+        font-weight: 500;
+        // &::before {
+        //   position: relative;
+        //   top: -2pt;
+        //   content: '';
+        //   display: inline-block;
+        //   /* By using an em scale, the arrows will size with the font */
+        //   width: 0.5em;
+        //   height: 0.5em;
+        //   border-right: 0.2em solid var(--bs-light);
+        //   border-top: 0.2em solid var(--bs-light);
+        //   transform: rotate(45deg);
+        //   margin-right: 0.5em;
+        // }
+      }
+    }
+  }
+}
