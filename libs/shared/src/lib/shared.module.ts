@@ -4,8 +4,10 @@ import { HorizontalCardComponent } from './horizontal-card/horizontal-card.compo
 import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.component';
 import { RouterModule } from '@angular/router';
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export * from './types/menu-item';
+export * from './types/gallery-image';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -13,11 +15,13 @@ export * from './types/menu-item';
     HorizontalCardComponent,
     HorizontalMenuComponent,
     HamburgerMenuComponent,
+    GalleryComponent,
   ],
   exports: [
     HorizontalCardComponent,
     HorizontalMenuComponent,
     HamburgerMenuComponent,
+    GalleryComponent,
   ],
 })
 export class SharedModule {}

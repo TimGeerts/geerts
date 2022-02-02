@@ -13,13 +13,21 @@ export class AboutComponent implements OnInit {
   private imagesGifts = ['gifts.jpg'];
   private imagesThanks = ['sugar.jpg'];
 
+  imgMarriage = '';
   imgBirth = '';
+  imgPresentation = '';
+  imgGift = '';
+  imgThanks = '';
 
   ngOnInit(): void {
+    this.imgMarriage = this.getRandomImg('marriage');
     this.imgBirth = this.getRandomImg('birth');
+    this.imgPresentation = this.getRandomImg('presentation');
+    this.imgGift = this.getRandomImg('gifts');
+    this.imgThanks = this.getRandomImg('thanks');
   }
 
-  getRandomImg(type: string): string {
+  private getRandomImg(type: string): string {
     let arr = this.imagesGifts;
     switch (type) {
       case 'marriage': {
@@ -47,10 +55,7 @@ export class AboutComponent implements OnInit {
         break;
       }
     }
-    return `assets/${arr[this.randomArrayIndex(arr.length)]}`;
-  }
-
-  private randomArrayIndex(length: number): number {
-    return Math.floor(Math.random() * length);
+    const rngIdx = Math.floor(Math.random() * length);
+    return `assets/${arr[rngIdx]}`;
   }
 }

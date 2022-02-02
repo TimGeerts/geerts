@@ -1,9 +1,8 @@
-<div class="horizontal-card {{ type }}" [ngClass]="{ rtl: rtl }">
-  <!-- <a class="horizontal-card__img_link" href="#"> -->
-
+<div
+  class="horizontal-card {{ type }}"
+  [ngClass]="{ rtl: rtl, 'no-img': !img }"
+>
   <img *ngIf="img" class="horizontal-card__img" [src]="img" alt="Image Title" />
-
-  <!-- </a> -->
   <div class="horizontal-card__text">
     <h1 class="horizontal-card__title">
       {{ cardTitle }}

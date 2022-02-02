@@ -198,6 +198,13 @@
     }
   }
 
+  .horizontal-card.no-img {
+    .horizontal-card__text:before,
+    .horizontal-card__text:after {
+      display: none;
+    }
+  }
+
   .horizontal-card.dark {
     .horizontal-card__text:before,
     .horizontal-card__text:after {

@@ -9,8 +9,4 @@ import { IMenuItem } from '../types/menu-item';
 export class HorizontalMenuComponent {
   @Input() class = '';
   @Input() menuItems: IMenuItem[] = new Array<IMenuItem>();
-
-  constructor() {
-    //empty
-  }
 }
