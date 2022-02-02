@@ -33,7 +33,8 @@ body,
 
 .content {
   flex: 1 0 auto;
-  // background-color: rgba($content-bg, 0.6);
+  padding-left: 0;
+  padding-right: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -50,7 +51,6 @@ body {
 
 .nav {
   font-family: 'Baloo 2', cursive;
-
   ul {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -67,10 +67,17 @@ body {
         }
         &.active,
         &:hover {
-          color: $primary;
           border-bottom: 3px solid $primary;
         }
       }
+      // &.hamburger {
+      //   a {
+      //     font-size: 1.7rem;
+      //     &:hover {
+      //       border: none;
+      //     }
+      //   }
+      // }
     }
   }
   .profile a {
@@ -93,18 +100,23 @@ body {
       }
     }
   }
-}
-
-.menu {
-  // display: none;
-  // background-color: $content-bg;
-  // border-top-left-radius: 8px;
-  // border-top-right-radius: 8px;
-  font-family: 'Baloo 2', cursive;
+  .sm-hamburger,
+  .sm-user {
+    position: absolute;
+    top: 0.8rem;
+    font-size: 1.7rem;
+    color: $light;
+  }
+  .sm-hamburger {
+    left: 1.6rem;
+  }
+  .sm-user {
+    right: 1.6rem;
+  }
 }
 
 .footer {
-  background: $primary url('assets/footer.jpg') repeat-x;
+  background: $primary;
   padding-top: 20px;
   padding-bottom: 20px;
   color: #a5a591;

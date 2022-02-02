@@ -294,17 +294,17 @@
       "tags": [],
       "implicitDependencies": ["wivipro"]
     },
-    "wivipro-home": {
+    "wivipro-feat-about": {
       "projectType": "library",
-      "root": "libs/wivipro/home",
-      "sourceRoot": "libs/wivipro/home/src",
+      "root": "libs/wivipro/feat-about",
+      "sourceRoot": "libs/wivipro/feat-about/src",
       "prefix": "geerts",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/wivipro/home"],
+          "outputs": ["coverage/libs/wivipro/feat-about"],
           "options": {
-            "jestConfig": "libs/wivipro/home/jest.config.js",
+            "jestConfig": "libs/wivipro/feat-about/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -312,8 +312,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/wivipro/home/src/**/*.ts",
-              "libs/wivipro/home/src/**/*.html"
+              "libs/wivipro/feat-about/src/**/*.ts",
+              "libs/wivipro/feat-about/src/**/*.html"
             ]
           }
         }

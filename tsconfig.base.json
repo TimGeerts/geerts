@@ -17,6 +17,7 @@
     "paths": {
       "@geerts/shared": ["libs/shared/src/index.ts"],
       "@geerts/ui": ["libs/ui/src/index.ts"],
+      "@geerts/wivipro/feat-about": ["libs/wivipro/feat-about/src/index.ts"],
       "@geerts/wivipro/home": ["libs/wivipro/home/src/index.ts"]
     }
   },

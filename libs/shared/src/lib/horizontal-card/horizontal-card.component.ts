@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class HorizontalCardComponent {
   @Input() type: 'dark' | 'light' = 'light';
-  @Input() title = '';
+  @Input() cardTitle = '';
   @Input() img = '';
   @Input() rtl = false;
 

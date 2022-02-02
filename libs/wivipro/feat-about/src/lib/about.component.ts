@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'geerts-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'geerts-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class AboutComponent implements OnInit {
   // TODO load from "database"
   private imagesMarriage = ['marriage500x500.png'];
   private imagesBirth = ['baby500x500.jpg', 'birth_feet.jpg'];
@@ -14,8 +14,6 @@ export class HomeComponent implements OnInit {
   private imagesThanks = ['sugar.jpg'];
 
   imgBirth = '';
-
-  constructor() {}
 
   ngOnInit(): void {
     this.imgBirth = this.getRandomImg('birth');

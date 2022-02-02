@@ -1,0 +1,17 @@
+<div class="menu {{ class }}">
+  <ul>
+    <li *ngFor="let item of items">
+      <a
+        href="#"
+        title="{{ item.label }}"
+        *ngIf="item.routerLink"
+        routerLink="{{ item.routerLink }}"
+        routerLinkActive="active"
+        >{{ item.label }}</a
+      >
+      <a *ngIf="item.extLink" href="{{ item.extLink }}" target="_blank">{{
+        item.label
+      }}</a>
+    </li>
+  </ul>
+</div>

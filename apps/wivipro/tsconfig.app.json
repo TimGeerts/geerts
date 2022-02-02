@@ -5,6 +5,10 @@
     "types": []
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.d.ts", "../../libs/wivipro/home/src/index.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "../../libs/wivipro/home/src/index.ts",
+    "../../libs/wivipro/feat-about/src/index.ts"
+  ],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }
