@@ -8,7 +8,9 @@
   "include": [
     "src/**/*.d.ts",
     "../../libs/wivipro/home/src/index.ts",
-    "../../libs/wivipro/feat-about/src/index.ts"
+    "../../libs/wivipro/feat-about/src/index.ts",
+    "../../libs/wivipro/feat-creations/src/index.ts",
+    "../../libs/wivipro/feat-wholesale/src/index.ts"
   ],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }

@@ -24,6 +24,20 @@ import { SharedModule } from '@geerts/shared';
               (module) => module.FeatAboutModule
             ),
         },
+        {
+          path: 'creations',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-creations').then(
+              (module) => module.FeatCreationsModule
+            ),
+        },
+        {
+          path: 'wholesale',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-wholesale').then(
+              (module) => module.FeatWholesaleModule
+            ),
+        },
       ],
       { initialNavigation: 'enabledBlocking' }
     ),

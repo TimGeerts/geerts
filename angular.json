@@ -319,6 +319,58 @@
         }
       },
       "tags": []
+    },
+    "wivipro-feat-creations": {
+      "projectType": "library",
+      "root": "libs/wivipro/feat-creations",
+      "sourceRoot": "libs/wivipro/feat-creations/src",
+      "prefix": "geerts",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wivipro/feat-creations"],
+          "options": {
+            "jestConfig": "libs/wivipro/feat-creations/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/wivipro/feat-creations/src/**/*.ts",
+              "libs/wivipro/feat-creations/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "wivipro-feat-wholesale": {
+      "projectType": "library",
+      "root": "libs/wivipro/feat-wholesale",
+      "sourceRoot": "libs/wivipro/feat-wholesale/src",
+      "prefix": "geerts",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wivipro/feat-wholesale"],
+          "options": {
+            "jestConfig": "libs/wivipro/feat-wholesale/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/wivipro/feat-wholesale/src/**/*.ts",
+              "libs/wivipro/feat-wholesale/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

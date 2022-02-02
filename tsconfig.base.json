@@ -18,6 +18,12 @@
       "@geerts/shared": ["libs/shared/src/index.ts"],
       "@geerts/ui": ["libs/ui/src/index.ts"],
       "@geerts/wivipro/feat-about": ["libs/wivipro/feat-about/src/index.ts"],
+      "@geerts/wivipro/feat-creations": [
+        "libs/wivipro/feat-creations/src/index.ts"
+      ],
+      "@geerts/wivipro/feat-wholesale": [
+        "libs/wivipro/feat-wholesale/src/index.ts"
+      ],
       "@geerts/wivipro/home": ["libs/wivipro/home/src/index.ts"]
     }
   },
