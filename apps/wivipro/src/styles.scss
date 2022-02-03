@@ -143,3 +143,7 @@ body,
   border-left: 3px solid $accent;
   opacity: 0.8;
 }
+
+p > a {
+  font-weight: 500;
+}

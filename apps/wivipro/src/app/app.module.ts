@@ -39,7 +39,10 @@ import { SharedModule } from '@geerts/shared';
             ),
         },
       ],
-      { initialNavigation: 'enabledBlocking' }
+      {
+        initialNavigation: 'enabledBlocking',
+        scrollPositionRestoration: 'enabled',
+      }
     ),
   ],
   providers: [],

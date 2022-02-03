@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
         routerLink: '/creations',
       },
       {
+        label: 'Geschenken',
+        routerLink: '/gifts',
+      },
+      {
         label: 'Webshop',
         extLink: 'http://www.wivipro-webshop.be',
       },
