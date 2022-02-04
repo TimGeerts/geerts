@@ -26,9 +26,18 @@ import { SharedModule } from '@geerts/shared';
         },
         {
           path: 'creations',
+          data: { title: 'Creaties', folder: 'creations' },
           loadChildren: () =>
-            import('@geerts/wivipro/feat-creations').then(
-              (module) => module.FeatCreationsModule
+            import('@geerts/wivipro/feat-gallery').then(
+              (module) => module.FeatGalleryModule
+            ),
+        },
+        {
+          path: 'gifts',
+          data: { title: 'Geschenken', folder: 'gifts' },
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-gallery').then(
+              (module) => module.FeatGalleryModule
             ),
         },
         {
@@ -36,6 +45,13 @@ import { SharedModule } from '@geerts/shared';
           loadChildren: () =>
             import('@geerts/wivipro/feat-wholesale').then(
               (module) => module.FeatWholesaleModule
+            ),
+        },
+        {
+          path: 'gallery',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-gallery').then(
+              (module) => module.FeatGalleryModule
             ),
         },
       ],

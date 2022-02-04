@@ -190,7 +190,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "apps/wivipro/src/favicon.ico",
-              "apps/wivipro/src/assets"
+              "apps/wivipro/src/assets",
+              "apps/wivipro/src/galleries"
             ],
             "styles": ["apps/wivipro/src/styles.scss"],
             "scripts": []
@@ -320,17 +321,17 @@
       },
       "tags": []
     },
-    "wivipro-feat-creations": {
+    "wivipro-feat-gallery": {
       "projectType": "library",
-      "root": "libs/wivipro/feat-creations",
-      "sourceRoot": "libs/wivipro/feat-creations/src",
+      "root": "libs/wivipro/feat-gallery",
+      "sourceRoot": "libs/wivipro/feat-gallery/src",
       "prefix": "geerts",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/wivipro/feat-creations"],
+          "outputs": ["coverage/libs/wivipro/feat-gallery"],
           "options": {
-            "jestConfig": "libs/wivipro/feat-creations/jest.config.js",
+            "jestConfig": "libs/wivipro/feat-gallery/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -338,8 +339,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/wivipro/feat-creations/src/**/*.ts",
-              "libs/wivipro/feat-creations/src/**/*.html"
+              "libs/wivipro/feat-gallery/src/**/*.ts",
+              "libs/wivipro/feat-gallery/src/**/*.html"
             ]
           }
         }

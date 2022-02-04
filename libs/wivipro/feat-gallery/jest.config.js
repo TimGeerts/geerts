@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'wivipro-feat-creations',
+  displayName: 'wivipro-feat-gallery',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/wivipro/feat-creations',
+  coverageDirectory: '../../../coverage/libs/wivipro/feat-gallery',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

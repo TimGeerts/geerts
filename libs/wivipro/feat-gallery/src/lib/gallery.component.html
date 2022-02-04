@@ -1,0 +1,8 @@
+<geerts-horizontal-card [cardTitle]="title" class="d-block rtl">
+  <p class="mb-5"></p>
+  <geerts-image-grid
+    *ngIf="assetsfolder"
+    [images]="gallery"
+    [path]="assetsfolder"
+  ></geerts-image-grid>
+</geerts-horizontal-card>

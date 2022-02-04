@@ -8,12 +8,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./horizontal-card.component.scss'],
 })
 export class HorizontalCardComponent {
+  @Input() class = '';
   @Input() type: 'dark' | 'light' = 'light';
   @Input() cardTitle = '';
   @Input() img = '';
-  @Input() rtl = false;
-
-  constructor() {
-    //not empty
-  }
 }
