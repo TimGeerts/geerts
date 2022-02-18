@@ -11,5 +11,6 @@ export class HorizontalCardComponent {
   @Input() class = '';
   @Input() type: 'dark' | 'light' = 'light';
   @Input() cardTitle = '';
+  @Input() titleClass = '';
   @Input() img = '';
 }

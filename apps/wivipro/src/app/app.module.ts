@@ -54,6 +54,13 @@ import { SharedModule } from '@geerts/shared';
               (module) => module.FeatGalleryModule
             ),
         },
+        {
+          path: 'login',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-login').then(
+              (module) => module.FeatLoginModule
+            ),
+        },
       ],
       {
         initialNavigation: 'enabledBlocking',

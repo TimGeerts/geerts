@@ -347,6 +347,32 @@
       },
       "tags": []
     },
+    "wivipro-feat-login": {
+      "projectType": "library",
+      "root": "libs/wivipro/feat-login",
+      "sourceRoot": "libs/wivipro/feat-login/src",
+      "prefix": "geerts",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wivipro/feat-login"],
+          "options": {
+            "jestConfig": "libs/wivipro/feat-login/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/wivipro/feat-login/src/**/*.ts",
+              "libs/wivipro/feat-login/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "wivipro-feat-wholesale": {
       "projectType": "library",
       "root": "libs/wivipro/feat-wholesale",

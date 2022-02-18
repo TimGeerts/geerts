@@ -21,6 +21,7 @@
       "@geerts/wivipro/feat-gallery": [
         "libs/wivipro/feat-gallery/src/index.ts"
       ],
+      "@geerts/wivipro/feat-login": ["libs/wivipro/feat-login/src/index.ts"],
       "@geerts/wivipro/feat-wholesale": [
         "libs/wivipro/feat-wholesale/src/index.ts"
       ],

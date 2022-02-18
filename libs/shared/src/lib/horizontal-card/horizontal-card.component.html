@@ -1,10 +1,7 @@
-<div
-  class="horizontal-card {{ type }} {{ class }}"
-  [ngClass]="{ 'no-img': !img }"
->
+<div class="horizontal-card {{ type }} {{ class }}" [ngClass]="{ 'no-img': !img }">
   <img *ngIf="img" class="horizontal-card__img" [src]="img" alt="Image Title" />
   <div class="horizontal-card__text">
-    <h1 class="horizontal-card__title">
+    <h1 class="horizontal-card__title {{titleClass}}">
       {{ cardTitle }}
     </h1>
     <div class="horizontal-card__preview-txt">

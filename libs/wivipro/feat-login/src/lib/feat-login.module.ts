@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@geerts/shared';
-import { WholesaleComponent } from './wholesale.component';
+import { LoginComponent } from './login.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: WholesaleComponent },
+      { path: '', pathMatch: 'full', component: LoginComponent },
     ]),
   ],
-  declarations: [WholesaleComponent],
-  exports: [WholesaleComponent],
+  declarations: [LoginComponent],
+  exports: [LoginComponent],
 })
-export class FeatWholesaleModule {}
+export class FeatLoginModule {}
