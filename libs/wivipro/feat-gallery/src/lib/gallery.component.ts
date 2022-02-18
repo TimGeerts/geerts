@@ -27,10 +27,10 @@ export class GalleryComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       this.gallery.push(
         {
-          fileName: `1.jpg`,
+          fileName: `1.jpg?${i}`,
         },
         {
-          fileName: `2.jpg`,
+          fileName: `2.jpg?${i}`,
         }
       );
     }

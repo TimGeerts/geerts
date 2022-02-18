@@ -1,5 +1,7 @@
 <div class="image-grid">
-  <div class="gallery-image" *ngFor="let image of images">
-    <img src="{{ path }}thumb_{{ image.fileName }}" />
-  </div>
+  <ng-container *ngFor="let image of imgData; let i = index">
+    <div class="gallery-image" id="gimg{{ i + 1 }}">
+      <img src="{{ path }}thumb_{{ image.fileName }}" />
+    </div>
+  </ng-container>
 </div>
