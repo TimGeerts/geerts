@@ -10,4 +10,5 @@ export class GalleryComponent {
   @Input() class = '';
   @Input() path = 'assets/';
   @Input() images: IGalleryImage[] = new Array<IGalleryImage>();
+  @Input() manage = false;
 }

@@ -12,6 +12,7 @@ export class ImageGridComponent implements OnInit {
   @Input() class = '';
   @Input() path = 'assets/';
   @Input() images: IGalleryImage[] = new Array<IGalleryImage>();
+  @Input() manage = false;
 
   imgData: IGalleryImage[] = new Array<IGalleryImage>();
   startLimit = 0;
@@ -50,5 +51,23 @@ export class ImageGridComponent implements OnInit {
 
   mockImgService(start: number, end: number): Observable<IGalleryImage[]> {
     return of(this.images.slice(start, end));
+  }
+
+  add(): void {
+    // TODO add CRUD dialog
+    console.log(`ADD`);
+    this.imgData.unshift({
+      fileName: '1.jpg',
+    });
+  }
+
+  edit(img: IGalleryImage): void {
+    // TODO add CRUD dialog
+    console.log(`EDIT ${JSON.stringify(img)}`);
+  }
+
+  delete(img: IGalleryImage): void {
+    // TODO add confirmation dialog
+    console.log(`DELETE ${JSON.stringify(img)}`);
   }
 }

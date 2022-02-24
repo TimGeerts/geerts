@@ -12,6 +12,7 @@ export class GalleryComponent implements OnInit {
   gallery: IGalleryImage[] = new Array<IGalleryImage>();
   title = '';
   assetsfolder = '';
+  canmanage = true;
 
   constructor(private route: ActivatedRoute) {}
 

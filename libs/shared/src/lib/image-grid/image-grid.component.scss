@@ -4,7 +4,48 @@
   gap: 1rem;
 
   .gallery-image {
+    position: relative;
     overflow: hidden;
+    width: 150px;
+
+    &.addnew {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--bs-primary);
+      font-size: 3rem;
+      border: 2px dashed currentColor;
+      opacity: 0.2;
+      transition: 250ms;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+
+    .actions {
+      opacity: 0;
+      position: absolute;
+      bottom: 0;
+      color: var(--bs-primary);
+      background-color: rgba(var(--bs-light-rgb), 0.8);
+      transition: 250ms;
+      i {
+        font-size: 1.5rem;
+        opacity: 0.6;
+        transition: 250ms;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    &:hover {
+      .actions {
+        opacity: 1;
+      }
+    }
 
     img {
       object-fit: cover;
