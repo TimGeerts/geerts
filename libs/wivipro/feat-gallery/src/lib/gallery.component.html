@@ -1,9 +1,12 @@
 <geerts-horizontal-card [cardTitle]="title" class="d-block rtl">
+  <div class="form-group">
+    <div class="form-check form-switch">
+      <input class="form-check-input no-focus" type="checkbox" role="switch" id="checkRememberme"
+        [(ngModel)]="canmanage" />
+      <label class="form-check-label" for="checkRememberme">Beheermodus</label>
+    </div>
+  </div>
   <p class="mb-5"></p>
-  <geerts-image-grid
-    *ngIf="assetsfolder"
-    [images]="gallery"
-    [path]="assetsfolder"
-    [manage]="canmanage"
-  ></geerts-image-grid>
+  <geerts-image-grid *ngIf="assetsfolder" [images]="gallery" [path]="assetsfolder" [manage]="canmanage"
+    (addImage)="addImage()" (editImage)="editImage($event)" (deleteImage)="deleteImage($event)"></geerts-image-grid>
 </geerts-horizontal-card>

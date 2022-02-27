@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IGalleryImage } from '../shared.module';
 import { InfiniteScrolling } from './services/infinite-scrolling.service';
@@ -13,6 +13,12 @@ export class ImageGridComponent implements OnInit {
   @Input() path = 'assets/';
   @Input() images: IGalleryImage[] = new Array<IGalleryImage>();
   @Input() manage = false;
+
+  @Output() addImage: EventEmitter<void> = new EventEmitter<void>();
+  @Output() editImage: EventEmitter<IGalleryImage> =
+    new EventEmitter<IGalleryImage>();
+  @Output() deleteImage: EventEmitter<IGalleryImage> =
+    new EventEmitter<IGalleryImage>();
 
   imgData: IGalleryImage[] = new Array<IGalleryImage>();
   startLimit = 0;
@@ -54,20 +60,14 @@ export class ImageGridComponent implements OnInit {
   }
 
   add(): void {
-    // TODO add CRUD dialog
-    console.log(`ADD`);
-    this.imgData.unshift({
-      fileName: '1.jpg',
-    });
+    this.addImage.emit();
   }
 
   edit(img: IGalleryImage): void {
-    // TODO add CRUD dialog
-    console.log(`EDIT ${JSON.stringify(img)}`);
+    this.editImage.emit(img);
   }
 
   delete(img: IGalleryImage): void {
-    // TODO add confirmation dialog
-    console.log(`DELETE ${JSON.stringify(img)}`);
+    this.deleteImage.emit(img);
   }
 }

@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    Edit image
+  </h5>
+  <button type="button" class="btn-close no-focus" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+  {{ img?.fileName }}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="ok()">OK</button>
+</div>

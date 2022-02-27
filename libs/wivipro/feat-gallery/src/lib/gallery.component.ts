@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IGalleryImage } from '@geerts/shared';
+import { IGalleryImage, ModalService } from '@geerts/shared';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs/operators';
+import { AddImageModalComponent } from './modals/add-image.modal';
+import { DeleteImageModalComponent } from './modals/delete-image.modal';
+import { EditImageModalComponent } from './modals/edit-image.modal';
 
 @Component({
   selector: 'geerts-gallery',
@@ -14,7 +18,12 @@ export class GalleryComponent implements OnInit {
   assetsfolder = '';
   canmanage = true;
 
-  constructor(private route: ActivatedRoute) {}
+  modalOptions: NgbModalOptions = { size: 'lg' };
+
+  constructor(
+    private route: ActivatedRoute,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.pipe(take(1)).subscribe((data) => {
@@ -24,16 +33,61 @@ export class GalleryComponent implements OnInit {
     });
   }
 
+  addImage = (): void => {
+    //callback code here
+    console.log('add image');
+
+    this.modalService
+      .show<AddImageModalComponent, boolean>(
+        AddImageModalComponent,
+        undefined,
+        this.modalOptions
+      )
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(JSON.stringify(res, null, 1));
+      });
+  };
+
+  editImage = (img: IGalleryImage): void => {
+    //callback code here
+    console.log('edit image', img);
+
+    this.modalService
+      .show<EditImageModalComponent, boolean>(
+        EditImageModalComponent,
+        { img },
+        this.modalOptions
+      )
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(JSON.stringify(res, null, 1));
+      });
+  };
+
+  deleteImage = (img: IGalleryImage): void => {
+    //callback code here
+    console.log('delete image', img);
+
+    this.modalService
+      .show<DeleteImageModalComponent, boolean>(
+        DeleteImageModalComponent,
+        { img },
+        this.modalOptions
+      )
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(JSON.stringify(res, null, 1));
+      });
+  };
+
+  //https://picsum.photos/150?random=1
   private initGallery(): void {
+    console.log('init gallery');
     for (let i = 0; i < 100; i++) {
-      this.gallery.push(
-        {
-          fileName: `1.jpg?${i}`,
-        },
-        {
-          fileName: `2.jpg?${i}`,
-        }
-      );
+      this.gallery.push({
+        fileName: `https://picsum.photos/150?random=${i}`,
+      });
     }
   }
 }

@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ImageGridComponent } from './image-grid/image-grid.component';
+import { ModalService } from './services/modal.service';
 
 export * from './types/menu-item';
 export * from './types/gallery-image';
+export * from './services/modal.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -26,5 +28,6 @@ export * from './types/gallery-image';
     GalleryComponent,
     ImageGridComponent,
   ],
+  providers: [ModalService],
 })
 export class SharedModule {}
