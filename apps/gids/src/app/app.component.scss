@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  font-family: sans-serif;
+  width: 367px;
+  // min-width: 300px;
+  // max-width: 600px;
+  margin: 50px auto;
+}
+.wrapper {
+  text-align: center;
+}
+
+.address, .contact {
+  font-family: "Tahoma";
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.contact {
+  text-align: right;
+  font-weight: 500;
+}
