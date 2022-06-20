@@ -1,128 +1,9 @@
 {
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "projects": {
-    "cryptofolio": {
-      "projectType": "application",
-      "root": "apps/cryptofolio",
-      "sourceRoot": "apps/cryptofolio/src",
-      "prefix": "geerts",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/cryptofolio",
-            "index": "apps/cryptofolio/src/index.html",
-            "main": "apps/cryptofolio/src/main.ts",
-            "polyfills": "apps/cryptofolio/src/polyfills.ts",
-            "tsConfig": "apps/cryptofolio/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/cryptofolio/src/favicon.ico",
-              "apps/cryptofolio/src/assets"
-            ],
-            "styles": ["apps/cryptofolio/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/cryptofolio/src/environments/environment.ts",
-                  "with": "apps/cryptofolio/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "cryptofolio:build:production"
-            },
-            "development": {
-              "browserTarget": "cryptofolio:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "cryptofolio:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/cryptofolio/src/**/*.ts",
-              "apps/cryptofolio/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/cryptofolio"],
-          "options": {
-            "jestConfig": "apps/cryptofolio/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "cryptofolio-e2e": {
-      "root": "apps/cryptofolio-e2e",
-      "sourceRoot": "apps/cryptofolio-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/cryptofolio-e2e/cypress.json",
-            "devServerTarget": "cryptofolio:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "cryptofolio:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/cryptofolio-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["cryptofolio"]
-    },
     "shared": {
       "projectType": "library",
       "root": "libs/shared",
@@ -266,34 +147,6 @@
         }
       },
       "tags": []
-    },
-    "wivipro-e2e": {
-      "root": "apps/wivipro-e2e",
-      "sourceRoot": "apps/wivipro-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/wivipro-e2e/cypress.json",
-            "devServerTarget": "wivipro:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "wivipro:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/wivipro-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["wivipro"]
     },
     "wivipro-feat-about": {
       "projectType": "library",
