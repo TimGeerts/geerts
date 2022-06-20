@@ -1,0 +1,28 @@
+name: Build affected
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: set up node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: npm install
+        run: npm install
+
+      - name: build
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: lint, build
+          nxCloud: 'true'
