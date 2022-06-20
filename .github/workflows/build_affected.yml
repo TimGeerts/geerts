@@ -26,3 +26,4 @@ jobs:
         with:
           targets: lint, build
           nxCloud: 'true'
+          all: 'false'
