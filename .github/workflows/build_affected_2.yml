@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: fetch origin
-      - run: git fetch origin main
+        run: git fetch origin main
 
       - name: lint
         run: npx nx affected:lint -- --base=remotes/origin/main
