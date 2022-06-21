@@ -1,4 +1,4 @@
-name: Build affected
+name: Build affected 2
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: lint
-        run: nx affected:lint
+        run: npx nx affected:lint
 
       - name: build
-        run: nx affected:build
+        run: npx nx affected:build
