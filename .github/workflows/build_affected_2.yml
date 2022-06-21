@@ -23,8 +23,11 @@ jobs:
       - name: npm install
         run: npm install
 
+      - name: fetch origin
+      - run: git fetch origin main
+
       - name: lint
-        run: npx nx affected:lint
+        run: npx nx affected:lint -- --base=remotes/origin/main
 
       - name: build
-        run: npx nx affected:build
+        run: npx nx affected:build -- --base=remotes/origin/main
