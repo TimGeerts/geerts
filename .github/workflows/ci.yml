@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: '16'
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm exec nx-cloud start-ci-run
