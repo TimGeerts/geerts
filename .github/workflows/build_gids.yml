@@ -3,34 +3,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout [main]
+      - name: Checkout [main]
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
 
-      - uses: pnpm/action-setup@v2
+      - name: Pnpm setup
+        uses: pnpm/action-setup@v2
         with:
           version: 6.22.2
 
-      - uses: actions/setup-node@v2
+      - name: Node setup
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'pnpm'
+
       - run: pnpm install
       - run: pnpm exec nx lint gids
       - run: pnpm exec nx build gids -- --configuration production
       - run: pnpm exec nx test gids
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to Azure Static Web App
         uses: Azure/static-web-apps-deploy@v1
         with:
