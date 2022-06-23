@@ -24,7 +24,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm exec nx lint gids
-      - run: pnpm exec nx build gids
+      - run: pnpm exec nx build gids -- --configuration production
       - run: pnpm exec nx test gids
 
       - name: Upload artifact
