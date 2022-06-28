@@ -1,0 +1,43 @@
+name: Build and deploy app - GiDS
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout [main]
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Pnpm setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.22.2
+
+      - name: Node setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'pnpm'
+
+      - run: pnpm install
+      - run: pnpm exec nx lint wivipro
+      - run: pnpm exec nx build wivipro -- --configuration production
+      - run: pnpm exec nx test wivipro
+
+      - name: Deploy to Azure Static Web App
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_SAND_070757B03 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: 'dist/apps/wivipro'
+          api_location: ''
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
