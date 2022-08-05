@@ -7,10 +7,12 @@ import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.componen
 import { GalleryComponent } from './gallery/gallery.component';
 import { ImageGridComponent } from './image-grid/image-grid.component';
 import { ModalService } from './services/modal.service';
+import { AuthService } from './services/fbauth.service';
 
 export * from './types/menu-item';
 export * from './types/gallery-image';
 export * from './services/modal.service';
+export * from './services/fbauth.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -28,6 +30,6 @@ export * from './services/modal.service';
     GalleryComponent,
     ImageGridComponent,
   ],
-  providers: [ModalService],
+  providers: [ModalService, AuthService],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMenuItem } from '@geerts/shared';
+import { AuthService, IMenuItem } from '@geerts/shared';
 
 @Component({
   selector: 'wivipro-root',
@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
   title = 'wivipro';
   menuItems: IMenuItem[] = new Array<IMenuItem>();
   showMobileMenu = false;
+
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.initMenu();
