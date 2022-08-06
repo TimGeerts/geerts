@@ -10,6 +10,7 @@ import { ModalService } from './services/modal.service';
 import { AuthService } from './services/fbauth.service';
 
 export * from './types/menu-item';
+export * from './types/user';
 export * from './types/gallery-image';
 export * from './services/modal.service';
 export * from './services/fbauth.service';
