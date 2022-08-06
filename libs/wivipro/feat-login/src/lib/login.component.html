@@ -23,7 +23,7 @@
         Wij zullen het nodige doen om een profiel voor u aan te maken en
         bezorgen u daarna de aanmeldgegevens voor de webshop.
       </p>
-      <form action="#" class="signin-form">
+      <form class="signin-form" [formGroup]="form" (ngSubmit)="login()">
         <div class="form-group mb-3">
           <!-- <label class="label" for="name">Gebruikersnaam</label> -->
 
@@ -32,7 +32,7 @@
               type="text"
               class="form-control"
               placeholder="Gebruikersnaam"
-              required
+              formControlName="username"
             />
             <span class="input-group-text">
               <i class="fas fa-user"></i>
@@ -46,7 +46,7 @@
               type="password"
               class="form-control"
               placeholder="Paswoord"
-              required
+              formControlName="password"
             />
             <span class="input-group-text">
               <i class="fas fa-lock"></i>
@@ -56,7 +56,7 @@
         <div class="form-group mb-3">
           <button
             type="submit"
-            (click)="login()"
+            [disabled]="!form.valid"
             class="form-control btn btn-primary rounded submit px-3"
           >
             Aanmelden
@@ -69,6 +69,7 @@
               type="checkbox"
               role="switch"
               id="checkRememberme"
+              formControlName="remember"
               checked
             />
             <label class="form-check-label" for="checkRememberme"
