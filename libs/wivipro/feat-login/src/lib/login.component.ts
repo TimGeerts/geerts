@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService, AppUser } from '@geerts/shared';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'geerts-login',
@@ -20,16 +21,19 @@ export class LoginComponent {
     const username = this.form.get('username')?.value;
     const password = this.form.get('password')?.value;
 
-    this.authService.signIn(username, password).subscribe({
-      next: (r) => {
-        console.log(r);
-        this.form.reset();
-      },
-      error: (e: FirebaseError) => {
-        // TODO handle errorcodes
-        console.log(e.code);
-      },
-    });
+    this.authService
+      .signIn(username, password)
+      .pipe(take(1))
+      .subscribe({
+        next: (r) => {
+          console.log(r);
+          this.form.reset();
+        },
+        error: (e: FirebaseError) => {
+          // TODO handle errorcodes
+          console.log(e.code);
+        },
+      });
   }
 
   updateUserProfile(): void {
@@ -38,8 +42,11 @@ export class LoginComponent {
       displayName: 'Tim',
       role: 'admin',
     };
-    this.authService.updateUser(userData).subscribe(() => {
-      console.log('user updated');
-    });
+    this.authService
+      .updateUser(userData)
+      .pipe(take(1))
+      .subscribe(() => {
+        console.log('user updated');
+      });
   }
 }

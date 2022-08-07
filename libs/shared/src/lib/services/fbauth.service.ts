@@ -3,6 +3,7 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
   User,
@@ -16,9 +17,12 @@ import { AppUser } from '../types/user';
   providedIn: 'root',
 })
 export class AuthService {
+  auth!: Auth;
   userData!: AppUser | null; // Save logged in user data
-  constructor(private auth: Auth, private firestore: Firestore) {
-    this.auth.onAuthStateChanged((user) => {
+  constructor(private firestore: Firestore) {
+    this.auth = getAuth();
+
+    onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.getUserData(user.uid)
           .then((u) => {
