@@ -7,6 +7,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { environment } from '../environments/environment';
     provideFirestore(() => getFirestore()),
     BrowserModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       [
         {
@@ -66,6 +68,13 @@ import { environment } from '../environments/environment';
           loadChildren: () =>
             import('@geerts/wivipro/feat-login').then(
               (module) => module.FeatLoginModule
+            ),
+        },
+        {
+          path: 'manage',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-manage').then(
+              (module) => module.FeatManageModule
             ),
         },
       ],

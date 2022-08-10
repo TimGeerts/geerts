@@ -7,7 +7,7 @@ import { AuthService, IMenuItem } from '@geerts/shared';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'wivipro';
+  title = 'Wivipro';
   menuItems: IMenuItem[] = new Array<IMenuItem>();
   showMobileMenu = false;
 

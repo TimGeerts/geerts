@@ -1,0 +1,57 @@
+<geerts-skeleton-loader [toggle]="users" [count]="5">
+  <div class="d-flex justify-content-between mb-3">
+    <div class="form-group">
+      <div class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="Zoeken..." />
+        <span class="input-group-text">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+
+    <button
+      class="btn btn-sm btn-outline-secondary rounded px-3"
+      (click)="addUser()"
+    >
+      <i class="fas fa-plus me-2"></i>
+      Gebruiker aanmaken
+    </button>
+  </div>
+  <table class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th style="width: 30px">&nbsp;</th>
+        <th>email</th>
+        <th>displayName</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>
+          <i
+            *ngIf="user.role === 'admin'"
+            class="fas fa-star"
+            title="Administrator"
+          ></i>
+        </td>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.displayName }}
+        </td>
+        <td class="text-end">
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-link" (click)="editUser(user)">
+              <i class="fas fa-pen"></i>
+            </button>
+            <button type="button" class="btn btn-link">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</geerts-skeleton-loader>

@@ -1,0 +1,50 @@
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title">{{title}}</h5>
+  <button
+    type="button"
+    class="btn-close text-reset"
+    aria-label="Close"
+    (click)="cancel()"
+  ></button>
+</div>
+<div class="offcanvas-body">
+  <pre>{{ usr | json }}</pre>
+
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control form-control-sm"
+        id="inputEmail"
+        ngbAutofocus
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputPassword" class="form-label">Paswoord</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputPassword"
+        formControlName="displayName"
+      />
+    </div>
+    <div class="text-end">
+      <button
+        type="button"
+        class="btn btn-sm btn-primary rounded px-3 me-1"
+        (click)="ok()"
+      >
+        {{actionLabel}}
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-primary rounded px-3"
+        (click)="cancel()"
+      >
+        Annuleren
+      </button>
+    </div>
+  </form>
+</div>

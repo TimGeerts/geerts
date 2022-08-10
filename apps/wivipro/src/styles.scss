@@ -10,6 +10,8 @@ $danger: #b71c1c;
 $light: #ecebcf;
 $dark: #212121;
 
+$table-hover-bg: $secondary;
+
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Bilbo+Swash+Caps&family=Roboto:wght@100;300;400;700&display=swap');
 
@@ -19,7 +21,8 @@ $accent: #a5a591;
 // layout/wrapper
 html,
 body,
-.wrapper {
+.wrapper,
+.offcanvas {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -45,14 +48,14 @@ body,
       li {
         a {
           margin-right: 0;
-          font-size: 1.1rem;
+          font-size: 0.8rem;
           padding: 6px 0px 2px 3px;
           text-decoration: none;
+          &.active {
+            border-bottom: 3px solid var(--bs-primary);
+          }
         }
       }
-    }
-    .links {
-      font-size: 0.8rem;
     }
   }
 }
@@ -176,5 +179,63 @@ button {
     &.btn-secondary {
       background-color: transparent;
     }
+    &:focus{
+      box-shadow: none;
+    }
   }
+  &.btn-close{
+    &:focus{
+      box-shadow: none;
+    }
+  }
+}
+
+// no focus
+*:focus {
+  box-shadow: none !important;
+}
+
+
+// tables
+table.table {
+  > :not(:first-child) {
+    border-top: 0; //reset silly bootstrap tableheader border
+  }
+  > thead {
+    th {
+      @extend .text-capitalize;
+      border-bottom: 1px solid var(--bs-primary);
+    }
+  }
+  th,td {
+    vertical-align: middle;
+  }
+  td > div.btn-group {
+    button > i {
+      transition: 250ms ease-in-out;
+      color: var(--bs-primary);
+      opacity: 0.2;
+    }
+    button:hover > i{
+      opacity: 1;
+    }
+  }
+  &.table-hover {
+    td {
+      transition: 100ms ease-in-out !important; //transition for hovercolor
+    }
+  }
+  &.table-sm {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    .badge {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// offcanvas
+.offcanvas {
+  width: 600px;
+  font-size: 0.9rem;
 }

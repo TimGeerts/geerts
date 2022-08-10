@@ -11,7 +11,8 @@
     "../../libs/wivipro/feat-about/src/index.ts",
     "../../libs/wivipro/feat-wholesale/src/index.ts",
     "../../libs/wivipro/feat-gallery/src/index.ts",
-    "../../libs/wivipro/feat-login/src/index.ts"
+    "../../libs/wivipro/feat-login/src/index.ts",
+    "../../libs/wivipro/feat-manage/src/index.ts"
   ],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }
