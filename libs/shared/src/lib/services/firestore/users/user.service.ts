@@ -15,6 +15,10 @@ export class UserService {
     return this.firestoreService.getAll<AppUser>(this.COL);
   }
 
+  get(uid: string): Observable<AppUser | undefined> {
+    return this.firestoreService.get<AppUser>(this.COL, uid);
+  }
+
   set(usr: AppUser): Observable<AppUser> {
     return this.firestoreService.set<AppUser>(this.COL, usr.uid, usr);
   }

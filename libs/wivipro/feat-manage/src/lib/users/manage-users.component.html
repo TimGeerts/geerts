@@ -21,8 +21,11 @@
     <thead>
       <tr>
         <th style="width: 30px">&nbsp;</th>
-        <th>email</th>
-        <th>displayName</th>
+        <th style="width: 80px">#</th>
+        <th>Bedrijf</th>
+        <th>Naam</th>
+        <th>BTW</th>
+        <th style="width: 400px">Email</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -36,10 +39,19 @@
           ></i>
         </td>
         <td>
-          {{ user.email }}
+          {{ user.customerNumber }}
         </td>
         <td>
           {{ user.displayName }}
+        </td>
+        <td>
+          {{ user.contactName }}
+        </td>
+        <td>
+          {{ user.taxNumber }}
+        </td>
+        <td>
+          {{ user.email }}
         </td>
         <td class="text-end">
           <div class="btn-group btn-group-sm" role="group">

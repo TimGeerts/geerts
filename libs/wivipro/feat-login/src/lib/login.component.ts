@@ -35,18 +35,4 @@ export class LoginComponent {
         },
       });
   }
-
-  updateUserProfile(): void {
-    const userData: AppUser = {
-      uid: 'qpS2WI9bndgz5A40Ol28k3pextp2',
-      displayName: 'Tim',
-      role: 'admin',
-    };
-    this.authService
-      .updateUser(userData)
-      .pipe(take(1))
-      .subscribe(() => {
-        console.log('user updated');
-      });
-  }
 }

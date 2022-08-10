@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Firestore,
+  getDoc,
   getDocs,
   collection,
   QuerySnapshot,
@@ -37,6 +38,17 @@ export class FirestoreService {
       map((q) => {
         return this.toArr<T>(q);
       })
+    );
+  }
+
+  get<T>(
+    col: string,
+    uid: string,
+    conv: FirestoreDataConverter<T> = this.converter<T>()
+  ): Observable<T | undefined> {
+    const ref = doc(this.firestore, col, uid).withConverter(conv);
+    return from(getDoc<T>(ref)).pipe(
+      map((d) => (d.exists() ? d.data() : undefined))
     );
   }
 

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import {
   AppUser,
+  AuthService,
   ModalService,
   NotificationService,
   UserService,
 } from '@geerts/shared';
-import { take } from 'rxjs/operators';
+import { catchError, concatMap, take } from 'rxjs/operators';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 
 @Component({
@@ -17,6 +18,7 @@ export class ManageUsersComponent {
   users!: AppUser[];
 
   constructor(
+    private authService: AuthService,
     private userService: UserService,
     private modalService: ModalService,
     private notificationService: NotificationService
@@ -27,24 +29,36 @@ export class ManageUsersComponent {
   getUsers(): void {
     this.userService.getAll().subscribe((users) => {
       this.users = users;
+      console.log(users);
     });
   }
 
   addUser = (): void => {
-    const title = 'Gebruiker aanmaken';
+    const title = 'Nieuwe gebruiker';
     this.modalService
-      .showOffCanvas<UserOffCanvasComponent, boolean>(
+      .showOffCanvas<UserOffCanvasComponent, AppUser>(
         UserOffCanvasComponent,
         { title },
         {}
       )
       .pipe(take(1))
       .subscribe((res) => {
-        if (res.Success) {
-          // TODO create an actual auth user with authservice
-          // 'createUserWithEmailAndPassword'
-          // after that is successful, use the uid to set a user document (with this.userService.set(res.Data))
-          console.log(JSON.stringify(res, null, 1));
+        if (res.Success && res.Data) {
+          const usr = res.Data;
+          const { email, password } = usr;
+          if (email && password) {
+            // create an auth user with authservice
+            // only after that is complete (hence concatMap), create a user object in the firestore 'users' collection
+            this.authService
+              .createUser(email, password)
+              .pipe(
+                concatMap((credential) => {
+                  usr.uid = credential.user.uid;
+                  return this.userService.set(usr);
+                })
+              )
+              .subscribe((x) => console.log(x));
+          }
         }
       });
   };
@@ -59,10 +73,10 @@ export class ManageUsersComponent {
       )
       .pipe(take(1))
       .subscribe((res) => {
-        if (res.Success) {
+        if (res.Success && res.Data) {
           this.userService.set(res.Data).subscribe((u) => {
             this.notificationService.success(
-              `user successfully updated to ${JSON.stringify(u)}`
+              `User successfully updated to ${JSON.stringify(u)}`
             );
             this.getUsers();
           });

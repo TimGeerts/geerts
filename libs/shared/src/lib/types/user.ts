@@ -1,7 +1,11 @@
 export interface AppUser {
   uid: string;
-  email?: string | null;
-  password?: string | null;
-  displayName: string | null;
+  email?: string;
+  password?: string;
+  displayName?: string;
+  contactName?: string;
+  customerNumber?: number;
+  taxNumber?: string;
+  phoneNumber?: string;
   role: string;
 }

@@ -12,28 +12,76 @@
 
   <form [formGroup]="form">
     <div class="mb-3">
+      <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputCustomerNumber"
+        ngbAutofocus
+        formControlName="customerNumber"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputDisplayName" class="form-label">Bedrijf</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputDisplayName"
+        formControlName="displayName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputContactName" class="form-label">Naam</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputContactName"
+        ngbAutofocus
+        formControlName="contactName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputTaxNumber" class="form-label">BTW</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputTaxNumber"
+        ngbAutofocus
+        formControlName="taxNumber"
+      />
+    </div>
+    <div class="mb-3">
       <label for="inputEmail" class="form-label">Email</label>
       <input
         type="email"
         class="form-control form-control-sm"
         id="inputEmail"
-        ngbAutofocus
         formControlName="email"
       />
     </div>
     <div class="mb-3">
-      <label for="inputPassword" class="form-label">Paswoord</label>
+      <label for="inputPhone" class="form-label">Telefoonnummer</label>
       <input
         type="text"
         class="form-control form-control-sm"
-        id="inputPassword"
-        formControlName="displayName"
+        id="inputPhone"
+        formControlName="phoneNumber"
       />
     </div>
-    <div class="text-end">
+    <div class="mb-3" *ngIf="action ==='create'">
+      <label for="inputPassword" class="form-label">Paswoord</label>
+      <input
+        type="password"
+        class="form-control form-control-sm"
+        id="inputPassword"
+        formControlName="password"
+      />
+    </div>
+    <div class="text-end mt-5">
       <button
         type="button"
         class="btn btn-sm btn-primary rounded px-3 me-1"
+        [disabled]="!form.valid"
         (click)="ok()"
       >
         {{actionLabel}}
