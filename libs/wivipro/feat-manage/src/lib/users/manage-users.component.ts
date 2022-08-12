@@ -1,14 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   AppUser,
-  AuthService,
   ModalService,
   NotificationService,
+  sortByProp,
   UserApi,
-  UserService,
 } from '@geerts/shared';
-import { catchError, concatMap, take } from 'rxjs/operators';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 
 @Component({
@@ -19,19 +16,13 @@ import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 export class ManageUsersComponent {
   users!: AppUser[];
 
-  constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private userApi: UserApi,
-    private modalService: ModalService,
-    private notificationService: NotificationService
-  ) {
+  constructor(private userApi: UserApi, private modalService: ModalService) {
     this.getUsers();
   }
 
   getUsers(): void {
     this.userApi.getAll().subscribe((users) => {
-      this.users = users;
+      this.users = sortByProp(users, 'displayName');
     });
   }
 
@@ -69,4 +60,12 @@ export class ManageUsersComponent {
     //TODO api call
     console.log('delete', usr);
   };
+
+  //split to some utils file
+
+  // private sortByProp<T, K extends keyof T>(values: T[], orderType: K): T[] {
+  //   return values.sort((a, b) =>
+  //     a[orderType] > b[orderType] ? 1 : b[orderType] > a[orderType] ? -1 : 0
+  //   );
+  // }
 }

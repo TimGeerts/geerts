@@ -12,7 +12,9 @@ import { AuthService } from './services/auth.service';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AuthGuard } from './services/auth.guard';
+import { LoadingbuttonDirective } from './loadingbutton/loadingbutton.directive';
 
+export * from './utils';
 export * from './types/menu-item';
 export * from './types/user';
 export * from './types/gallery-image';
@@ -38,6 +40,7 @@ export * from './services/api/users/user.api';
     GalleryComponent,
     ImageGridComponent,
     SkeletonLoaderComponent,
+    LoadingbuttonDirective,
   ],
   exports: [
     HorizontalCardComponent,
@@ -46,6 +49,7 @@ export * from './services/api/users/user.api';
     GalleryComponent,
     ImageGridComponent,
     SkeletonLoaderComponent,
+    LoadingbuttonDirective,
   ],
   providers: [ModalService, AuthService, AuthGuard],
 })

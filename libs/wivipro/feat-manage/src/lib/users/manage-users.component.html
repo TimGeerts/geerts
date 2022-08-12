@@ -9,10 +9,7 @@
       </div>
     </div>
 
-    <button
-      class="btn btn-sm btn-outline-secondary rounded px-3"
-      (click)="addUser()"
-    >
+    <button class="btn btn-sm btn-outline-secondary rounded px-3" (click)="addUser()">
       <i class="fas fa-plus me-2"></i>
       Gebruiker aanmaken
     </button>
@@ -20,7 +17,6 @@
   <table class="table table-sm table-hover">
     <thead>
       <tr>
-        <th style="width: 30px">&nbsp;</th>
         <th style="width: 80px">#</th>
         <th>Bedrijf</th>
         <th>Naam</th>
@@ -31,13 +27,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td>
-          <i
-            *ngIf="user.role === 'admin'"
-            class="fas fa-star"
-            title="Administrator"
-          ></i>
-        </td>
         <td>
           {{ user.customerNumber }}
         </td>
@@ -55,14 +44,10 @@
         </td>
         <td class="text-end">
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-link" (click)="editUser(user)">
+            <button type="button" class="btn btn-link" title="Aanpassen" (click)="editUser(user)">
               <i class="fas fa-pen"></i>
             </button>
-            <button
-              type="button"
-              class="btn btn-link"
-              (click)="deleteUser(user)"
-            >
+            <button type="button" class="btn btn-link" title="Verwijderen" (click)="deleteUser(user)">
               <i class="fas fa-trash"></i>
             </button>
           </div>

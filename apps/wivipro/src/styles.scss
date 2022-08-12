@@ -179,12 +179,21 @@ button {
     &.btn-secondary {
       background-color: transparent;
     }
-    &:focus{
+    &:focus {
       box-shadow: none;
     }
+    i {
+      margin-left: 0.5rem;
+      &.undefined {
+        display: none;
+      }
+    }
+    > i:only-child {
+      margin-left: 0;
+    }
   }
-  &.btn-close{
-    &:focus{
+  &.btn-close {
+    &:focus {
       box-shadow: none;
     }
   }
@@ -194,7 +203,6 @@ button {
 *:focus {
   box-shadow: none !important;
 }
-
 
 // tables
 table.table {
@@ -207,7 +215,8 @@ table.table {
       border-bottom: 1px solid var(--bs-primary);
     }
   }
-  th,td {
+  th,
+  td {
     vertical-align: middle;
   }
   td > div.btn-group {
@@ -216,7 +225,7 @@ table.table {
       color: var(--bs-primary);
       opacity: 0.2;
     }
-    button:hover > i{
+    button:hover > i {
       opacity: 1;
     }
   }

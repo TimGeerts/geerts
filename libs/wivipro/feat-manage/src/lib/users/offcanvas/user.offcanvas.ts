@@ -8,6 +8,7 @@ import {
   NotificationService,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import { concat, concatMap, Observable, of } from 'rxjs';
 
 @Component({
@@ -19,6 +20,7 @@ export class UserOffCanvasComponent implements OnInit {
   title!: string;
   action: 'create' | 'update' = 'create';
   actionLabel: 'Aanmaken' | 'Aanpassen' = 'Aanmaken';
+  loading = false;
 
   form = this.fb.group({
     email: ['', Validators.email],
@@ -36,7 +38,8 @@ export class UserOffCanvasComponent implements OnInit {
     private fb: FormBuilder,
     private authApi: AuthApi,
     private userApi: UserApi,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loader: LoadingBarService
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +48,7 @@ export class UserOffCanvasComponent implements OnInit {
       this.actionLabel = 'Aanpassen';
       this.form.get('password')?.disable(); // this disables the validator
     }
-    this.usr = this.usr || {
-      role: 'member',
-    };
+    this.usr = this.usr || {};
     this.initForm();
   }
 
@@ -84,7 +85,7 @@ export class UserOffCanvasComponent implements OnInit {
     $uid
       .pipe(
         concatMap((uid) => {
-          console.log(uid);
+          this.loading = true;
           userFromForm.uid = uid;
           return this.userApi.create(userFromForm);
         })
@@ -92,6 +93,7 @@ export class UserOffCanvasComponent implements OnInit {
       .subscribe({
         next: (r) => {
           //TODO notification stuff
+          this.loading = false;
           this.activeOffCanvas.close(r);
         },
         error: (e) => this.notificationService.handleApiError(e),

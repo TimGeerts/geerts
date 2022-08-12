@@ -10,7 +10,6 @@ type AppUser = {
   customerNumber?: number;
   taxNumber?: string;
   phoneNumber?: string;
-  role: string;
 };
 
 type Request = {

@@ -19,6 +19,9 @@ specifiers:
   '@angular/platform-browser-dynamic': ^13.0.0
   '@angular/router': ^13.0.0
   '@ng-bootstrap/ng-bootstrap': 12.1.2
+  '@ngx-loading-bar/core': ^6.0.2
+  '@ngx-loading-bar/http-client': ^6.0.2
+  '@ngx-loading-bar/router': ^6.0.2
   '@nrwl/angular': 13.2.4
   '@nrwl/cli': 13.2.4
   '@nrwl/cypress': 13.2.4
@@ -63,6 +66,9 @@ dependencies:
   '@angular/platform-browser-dynamic': 13.3.11_ovunbf5pfqpgs344qovmyresle
   '@angular/router': 13.3.11_pvruykzhro5qf7dhohz54wtiva
   '@ng-bootstrap/ng-bootstrap': 12.1.2_gmm2kxn63wb37dt5gb5yar3fpe
+  '@ngx-loading-bar/core': 6.0.2_72ls5bmilxwpvsmww3bb4gttku
+  '@ngx-loading-bar/http-client': 6.0.2_6fqrnubsgllhabviwxmap4il3a
+  '@ngx-loading-bar/router': 6.0.2_yfffp4uvuudakkg6ooy3rrgn3y
   '@nrwl/angular': 13.2.4_dlkslhg7qfsh7dktsmwqz3mf2e
   '@popperjs/core': 2.11.5
   bootstrap: 5.1.3_@popperjs+core@2.11.5
@@ -2802,6 +2808,37 @@ packages:
       typescript: 4.4.4
       webpack: 5.64.1_esbuild@0.13.12
     dev: true
+
+  /@ngx-loading-bar/core/6.0.2_72ls5bmilxwpvsmww3bb4gttku:
+    resolution: {integrity: sha512-8r+OQEYXwvU+2ZXK6CY3Guh2yJuG8pQ2XNryHVbPZB2Ub3VmzhGWqjxXAQgxmsi+GxrD4m+nGmGZPeOrNH1ztA==}
+    peerDependencies:
+      '@angular/common': '>=13.0.0'
+      rxjs: ^6.5.3 || ^7.0.0
+    dependencies:
+      '@angular/common': 13.3.11_2t22fagylqbkqccvcmmekxvl4a
+      rxjs: 7.4.0
+      tslib: 2.4.0
+    dev: false
+
+  /@ngx-loading-bar/http-client/6.0.2_6fqrnubsgllhabviwxmap4il3a:
+    resolution: {integrity: sha512-wMzyg9YBvHlOqYMQK82j7fnF6GlXb1RNg/rjvl34uq3+xsqic9vUhEziEDlVEKvpbnXh5yMd05Aj7J4GwRaFcw==}
+    peerDependencies:
+      '@ngx-loading-bar/core': 6.0.2
+    dependencies:
+      '@ngx-loading-bar/core': 6.0.2_72ls5bmilxwpvsmww3bb4gttku
+      tslib: 2.4.0
+    dev: false
+
+  /@ngx-loading-bar/router/6.0.2_yfffp4uvuudakkg6ooy3rrgn3y:
+    resolution: {integrity: sha512-el+32ysDhqr46Zcg+H8UiKpOEz43qY0++CUxj8DADLRm3mAzKqNn/X+5qhFQS4o5Nb/SdvZn5apfFlXoNNUViQ==}
+    peerDependencies:
+      '@angular/router': '>=13.0.0'
+      '@ngx-loading-bar/core': 6.0.2
+    dependencies:
+      '@angular/router': 13.3.11_pvruykzhro5qf7dhohz54wtiva
+      '@ngx-loading-bar/core': 6.0.2_72ls5bmilxwpvsmww3bb4gttku
+      tslib: 2.4.0
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

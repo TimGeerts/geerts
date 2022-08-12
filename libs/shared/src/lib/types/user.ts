@@ -11,7 +11,6 @@ export interface AppUser {
   customerNumber?: number;
   taxNumber?: string;
   phoneNumber?: string;
-  role: string;
 }
 
 export type UpdateAuth = {
