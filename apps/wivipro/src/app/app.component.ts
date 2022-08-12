@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService, IMenuItem } from '@geerts/shared';
 
 @Component({
@@ -10,11 +11,18 @@ export class AppComponent implements OnInit {
   title = 'Wivipro';
   menuItems: IMenuItem[] = new Array<IMenuItem>();
   showMobileMenu = false;
+  loginReturnUrl = '/';
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.initMenu();
+  }
+
+  login(): void {
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl: this.router.url },
+    });
   }
 
   private initMenu(): void {

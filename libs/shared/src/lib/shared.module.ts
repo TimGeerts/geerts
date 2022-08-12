@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
 import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.component';
 import { RouterModule } from '@angular/router';
@@ -10,6 +11,7 @@ import { ModalService } from './services/modal.service';
 import { AuthService } from './services/auth.service';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AuthGuard } from './services/auth.guard';
 
 export * from './types/menu-item';
 export * from './types/user';
@@ -17,10 +19,18 @@ export * from './types/gallery-image';
 export * from './services/notification.service';
 export * from './services/modal.service';
 export * from './services/auth.service';
+export * from './services/auth.guard';
 export * from './services/firestore/users/user.service';
+export * from './services/api/auth/auth.api';
+export * from './services/api/users/user.api';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgxSkeletonLoaderModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    NgxSkeletonLoaderModule,
+  ],
   declarations: [
     HorizontalCardComponent,
     HorizontalMenuComponent,
@@ -37,6 +47,6 @@ export * from './services/firestore/users/user.service';
     ImageGridComponent,
     SkeletonLoaderComponent,
   ],
-  providers: [ModalService, AuthService],
+  providers: [ModalService, AuthService, AuthGuard],
 })
 export class SharedModule {}

@@ -1,9 +1,6 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
+  api_baseurl: 'http://localhost:5001/wivipro-6fdd8/europe-west1/api',
   firebase: {
     apiKey: 'AIzaSyCXrlgxzfUFwoguqmk1Np37hDeUiIeUfyE',
     authDomain: 'wivipro-6fdd8.firebaseapp.com',

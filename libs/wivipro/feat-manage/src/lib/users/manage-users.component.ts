@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   AppUser,
   AuthService,
   ModalService,
   NotificationService,
+  UserApi,
   UserService,
 } from '@geerts/shared';
 import { catchError, concatMap, take } from 'rxjs/operators';
@@ -20,6 +22,7 @@ export class ManageUsersComponent {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private userApi: UserApi,
     private modalService: ModalService,
     private notificationService: NotificationService
   ) {
@@ -27,38 +30,21 @@ export class ManageUsersComponent {
   }
 
   getUsers(): void {
-    this.userService.getAll().subscribe((users) => {
+    this.userApi.getAll().subscribe((users) => {
       this.users = users;
-      console.log(users);
     });
   }
 
   addUser = (): void => {
     const title = 'Nieuwe gebruiker';
     this.modalService
-      .showOffCanvas<UserOffCanvasComponent, AppUser>(
-        UserOffCanvasComponent,
-        { title },
-        {}
-      )
-      .pipe(take(1))
+      .showOffCanvas<UserOffCanvasComponent, AppUser>(UserOffCanvasComponent, {
+        title,
+      })
       .subscribe((res) => {
-        if (res.Success && res.Data) {
-          const usr = res.Data;
-          const { email, password } = usr;
-          if (email && password) {
-            // create an auth user with authservice
-            // only after that is complete (hence concatMap), create a user object in the firestore 'users' collection
-            this.authService
-              .createUser(email, password)
-              .pipe(
-                concatMap((credential) => {
-                  usr.uid = credential.user.uid;
-                  return this.userService.set(usr);
-                })
-              )
-              .subscribe((x) => console.log(x));
-          }
+        console.log(res);
+        if (res.Success) {
+          this.getUsers();
         }
       });
   };
@@ -66,21 +52,21 @@ export class ManageUsersComponent {
   editUser = (usr: AppUser): void => {
     const title = `Gebruiker '${usr.displayName}' aanpassen`;
     this.modalService
-      .showOffCanvas<UserOffCanvasComponent, AppUser>(
-        UserOffCanvasComponent,
-        { usr, title },
-        {}
-      )
-      .pipe(take(1))
+      .showOffCanvas<UserOffCanvasComponent, AppUser>(UserOffCanvasComponent, {
+        usr,
+        title,
+      })
       .subscribe((res) => {
-        if (res.Success && res.Data) {
-          this.userService.set(res.Data).subscribe((u) => {
-            this.notificationService.success(
-              `User successfully updated to ${JSON.stringify(u)}`
-            );
-            this.getUsers();
-          });
+        console.log(res);
+        if (res.Success) {
+          this.getUsers();
         }
       });
+  };
+
+  deleteUser = (usr: AppUser): void => {
+    //TODO confirmdeletedialog/offcanvas?
+    //TODO api call
+    console.log('delete', usr);
   };
 }

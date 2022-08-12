@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -9,29 +8,46 @@ import {
   User,
   UserCredential,
 } from '@angular/fire/auth';
-import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
-import { catchError, EMPTY, from, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { UserService } from '../shared.module';
-import { AppUser } from '../types/user';
+import { Firestore } from '@angular/fire/firestore';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   auth!: Auth;
-  userData!: AppUser | null; // Save logged in user data
-  constructor(private firestore: Firestore, private userService: UserService) {
-    this.auth = getAuth();
+  currentUser!: User | null;
+  isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(private firestore: Firestore) {
+    this.auth = getAuth(this.firestore.app);
 
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        this.getUserData(user.uid);
+        this.currentUser = user;
+        this.setRole(user);
+        localStorage.setItem('user', user.uid);
       } else {
-        localStorage.setItem('user', 'null');
-        this.userData = null;
+        this.currentUser = null;
+        this.isAdmin.next(false);
+        localStorage.removeItem('user');
       }
     });
+  }
+
+  private setRole(user: User | null) {
+    if (!user) {
+      this.isAdmin.next(false);
+    } else {
+      user
+        .getIdTokenResult()
+        .then((token) => {
+          this.isAdmin.next(!!token.claims.isAdmin);
+        })
+        .catch((_) => {
+          this.isAdmin.next(false);
+        });
+    }
   }
 
   // Sign in
@@ -40,70 +56,8 @@ export class AuthService {
     return from(loginPromise);
   }
 
-  public createUser(
-    email: string,
-    password: string
-  ): Observable<UserCredential> {
-    return from(
-      createUserWithEmailAndPassword(this.auth, email, password)
-    ).pipe(take(1));
-  }
-
-  // Sign up
-  // public createUser(usr: AppUser): Observable<UserCredential> {
-  //   if (!usr.email || !usr.password || !usr.displayName) {
-  //     return EMPTY;
-  //   }
-  //   const userCreationPromise = createUserWithEmailAndPassword(
-  //     this.auth,
-  //     usr.email,
-  //     usr.password
-  //   );
-  //   userCreationPromise.then((u: UserCredential) => {
-  //     this.setUserData(u.user, usr.displayName);
-  //   });
-  //   return from(userCreationPromise);
-  // }
-
-  // Update user
-  public updateUser(userData: AppUser): Observable<void> {
-    return from(
-      updateDoc(doc(this.firestore, `users/${userData.uid}`), {
-        ...userData,
-      })
-    );
-  }
-
   // Sign out
   public signOut() {
-    const signOutPromise = signOut(this.auth);
-    signOutPromise.then(() => {
-      localStorage.removeItem('user');
-    });
-    return from(signOutPromise);
-  }
-
-  // async setUserData(user: User, displayName: string | null): Promise<void> {
-  //   const userData: AppUser = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: displayName,
-  //     role: 'member',
-  //   };
-  //   await updateDoc(doc(this.firestore, `users/${user.uid}`), {
-  //     ...userData,
-  //   });
-  // }
-
-  getUserData(uid: string): void {
-    this.userService.get(uid).subscribe((u) => {
-      if (!u) throw 'user not found';
-      this.userData = u;
-      localStorage.setItem('user', u.uid);
-    });
-  }
-
-  get isAdmin(): boolean {
-    return this.userData?.role === 'admin' || false;
+    signOut(this.auth);
   }
 }

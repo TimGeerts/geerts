@@ -4,14 +4,14 @@
     </geerts-horizontal-menu>
     <div class="profile d-none d-md-block">
       <ul>
-        <li *ngIf="!authService.userData">
-          <a href="#" title="Aanmelden" routerLink="login">
+        <li *ngIf="!authService.currentUser">
+          <a href="javascript:void(0);" title="Aanmelden" (click)="login()">
             <span class="ms-2">Aanmelden</span>
           </a>
         </li>
-        <li *ngIf="authService.userData">
+        <li *ngIf="authService.currentUser">
           <span class="me-2"
-            >Welkom {{ authService.userData.displayName }}</span
+            >Welkom {{ authService.currentUser.displayName }}</span
           >
           <a href="#" title="Profiel" class="links">profiel</a>
           |
@@ -22,7 +22,8 @@
             (click)="authService.signOut()"
             >afmelden</a
           >
-          <ng-container *ngIf="authService.isAdmin">
+
+          <ng-container *ngIf="authService.isAdmin | async">
             |
             <a
               href="#"
@@ -53,11 +54,7 @@
     </div>
   </div>
   <div class="content container">
-    <!-- <div class="container"> -->
-    <!-- <div class="row"> -->
     <router-outlet></router-outlet>
-    <!-- </div> -->
-    <!-- </div> -->
   </div>
   <div class="footer small">
     <div class="container">

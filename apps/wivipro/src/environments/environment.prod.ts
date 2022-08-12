@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  api_baseurl: 'http://localhost:5001/wivipro-6fdd8/europe-west1/api',
   firebase: {
     apiKey: 'AIzaSyCXrlgxzfUFwoguqmk1Np37hDeUiIeUfyE',
     authDomain: 'wivipro-6fdd8.firebaseapp.com',

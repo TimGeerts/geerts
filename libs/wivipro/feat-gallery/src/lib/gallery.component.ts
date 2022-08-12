@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IGalleryImage, ModalService } from '@geerts/shared';
+import { AuthService, IGalleryImage, ModalService } from '@geerts/shared';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs/operators';
 import { AddImageModalComponent } from './modals/add-image.modal';
@@ -16,14 +16,21 @@ export class GalleryComponent implements OnInit {
   gallery: IGalleryImage[] = new Array<IGalleryImage>();
   title = '';
   assetsfolder = '';
-  canmanage = true;
+  canmanage = false;
+  isAdmin = false;
 
   modalOptions: NgbModalOptions = { size: 'lg' };
 
   constructor(
     private route: ActivatedRoute,
-    private modalService: ModalService
-  ) {}
+    private modalService: ModalService,
+    private authService: AuthService
+  ) {
+    this.authService.isAdmin.subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+      this.canmanage = isAdmin;
+    });
+  }
 
   ngOnInit(): void {
     this.route.data.pipe(take(1)).subscribe((data) => {

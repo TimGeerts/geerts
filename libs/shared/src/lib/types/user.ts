@@ -1,7 +1,11 @@
+export interface AuthUser {
+  email: string;
+  password: string;
+  displayName: string;
+}
 export interface AppUser {
   uid: string;
   email?: string;
-  password?: string;
   displayName?: string;
   contactName?: string;
   customerNumber?: number;
@@ -9,3 +13,11 @@ export interface AppUser {
   phoneNumber?: string;
   role: string;
 }
+
+export type UpdateAuth = {
+  email: string;
+  password: string;
+  displayName: string;
+  photoURL: string;
+  disabled: boolean;
+};

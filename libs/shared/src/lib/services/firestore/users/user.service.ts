@@ -1,3 +1,4 @@
+//TODO possibly deprecated - clean up "soon"
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppUser } from '../../../shared.module';

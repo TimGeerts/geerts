@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AppUser } from '@geerts/shared';
+import {
+  AppUser,
+  AuthApi,
+  AuthUser,
+  UserApi,
+  NotificationService,
+} from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { concat, concatMap, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'geerts-user-offcanvas',
@@ -26,7 +33,10 @@ export class UserOffCanvasComponent implements OnInit {
   //TODO usr is not "something" yet in constructor, so formbuilding goes to SHIT!
   constructor(
     private activeOffCanvas: NgbActiveOffcanvas,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authApi: AuthApi,
+    private userApi: UserApi,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -53,8 +63,47 @@ export class UserOffCanvasComponent implements OnInit {
     });
   }
 
+  // TODO validate form, cause email validator is wrong
   ok(): void {
-    // TODO validate form, cause email validator is wrong
+    let $uid: Observable<string> = new Observable<string>();
+    const userFromForm: AppUser = this.formToUser();
+    if (this.action === 'create') {
+      // if the action is 'create a user'
+      // first we need to make an actual authentication record for the user
+      const newAuth: AuthUser = {
+        email: this.form.get('email')?.value,
+        password: this.form.get('password')?.value,
+        displayName: this.form.get('displayName')?.value,
+      };
+      $uid = this.authApi.create(newAuth);
+    } else {
+      // update existing user
+      $uid = of(userFromForm.uid);
+    }
+
+    $uid
+      .pipe(
+        concatMap((uid) => {
+          console.log(uid);
+          userFromForm.uid = uid;
+          return this.userApi.create(userFromForm);
+        })
+      )
+      .subscribe({
+        next: (r) => {
+          //TODO notification stuff
+          this.activeOffCanvas.close(r);
+        },
+        error: (e) => this.notificationService.handleApiError(e),
+      });
+  }
+
+  cancel(): void {
+    this.activeOffCanvas.dismiss('cancel');
+  }
+
+  // helpers
+  private formToUser(): AppUser {
     const newUsr = {
       email: this.form.get('email')?.value,
       displayName: this.form.get('displayName')?.value,
@@ -62,13 +111,8 @@ export class UserOffCanvasComponent implements OnInit {
       customerNumber: this.form.get('customerNumber')?.value,
       taxNumber: this.form.get('taxNumber')?.value,
       phoneNumber: this.form.get('phoneNumber')?.value,
-      password: this.form.get('password')?.value,
     };
     const ret: AppUser = { ...this.usr, ...newUsr };
-    this.activeOffCanvas.close(ret);
-  }
-
-  cancel(): void {
-    this.activeOffCanvas.dismiss();
+    return ret;
   }
 }
