@@ -11,8 +11,11 @@ import { ModalService } from './services/modal.service';
 import { AuthService } from './services/auth.service';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { AuthGuard } from './services/auth.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './services/guards/auth.guard';
+import { AdminGuard } from './services/guards/admin.guard';
 import { LoadingbuttonDirective } from './loadingbutton/loadingbutton.directive';
+import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 
 export * from './utils';
 export * from './types/menu-item';
@@ -21,7 +24,9 @@ export * from './types/gallery-image';
 export * from './services/notification.service';
 export * from './services/modal.service';
 export * from './services/auth.service';
-export * from './services/auth.guard';
+export * from './services/guards/auth.guard';
+export * from './services/guards/admin.guard';
+export * from './services/interceptors/error.interceptor';
 export * from './services/firestore/users/user.service';
 export * from './services/api/auth/auth.api';
 export * from './services/api/users/user.api';
@@ -32,6 +37,11 @@ export * from './services/api/users/user.api';
     HttpClientModule,
     RouterModule,
     NgxSkeletonLoaderModule,
+    ToastrModule.forRoot({
+      disableTimeOut: true,
+      enableHtml: true,
+      preventDuplicates: true,
+    }),
   ],
   declarations: [
     HorizontalCardComponent,
@@ -51,6 +61,12 @@ export * from './services/api/users/user.api';
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
   ],
-  providers: [ModalService, AuthService, AuthGuard],
+  providers: [
+    ModalService,
+    AuthService,
+    ErrorInterceptor,
+    AuthGuard,
+    AdminGuard,
+  ],
 })
 export class SharedModule {}

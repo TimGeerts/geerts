@@ -46,6 +46,7 @@ specifiers:
   jest: 27.2.3
   jest-preset-angular: 11.0.0
   ngx-skeleton-loader: ^5.0.0
+  ngx-toastr: ^14.3.0
   postcss: ^8.4.4
   prettier: ^2.3.1
   rxjs: ~7.4.0
@@ -74,6 +75,7 @@ dependencies:
   bootstrap: 5.1.3_@popperjs+core@2.11.5
   firebase: 9.9.0
   ngx-skeleton-loader: 5.0.0_ve2xnktmvxgo5glgd6utpzcxwq
+  ngx-toastr: 14.3.0_if65wtke2itpurn4q7uxqiy2sa
   rxjs: 7.4.0
   tslib: 2.4.0
   zone.js: 0.11.6
@@ -8298,6 +8300,19 @@ packages:
       '@angular/common': 13.3.11_2t22fagylqbkqccvcmmekxvl4a
       '@angular/core': 13.3.11_rxjs@7.4.0+zone.js@0.11.6
       perf-marks: 1.14.2
+      tslib: 2.4.0
+    dev: false
+
+  /ngx-toastr/14.3.0_if65wtke2itpurn4q7uxqiy2sa:
+    resolution: {integrity: sha512-d8j/sOr60w5U7rGlcKQ0Ff4u+m2NzhqU5ZdJXn7QW3aR3Zf/rY7/Fd14BmUindTOWVr2NeTYcQXCjLpir0ldpA==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0-0'
+      '@angular/core': '>=12.0.0-0'
+      '@angular/platform-browser': '>=12.0.0-0'
+    dependencies:
+      '@angular/common': 13.3.11_2t22fagylqbkqccvcmmekxvl4a
+      '@angular/core': 13.3.11_rxjs@7.4.0+zone.js@0.11.6
+      '@angular/platform-browser': 13.3.11_dontfr2itdbwnai2bloqfkk3ui
       tslib: 2.4.0
     dev: false
 

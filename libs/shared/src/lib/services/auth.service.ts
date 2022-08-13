@@ -9,7 +9,8 @@ import {
   UserCredential,
 } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, tap } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,18 @@ export class AuthService {
   currentUser!: User | null;
   isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private firestore: Firestore) {
+  constructor(
+    private firestore: Firestore,
+    private notificationService: NotificationService
+  ) {
     this.auth = getAuth(this.firestore.app);
-
     onAuthStateChanged(this.auth, (user) => {
+      //trigger this once, so it can be subscribed to on a page load to know when firebase has done it's auth check
       if (user) {
         this.currentUser = user;
         this.setRole(user);
         localStorage.setItem('user', user.uid);
+        this.notificationService.success(`Welkom ${user.displayName}`, ' '); //TODO maybe no welcome message?
       } else {
         this.currentUser = null;
         this.isAdmin.next(false);

@@ -5,9 +5,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AuthService } from '@geerts/shared';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,15 +14,18 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.authService.isAdmin.pipe(
-      tap((isAdmin) => {
-        if (!isAdmin) {
+  ): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.authService.auth.onAuthStateChanged((user) => {
+        if (!user) {
           this.router.navigate(['/login'], {
             queryParams: { returnUrl: state.url },
           });
+          resolve(false);
+        } else {
+          resolve(true);
         }
-      })
-    );
+      });
+    });
   }
 }

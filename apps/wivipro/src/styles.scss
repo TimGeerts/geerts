@@ -13,6 +13,7 @@ $dark: #212121;
 $table-hover-bg: $secondary;
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import '~ngx-toastr/toastr';
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Bilbo+Swash+Caps&family=Roboto:wght@100;300;400;700&display=swap');
 
 // wivipro vars
@@ -247,4 +248,85 @@ table.table {
 .offcanvas {
   width: 600px;
   font-size: 0.9rem;
+}
+
+// toasts
+.toast-container {
+  &.toast-bottom-center  .ngx-toastr{
+    width: 600px;
+  }
+  .ngx-toastr {
+    box-shadow: 0 0 5px var(--bs-gray-500);
+    color: var(--bs-dark);
+    background: linear-gradient(70deg, var(--bs-secondary), var(--bs-light));
+    width: 600px;
+    pre {
+      white-space: pre-wrap;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    &:hover{
+      box-shadow: 0 0 5px var(--bs-gray-600);
+    }
+    &.toast-info,
+    &.toast-success,
+    &.toast-warning,
+    &.toast-error {
+      border: 2px solid var(--bs-primary);
+      &:before {
+        position: relative;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 2rem;
+        float: left;
+        margin-left: -1em;
+        padding-left: 0.5rem;
+        margin-right: 2rem;
+      }
+    }
+    &.toast-info {
+      border-color: $blue-600;
+      &:before {
+        color: $blue-600;
+        content: "\f05a";
+      }
+    }
+    &.toast-success {
+      border-color: $green;
+      &:before {
+        color: $green;
+        content: "\f058";
+      }
+    }
+    &.toast-warning {
+      border-color: $yellow-600;
+      &:before {
+        color: $yellow-600;
+        content: "\f071";
+      }
+    }
+    &.toast-error {
+      border-color: $red;
+      &:before {
+        color: $red;
+        content: "\f06a";
+      }
+    }
+    .toast-title, .toast-message {
+      padding-left: 2.5rem;
+    }
+   
+   
+   
+    
+    // &.toast-success {
+    //   border: 3px solid var(--bs-success);
+    // }
+  }
 }

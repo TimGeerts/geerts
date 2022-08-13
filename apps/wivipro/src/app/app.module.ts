@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { AuthGuard, SharedModule } from '@geerts/shared';
+import {
+  AuthGuard,
+  AdminGuard,
+  SharedModule,
+  ErrorInterceptor,
+} from '@geerts/shared';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -10,6 +16,7 @@ import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +25,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     BrowserModule,
+    BrowserAnimationsModule,
     SharedModule,
     LoadingBarRouterModule,
     LoadingBarHttpClientModule,
@@ -61,13 +69,6 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
             ),
         },
         {
-          path: 'gallery',
-          loadChildren: () =>
-            import('@geerts/wivipro/feat-gallery').then(
-              (module) => module.FeatGalleryModule
-            ),
-        },
-        {
           path: 'login',
           loadChildren: () =>
             import('@geerts/wivipro/feat-login').then(
@@ -76,7 +77,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
         },
         {
           path: 'manage',
-          canActivate: [AuthGuard],
+          canActivate: [AdminGuard],
           loadChildren: () =>
             import('@geerts/wivipro/feat-manage').then(
               (module) => module.FeatManageModule
@@ -89,7 +90,10 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
       }
     ),
   ],
-  providers: [{ provide: 'apiBaseUrl', useValue: environment.api_baseurl }],
+  providers: [
+    { provide: 'apiBaseUrl', useValue: environment.api_baseurl },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

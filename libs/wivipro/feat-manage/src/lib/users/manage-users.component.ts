@@ -16,7 +16,11 @@ import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 export class ManageUsersComponent {
   users!: AppUser[];
 
-  constructor(private userApi: UserApi, private modalService: ModalService) {
+  constructor(
+    private userApi: UserApi,
+    private modalService: ModalService,
+    private notificationService: NotificationService
+  ) {
     this.getUsers();
   }
 
@@ -59,6 +63,7 @@ export class ManageUsersComponent {
     //TODO confirmdeletedialog/offcanvas?
     //TODO api call
     console.log('delete', usr);
+    this.notificationService.error('something went wrong');
   };
 
   //split to some utils file

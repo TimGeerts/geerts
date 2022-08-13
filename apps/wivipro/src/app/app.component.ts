@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, IMenuItem } from '@geerts/shared';
+import { AuthService, IMenuItem, NotificationService } from '@geerts/shared';
 
 @Component({
   selector: 'wivipro-root',
@@ -13,10 +13,19 @@ export class AppComponent implements OnInit {
   showMobileMenu = false;
   loginReturnUrl = '/';
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.initMenu();
+
+    this.notificationService.success('success');
+    this.notificationService.warning('warning');
+    this.notificationService.error('error');
+    this.notificationService.info('info');
   }
 
   login(): void {
