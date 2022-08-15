@@ -8,8 +8,7 @@ import {
   NotificationService,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingBarService } from '@ngx-loading-bar/core';
-import { concat, concatMap, Observable, of } from 'rxjs';
+import { concatMap, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'geerts-user-offcanvas',
@@ -38,8 +37,7 @@ export class UserOffCanvasComponent implements OnInit {
     private fb: FormBuilder,
     private authApi: AuthApi,
     private userApi: UserApi,
-    private notificationService: NotificationService,
-    private loader: LoadingBarService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +64,8 @@ export class UserOffCanvasComponent implements OnInit {
 
   // TODO validate form, cause email validator is wrong
   ok(): void {
+    this.loading = true;
+    this.notificationService.showLoading();
     let $uid: Observable<string> = new Observable<string>();
     const userFromForm: AppUser = this.formToUser();
     if (this.action === 'create') {
@@ -85,18 +85,19 @@ export class UserOffCanvasComponent implements OnInit {
     $uid
       .pipe(
         concatMap((uid) => {
-          this.loading = true;
           userFromForm.uid = uid;
           return this.userApi.create(userFromForm);
         })
       )
       .subscribe({
         next: (r) => {
-          //TODO notification stuff
-          this.loading = false;
           this.activeOffCanvas.close(r);
         },
-        error: (e) => this.notificationService.handleApiError(e),
+        error: (e) => {
+          this.loading = false;
+          this.notificationService.hideLoading();
+          this.notificationService.handleApiError(e);
+        },
       });
   }
 

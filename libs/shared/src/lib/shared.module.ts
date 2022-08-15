@@ -41,6 +41,7 @@ export * from './services/api/users/user.api';
       disableTimeOut: true,
       enableHtml: true,
       preventDuplicates: true,
+      positionClass: 'toast-bottom-right',
     }),
   ],
   declarations: [

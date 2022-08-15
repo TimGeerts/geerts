@@ -19,6 +19,10 @@ $table-hover-bg: $secondary;
 // wivipro vars
 $accent: #a5a591;
 
+:root {
+  --fa-animation-duration: 1s;
+}
+
 // layout/wrapper
 html,
 body,
@@ -36,6 +40,7 @@ body,
 .wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 // layout/nav
@@ -109,10 +114,10 @@ body,
 
 // layout/footer
 .footer {
-  flex-shrink: 0;
   background: var(--bs-primary);
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  margin-top: auto;
   color: $accent;
   strong {
     color: var(--bs-light);
@@ -259,7 +264,12 @@ table.table {
     box-shadow: 0 0 5px var(--bs-gray-500);
     color: var(--bs-dark);
     background: linear-gradient(70deg, var(--bs-secondary), var(--bs-light));
-    width: 600px;
+    width: 250px;
+    border-left: 6px solid var(--bs-primary);
+    padding: 0.5rem 1rem;
+    .toast-message {
+      line-height: initial;
+    }
     pre {
       white-space: pre-wrap;
     }
@@ -272,26 +282,37 @@ table.table {
       left: 0;
     }
     &:hover{
-      box-shadow: 0 0 5px var(--bs-gray-600);
+      box-shadow: 0 0 5px var(--bs-gray-500);
+    }
+    &.toast-loading {
+      .toast-message {
+        padding: 0;
+        font-size: 0.875em;
+        i {
+          color: var(--bs-primary);
+          margin-right: 0.5rem;
+          opacity: 0.5;
+        }
+      }
     }
     &.toast-info,
     &.toast-success,
     &.toast-warning,
     &.toast-error {
-      border: 2px solid var(--bs-primary);
       &:before {
         position: relative;
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
-        font-size: 2rem;
+        font-size: 1.4rem;
         float: left;
-        margin-left: -1em;
-        padding-left: 0.5rem;
-        margin-right: 2rem;
+        // margin-left: -1em;
+        // padding-left: 0.5rem;
+        // margin-right: 2rem;
       }
     }
     &.toast-info {
       border-color: $blue-600;
+      background: linear-gradient(70deg, $blue-100, var(--bs-light));
       &:before {
         color: $blue-600;
         content: "\f05a";
@@ -299,6 +320,7 @@ table.table {
     }
     &.toast-success {
       border-color: $green;
+      background: linear-gradient(70deg, $green-100, var(--bs-light));
       &:before {
         color: $green;
         content: "\f058";
@@ -306,27 +328,29 @@ table.table {
     }
     &.toast-warning {
       border-color: $yellow-600;
+      background: linear-gradient(70deg, $yellow-100, var(--bs-light));
       &:before {
         color: $yellow-600;
         content: "\f071";
       }
     }
     &.toast-error {
+      width: 580px;
       border-color: $red;
+      background: linear-gradient(70deg, $red-100, var(--bs-light));
       &:before {
+        font-size: 2rem;
         color: $red;
+        margin-right: 1.5rem;
         content: "\f06a";
       }
     }
     .toast-title, .toast-message {
       padding-left: 2.5rem;
     }
-   
-   
-   
-    
-    // &.toast-success {
-    //   border: 3px solid var(--bs-success);
-    // }
+    .toast-message {
+      font-size: 0.9rem;
+      padding-top: 0.5rem;
+    }
   }
 }

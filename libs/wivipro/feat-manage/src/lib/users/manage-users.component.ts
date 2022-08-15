@@ -25,8 +25,10 @@ export class ManageUsersComponent {
   }
 
   getUsers(): void {
+    this.notificationService.showLoading();
     this.userApi.getAll().subscribe((users) => {
       this.users = sortByProp(users, 'displayName');
+      this.notificationService.hideLoading();
     });
   }
 

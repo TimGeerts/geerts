@@ -31,7 +31,7 @@ export class AuthService {
         this.currentUser = user;
         this.setRole(user);
         localStorage.setItem('user', user.uid);
-        this.notificationService.success(`Welkom ${user.displayName}`, ' '); //TODO maybe no welcome message?
+        // this.notificationService.success(`Welkom ${user.displayName}`, ' '); //TODO maybe no welcome message?
       } else {
         this.currentUser = null;
         this.isAdmin.next(false);

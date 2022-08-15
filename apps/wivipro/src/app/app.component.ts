@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     this.notificationService.warning('warning');
     this.notificationService.error('error');
     this.notificationService.info('info');
+    this.notificationService.showLoading();
   }
 
   login(): void {

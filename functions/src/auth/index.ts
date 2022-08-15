@@ -35,7 +35,11 @@ const createAuth = async (req: Request, res: Response) => {
     return res.status(201).send(newAuth.uid);
   } catch (error: any) {
     log_error(error.message);
-    return res.status(500).json(error.message);
+    return res.status(500).json({
+      code: error.code,
+      message: error.message,
+    });
+    // return res.status(500).send(`[${error.code}] ${error.message}`);
   }
 };
 

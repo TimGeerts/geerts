@@ -29,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             // not fixed even after retries
             // TODO maybe no need to add the error message, but make a generic error message and "store or mail" the actual message?
-            this.notificationService.error(`<pre>${error.message}</pre>`);
+            this.notificationService.handleApiError(error);
             throw error;
           })
         );
