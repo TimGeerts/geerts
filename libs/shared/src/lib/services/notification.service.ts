@@ -35,7 +35,7 @@ export class NotificationService {
     console.log(message);
   }
 
-  showLoading(message: string = ''): void {
+  showLoading(message: string = ''): boolean {
     const template = `
       <div>
         <i class='fas fa-circle-notch fa-spin'></i>
@@ -46,11 +46,13 @@ export class NotificationService {
       toastClass: 'ngx-toastr toast-loading',
       disableTimeOut: true,
     });
+    return true;
   }
 
-  hideLoading(): void {
+  hideLoading(): boolean {
     if (this.activeLoadingToast)
       this.toastr.remove(this.activeLoadingToast.toastId);
+    return false;
   }
 
   handleApiError(res: HttpErrorResponse): void {

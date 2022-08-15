@@ -47,7 +47,8 @@
             <button type="button" class="btn btn-link" title="Aanpassen" (click)="editUser(user)">
               <i class="fas fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-link" title="Verwijderen" (click)="deleteUser(user)">
+            <button type="button" class="btn btn-link" title="Verwijderen" geertsHoldable
+              (holdTime)="deleteUser($event)">
               <i class="fas fa-trash"></i>
             </button>
           </div>

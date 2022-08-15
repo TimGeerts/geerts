@@ -1,8 +1,4 @@
-<ngx-loading-bar
-  color="var(--bs-primary)"
-  height="5px"
-  [fixed]="true"
-></ngx-loading-bar>
+<ngx-loading-bar color="var(--bs-primary)" height="5px" [fixed]="true"></ngx-loading-bar>
 <div class="wrapper min-vh-100">
   <div class="nav container d-flex justify-content-between">
     <geerts-horizontal-menu class="d-none d-md-block" [menuItems]="menuItems">
@@ -10,34 +6,20 @@
     <div class="profile d-none d-md-block">
       <ul>
         <li *ngIf="!authService.currentUser">
-          <a href="javascript:void(0);" title="Aanmelden" (click)="login()">
+          <a href="javascript:void(0);" title="Aanmelden" routerLink="login" (click)="login()"
+            routerLinkActive="d-none">
             <span class="ms-2">Aanmelden</span>
           </a>
         </li>
         <li *ngIf="authService.currentUser">
-          <span class="me-2"
-            >Welkom {{ authService.currentUser.displayName }}</span
-          >
+          <span class="me-2">Welkom {{ authService.currentUser.displayName }}</span>
           <a href="#" title="Profiel" class="links">profiel</a>
           |
-          <a
-            href="#"
-            title="Afmelden"
-            class="links"
-            (click)="authService.signOut()"
-            >afmelden</a
-          >
+          <a href="#" title="Afmelden" class="links" (click)="authService.signOut()">afmelden</a>
 
           <ng-container *ngIf="authService.isAdmin | async">
             |
-            <a
-              href="#"
-              title="Beheer"
-              class="links"
-              routerLink="manage"
-              routerLinkActive="active"
-              >beheer</a
-            >
+            <a href="#" title="Beheer" class="links" routerLink="manage" routerLinkActive="active">beheer</a>
           </ng-container>
         </li>
       </ul>
@@ -84,11 +66,8 @@
             <strong>Legal</strong><br /><br />
             BTW: BE 0812 026 788<br />
             Record: BE86 6528 3312 0150<br />
-            <a
-              href="https://www.dropbox.com/s/j3czcyok2p3hwto/Algemene%20Verkoopsvoorwaarden.pdf?dl=0"
-              target="_blank"
-              >Verkoopsvoorwaarden</a
-            ><br />
+            <a href="https://www.dropbox.com/s/j3czcyok2p3hwto/Algemene%20Verkoopsvoorwaarden.pdf?dl=0"
+              target="_blank">Verkoopsvoorwaarden</a><br />
           </address>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -131,25 +110,13 @@
             <strong>Social</strong>
             <br /><br />
             <div class="social d-flex">
-              <a
-                href="https://www.facebook.com/wivipro/"
-                target="_blank"
-                title="Facebook"
-              >
+              <a href="https://www.facebook.com/wivipro/" target="_blank" title="Facebook">
                 <i class="fab fa-facebook-square"></i>
               </a>
-              <a
-                href="https://www.instagram.com/wiviprokapellen/"
-                target="_blank"
-                title="Instagram"
-              >
+              <a href="https://www.instagram.com/wiviprokapellen/" target="_blank" title="Instagram">
                 <i class="fab fa-instagram-square"></i>
               </a>
-              <a
-                href="https://www.pinterest.com/wivipro/"
-                target="_blank"
-                title="Pinterest"
-              >
+              <a href="https://www.pinterest.com/wivipro/" target="_blank" title="Pinterest">
                 <i class="fab fa-pinterest-square"></i>
               </a>
             </div>

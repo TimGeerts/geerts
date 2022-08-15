@@ -11,7 +11,6 @@ export class AppComponent implements OnInit {
   title = 'Wivipro';
   menuItems: IMenuItem[] = new Array<IMenuItem>();
   showMobileMenu = false;
-  loginReturnUrl = '/';
 
   constructor(
     public authService: AuthService,
@@ -21,18 +20,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMenu();
-
-    this.notificationService.success('success');
-    this.notificationService.warning('warning');
-    this.notificationService.error('error');
-    this.notificationService.info('info');
-    this.notificationService.showLoading();
+    // this.notificationService.success('success');
+    // this.notificationService.warning('warning');
+    // this.notificationService.error('error');
+    // this.notificationService.info('info');
+    // this.notificationService.showLoading();
   }
 
   login(): void {
-    this.router.navigate(['/login'], {
-      queryParams: { returnUrl: this.router.url },
-    });
+    // if currently on the login page, don't pass the returnurl
+    if (this.router.url.startsWith('/login')) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: this.router.url },
+      });
+    }
   }
 
   private initMenu(): void {

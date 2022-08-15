@@ -54,18 +54,17 @@ export class ManageUsersComponent {
         title,
       })
       .subscribe((res) => {
-        console.log(res);
         if (res.Success) {
           this.getUsers();
         }
       });
   };
 
-  deleteUser = (usr: AppUser): void => {
+  deleteUser = (x: any): void => {
     //TODO confirmdeletedialog/offcanvas?
     //TODO api call
-    console.log('delete', usr);
-    this.notificationService.error('something went wrong');
+    console.log('delete', x);
+    // this.notificationService.error('something went wrong');
   };
 
   //split to some utils file

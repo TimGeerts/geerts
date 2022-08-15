@@ -16,6 +16,7 @@ import { AuthGuard } from './services/guards/auth.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 import { LoadingbuttonDirective } from './loadingbutton/loadingbutton.directive';
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
+import { HoldableDirective } from './holdable/holdable.directive';
 
 export * from './utils';
 export * from './types/menu-item';
@@ -38,7 +39,6 @@ export * from './services/api/users/user.api';
     RouterModule,
     NgxSkeletonLoaderModule,
     ToastrModule.forRoot({
-      disableTimeOut: true,
       enableHtml: true,
       preventDuplicates: true,
       positionClass: 'toast-bottom-right',
@@ -52,6 +52,7 @@ export * from './services/api/users/user.api';
     ImageGridComponent,
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
+    HoldableDirective,
   ],
   exports: [
     HorizontalCardComponent,
@@ -61,6 +62,7 @@ export * from './services/api/users/user.api';
     ImageGridComponent,
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
+    HoldableDirective,
   ],
   providers: [
     ModalService,

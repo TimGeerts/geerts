@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthUser, UpdateAuth } from '../../../shared.module';
+import { ApiResponse } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +25,10 @@ export class AuthApi {
   update(uid: string, changes: UpdateAuth): Observable<unknown> {
     const endpoint = `${this.baseUrl}/auth/]${uid}`;
     return this.http.patch(endpoint, changes);
+  }
+
+  delete(uid: string): Observable<ApiResponse<null>> {
+    const endpoint = `${this.baseUrl}/auth/${uid}`;
+    return this.http.delete<ApiResponse<null>>(endpoint);
   }
 }

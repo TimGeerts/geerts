@@ -19,6 +19,8 @@ export class UserOffCanvasComponent implements OnInit {
   title!: string;
   action: 'create' | 'update' = 'create';
   actionLabel: 'Aanmaken' | 'Aanpassen' = 'Aanmaken';
+  resultMessage: 'Gebruiker aangemaakt' | 'Gebruiker aangepast' =
+    'Gebruiker aangemaakt';
   loading = false;
 
   form = this.fb.group({
@@ -44,6 +46,7 @@ export class UserOffCanvasComponent implements OnInit {
     if (this.usr && this.usr.email) {
       this.action = 'update';
       this.actionLabel = 'Aanpassen';
+      this.resultMessage = 'Gebruiker aangepast';
       this.form.get('password')?.disable(); // this disables the validator
     }
     this.usr = this.usr || {};
@@ -64,8 +67,7 @@ export class UserOffCanvasComponent implements OnInit {
 
   // TODO validate form, cause email validator is wrong
   ok(): void {
-    this.loading = true;
-    this.notificationService.showLoading();
+    this.loading = this.notificationService.showLoading();
     let $uid: Observable<string> = new Observable<string>();
     const userFromForm: AppUser = this.formToUser();
     if (this.action === 'create') {
@@ -92,10 +94,11 @@ export class UserOffCanvasComponent implements OnInit {
       .subscribe({
         next: (r) => {
           this.activeOffCanvas.close(r);
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.success(this.resultMessage);
         },
         error: (e) => {
-          this.loading = false;
-          this.notificationService.hideLoading();
+          this.loading = this.notificationService.hideLoading();
           this.notificationService.handleApiError(e);
         },
       });
@@ -103,6 +106,30 @@ export class UserOffCanvasComponent implements OnInit {
 
   cancel(): void {
     this.activeOffCanvas.dismiss('cancel');
+  }
+
+  // TODO confirm delete
+  delete(): void {
+    this.loading = this.notificationService.showLoading();
+    // first delete the user record, if that succeeds, delete the auth record as well
+    this.userApi
+      .delete(this.usr.uid)
+      .pipe(
+        concatMap((res) => {
+          return this.authApi.delete(this.usr.uid);
+        })
+      )
+      .subscribe({
+        next: (r) => {
+          this.activeOffCanvas.close(r);
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.success('Gebruiker verwijderd');
+        },
+        error: (e) => {
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.handleApiError(e);
+        },
+      });
   }
 
   // helpers

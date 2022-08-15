@@ -39,7 +39,7 @@
     <div class="d-flex justify-content-between mt-5">
       <div class="btn-group" role="group" *ngIf="action ==='update'">
         <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-danger" style="width: 32px;"
-          title="Verwijderen">
+          title="Verwijderen" (click)="delete()">
           <i class="fas fa-trash"></i>
         </button>
         <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-danger" title="Reset paswoord ">
@@ -49,12 +49,12 @@
       <div class="w-100 text-end">
         <button geertsLoadingButton [loading]="loading" type="button" class="btn btn-sm btn-primary rounded px-3 me-1"
           [disabled]="!form.valid" (click)="ok()">
-          {{actionLabel}}
+          <span>{{actionLabel}}</span>
           <i class="fas fa-check"></i>
         </button>
         <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-primary rounded px-3"
           (click)="cancel()">
-          Annuleren
+          <span>Annuleren</span>
           <i class="fas fa-ban"></i>
         </button>
       </div>
