@@ -3,15 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import {
-  AuthGuard,
-  AdminGuard,
-  SharedModule,
-  ErrorInterceptor,
-} from '@geerts/shared';
+import { AdminGuard, SharedModule, ErrorInterceptor } from '@geerts/shared';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
@@ -24,6 +20,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideFunctions(() => getFunctions()),
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,

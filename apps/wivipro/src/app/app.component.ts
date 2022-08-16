@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, IMenuItem, NotificationService } from '@geerts/shared';
+import {
+  AuthFunctions,
+  AuthService,
+  IMenuItem,
+  NotificationService,
+} from '@geerts/shared';
 
 @Component({
   selector: 'wivipro-root',
@@ -15,7 +20,8 @@ export class AppComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authFunctions: AuthFunctions
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +42,29 @@ export class AppComponent implements OnInit {
         queryParams: { returnUrl: this.router.url },
       });
     }
+  }
+
+  clickTest(): void {
+    this.authFunctions.test().subscribe((r) => {
+      console.log(r);
+    });
+  }
+
+  clickTestError(): void {
+    this.authFunctions.testError().subscribe({
+      next: (r) => {
+        console.log(r);
+      },
+      error: (e) => {
+        // const obj = JSON.parse(JSON.stringify(e));
+        // console.log('error: ', e);
+        // console.log('error object?: ', obj);
+
+        const code = e.code;
+        const message = e.message;
+        const details = e.details;
+      },
+    });
   }
 
   private initMenu(): void {

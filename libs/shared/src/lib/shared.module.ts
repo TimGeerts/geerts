@@ -32,6 +32,8 @@ export * from './services/firestore/users/user.service';
 export * from './services/api/auth/auth.api';
 export * from './services/api/users/user.api';
 
+export * from './services/functions/auth.functions';
+
 @NgModule({
   imports: [
     CommonModule,
