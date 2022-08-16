@@ -7,6 +7,7 @@ import { ManageComponent } from './manage.component';
 import { ManageUsersComponent } from './users/manage-users.component';
 import { ManageOrdersComponent } from './orders/manage-orders.component';
 import { UserOffCanvasComponent } from './users/offcanvas/user.offcanvas';
+import { DeleteUserWarningComponent } from './users/delete-user/delete-user-warning.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { UserOffCanvasComponent } from './users/offcanvas/user.offcanvas';
     ManageUsersComponent,
     ManageOrdersComponent,
     UserOffCanvasComponent,
+    DeleteUserWarningComponent,
   ],
   exports: [ManageComponent],
 })

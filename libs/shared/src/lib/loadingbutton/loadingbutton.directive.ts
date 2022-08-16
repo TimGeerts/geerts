@@ -46,11 +46,7 @@ export class LoadingbuttonDirective implements AfterViewInit {
       ((button.getElementsByTagName('i') || [])[0] || {}).className;
     this.icon = this.icon || button.querySelector('i');
     if (!this.icon) {
-      var insertedIcon = document.createElement('i');
-      // insertedIcon.className = classLoadingIcon;
-
-      insertedIcon.classList.add('bg-yellow', 'text-lg');
-
+      const insertedIcon = document.createElement('i');
       button.appendChild(insertedIcon);
       this.icon = insertedIcon;
     }
@@ -59,10 +55,6 @@ export class LoadingbuttonDirective implements AfterViewInit {
   private start() {
     const button = this.el.nativeElement as HTMLButtonElement;
     button.disabled = true;
-    console.log(this.icon);
-    if (!this.icon) {
-      console.log('button does not have an icon');
-    }
 
     this.renderer.setAttribute(
       this.icon,

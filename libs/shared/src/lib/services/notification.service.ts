@@ -23,6 +23,7 @@ export class NotificationService {
   error(message: string, title: string = ''): void {
     this.toastr.error(message, title || this.defaults.errorTitle, {
       positionClass: 'toast-top-right',
+      disableTimeOut: true,
     });
     console.error(message || this.defaultErrorMessage);
   }

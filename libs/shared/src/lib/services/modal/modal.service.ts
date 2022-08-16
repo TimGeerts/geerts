@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable, TemplateRef, Type } from '@angular/core';
 import {
   NgbModal,
   NgbModalOptions,
@@ -7,6 +7,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { ConfirmDeleteModalComponent } from './templates/confirm-delete.modal';
 
 //TODO: maybe we also need an OffCanvasResult<T>, time will tell
 export class ModalResult<T> {
@@ -29,6 +30,22 @@ export class ModalService {
   ) {}
 
   //TODO: add some generic dialogs that are used quite often (like a simple yes/no confirmation dialog, etc...)
+
+  confirmDelete(message: string = ''): Observable<ModalResult<boolean>> {
+    return this.show<ConfirmDeleteModalComponent, boolean>(
+      ConfirmDeleteModalComponent,
+      { bodyText: message }
+    );
+  }
+
+  confirmDeleteWithTemplate(
+    template: TemplateRef<Element>
+  ): Observable<ModalResult<boolean>> {
+    return this.show<ConfirmDeleteModalComponent, boolean>(
+      ConfirmDeleteModalComponent,
+      { body: template }
+    );
+  }
 
   show<T, R>(
     content: Type<T>,

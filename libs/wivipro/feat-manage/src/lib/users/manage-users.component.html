@@ -9,7 +9,10 @@
       </div>
     </div>
 
-    <button class="btn btn-sm btn-outline-secondary rounded px-3" (click)="addUser()">
+    <button
+      class="btn btn-sm btn-outline-secondary rounded px-3"
+      (click)="addUser()"
+    >
       <i class="fas fa-plus me-2"></i>
       Gebruiker aanmaken
     </button>
@@ -44,11 +47,22 @@
         </td>
         <td class="text-end">
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-link" title="Aanpassen" (click)="editUser(user)">
+            <button
+              type="button"
+              [disabled]="loading"
+              class="btn btn-link"
+              title="Aanpassen"
+              (click)="editUser(user)"
+            >
               <i class="fas fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-link" title="Verwijderen" geertsHoldable
-              (holdTime)="deleteUser($event)">
+            <button
+              type="button"
+              [disabled]="loading"
+              class="btn btn-link"
+              title="Verwijderen"
+              (click)="deleteUser(user)"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -57,3 +71,7 @@
     </tbody>
   </table>
 </geerts-skeleton-loader>
+
+<ng-template #confirmDeleteUser>
+  <geerts-delete-user-warning></geerts-delete-user-warning>
+</ng-template>

@@ -197,6 +197,10 @@ button {
     > i:only-child {
       margin-left: 0;
     }
+    .btn-outline-primary:hover {
+      background-color: var(--bs-secondary);
+      color: var(--bs-primary)
+    }
   }
   &.btn-close {
     &:focus {
@@ -230,6 +234,9 @@ table.table {
       transition: 250ms ease-in-out;
       color: var(--bs-primary);
       opacity: 0.2;
+    }
+    button:hover > i.fa-trash {
+      color: var(--bs-danger);
     }
     button:hover > i {
       opacity: 1;
@@ -338,6 +345,9 @@ table.table {
       width: 580px;
       border-color: $red;
       background: linear-gradient(70deg, $red-100, var(--bs-light));
+      .toast-message {
+        padding-left: 3.5rem;
+      }
       &:before {
         font-size: 2rem;
         color: $red;
@@ -351,6 +361,31 @@ table.table {
     .toast-message {
       font-size: 0.9rem;
       padding-top: 0.5rem;
+    }
+  }
+}
+
+//modal
+.modal-dialog {
+  .modal-content{
+    background-color: var(--bs-light);
+   
+  }
+  .confirm-delete {
+    border: 2px solid var(--bs-danger);
+    .modal-body i {
+      font-size: 5rem;
+      color: var(--bs-danger);
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-footer {
+      border-top: 0;
+      justify-content: center;
+    }
+    .btn-outline-danger:hover {
+      background-color: $red-100;
+      color: var(--bs-danger)
     }
   }
 }

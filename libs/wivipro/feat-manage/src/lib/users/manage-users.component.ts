@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import {
   AppUser,
+  AuthApi,
   ModalService,
   NotificationService,
   sortByProp,
   UserApi,
 } from '@geerts/shared';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
+import { concatMap, switchMap } from 'rxjs/operators';
+import { NEVER } from 'rxjs';
 
 @Component({
   selector: 'geerts-manage',
@@ -14,10 +17,14 @@ import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
   styleUrls: ['./manage-users.component.scss'],
 })
 export class ManageUsersComponent {
+  @ViewChild('confirmDeleteUser') confirmDeleteUser!: TemplateRef<Element>;
+
   users!: AppUser[];
+  loading = false;
 
   constructor(
     private userApi: UserApi,
+    private authApi: AuthApi,
     private modalService: ModalService,
     private notificationService: NotificationService
   ) {
@@ -39,7 +46,6 @@ export class ManageUsersComponent {
         title,
       })
       .subscribe((res) => {
-        console.log(res);
         if (res.Success) {
           this.getUsers();
         }
@@ -60,18 +66,33 @@ export class ManageUsersComponent {
       });
   };
 
-  deleteUser = (x: any): void => {
-    //TODO confirmdeletedialog/offcanvas?
-    //TODO api call
-    console.log('delete', x);
-    // this.notificationService.error('something went wrong');
+  deleteUser = (u: AppUser): void => {
+    this.modalService
+      .confirmDeleteWithTemplate(this.confirmDeleteUser)
+      .pipe(
+        switchMap((r) => {
+          if (r.Success) {
+            this.loading = this.notificationService.showLoading();
+            return this.userApi.delete(u.uid).pipe(
+              concatMap((_) => {
+                return this.authApi.delete(u.uid);
+              })
+            );
+          } else {
+            return NEVER;
+          }
+        })
+      )
+      .subscribe({
+        next: (r) => {
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.success('Gebruiker verwijderd');
+          this.getUsers();
+        },
+        error: (e) => {
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.handleApiError(e);
+        },
+      });
   };
-
-  //split to some utils file
-
-  // private sortByProp<T, K extends keyof T>(values: T[], orderType: K): T[] {
-  //   return values.sort((a, b) =>
-  //     a[orderType] > b[orderType] ? 1 : b[orderType] > a[orderType] ? -1 : 0
-  //   );
-  // }
 }
