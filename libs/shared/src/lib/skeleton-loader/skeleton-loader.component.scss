@@ -1,0 +1,8 @@
+:host ::ng-deep ngx-skeleton-loader .loader {
+  background-color: #e7e2be;
+  margin-top: 10px;
+  margin-bottom: 0;
+  &.pulse {
+    animation: pulse 2s cubic-bezier(.6,0,.4,1) infinite;
+  }
+}

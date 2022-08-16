@@ -1,14 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '@geerts/shared';
+import {
+  AuthGuard,
+  AdminGuard,
+  SharedModule,
+  ErrorInterceptor,
+} from '@geerts/shared';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     BrowserModule,
+    BrowserAnimationsModule,
     SharedModule,
+    LoadingBarRouterModule,
+    LoadingBarHttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       [
         {
@@ -48,17 +69,18 @@ import { SharedModule } from '@geerts/shared';
             ),
         },
         {
-          path: 'gallery',
-          loadChildren: () =>
-            import('@geerts/wivipro/feat-gallery').then(
-              (module) => module.FeatGalleryModule
-            ),
-        },
-        {
           path: 'login',
           loadChildren: () =>
             import('@geerts/wivipro/feat-login').then(
               (module) => module.FeatLoginModule
+            ),
+        },
+        {
+          path: 'manage',
+          canActivate: [AdminGuard],
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-manage').then(
+              (module) => module.FeatManageModule
             ),
         },
       ],
@@ -68,7 +90,10 @@ import { SharedModule } from '@geerts/shared';
       }
     ),
   ],
-  providers: [],
+  providers: [
+    { provide: 'apiBaseUrl', useValue: environment.api_baseurl },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

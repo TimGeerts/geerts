@@ -1,0 +1,128 @@
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title">{{title}}</h5>
+  <button
+    type="button"
+    class="btn-close text-reset"
+    aria-label="Close"
+    (click)="cancel()"
+  ></button>
+</div>
+<div class="offcanvas-body">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputCustomerNumber"
+        ngbAutofocus
+        formControlName="customerNumber"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputDisplayName" class="form-label">Bedrijf</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputDisplayName"
+        formControlName="displayName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputContactName" class="form-label">Naam</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputContactName"
+        ngbAutofocus
+        formControlName="contactName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputTaxNumber" class="form-label">BTW</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputTaxNumber"
+        ngbAutofocus
+        formControlName="taxNumber"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control form-control-sm"
+        id="inputEmail"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputPhone" class="form-label">Telefoonnummer</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="inputPhone"
+        formControlName="phoneNumber"
+      />
+    </div>
+    <div class="mb-3" *ngIf="action ==='create'">
+      <label for="inputPassword" class="form-label">Paswoord</label>
+      <input
+        type="password"
+        class="form-control form-control-sm"
+        id="inputPassword"
+        formControlName="password"
+      />
+    </div>
+
+    <div class="d-flex justify-content-between mt-5">
+      <div class="btn-group" role="group" *ngIf="action ==='update'">
+        <button
+          [disabled]="loading"
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+          style="width: 32px"
+          title="Verwijderen"
+          (click)="delete()"
+        >
+          <i class="fas fa-trash"></i>
+        </button>
+        <button
+          [disabled]="loading"
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+          title="Reset paswoord "
+        >
+          <i class="fas fa-key"></i>
+        </button>
+      </div>
+      <div class="w-100 text-end">
+        <button
+          [disabled]="loading"
+          type="button"
+          class="btn btn-sm btn-outline-primary rounded px-3 me-1"
+          (click)="cancel()"
+        >
+          <span>Annuleren</span>
+          <i class="fas fa-ban"></i>
+        </button>
+        <button
+          geertsLoadingButton
+          [loading]="loading"
+          type="button"
+          class="btn btn-sm btn-primary rounded px-3"
+          [disabled]="!form.valid"
+          (click)="ok()"
+        >
+          <span>{{actionLabel}}</span>
+          <i class="fas fa-check"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #confirmDeleteUser>
+  <geerts-delete-user-warning></geerts-delete-user-warning>
+</ng-template>

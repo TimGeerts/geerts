@@ -1,0 +1,11 @@
+<ng-container *ngIf="toggle; else data_loading">
+  <ng-content></ng-content>
+</ng-container>
+
+<ng-template #data_loading>
+  <ngx-skeleton-loader
+    [count]="count"
+    [appearance]="type"
+    animation="pulse"
+  ></ngx-skeleton-loader>
+</ng-template>
