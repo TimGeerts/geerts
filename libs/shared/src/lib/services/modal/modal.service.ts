@@ -8,6 +8,7 @@ import {
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { ConfirmDeleteModalComponent } from './templates/confirm-delete.modal';
+import { ConfirmResetModalComponent } from './templates/confirm-reset.modal';
 
 //TODO: maybe we also need an OffCanvasResult<T>, time will tell
 export class ModalResult<T> {
@@ -43,6 +44,15 @@ export class ModalService {
   ): Observable<ModalResult<boolean>> {
     return this.show<ConfirmDeleteModalComponent, boolean>(
       ConfirmDeleteModalComponent,
+      { body: template }
+    );
+  }
+
+  confirmResetWithTemplate(
+    template: TemplateRef<Element>
+  ): Observable<ModalResult<boolean>> {
+    return this.show<ConfirmResetModalComponent, boolean>(
+      ConfirmResetModalComponent,
       { body: template }
     );
   }

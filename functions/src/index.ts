@@ -6,8 +6,13 @@ admin.initializeApp();
 import * as express from 'express';
 import * as cors from 'cors';
 import { addUser, deleteUser, getAllUsers, getUser } from './user';
-import { createAuth, deleteAuth, setAdmin, updateAuth } from './auth';
-import { CallableContext } from 'firebase-functions/v1/https';
+import {
+  createAuth,
+  deleteAuth,
+  resetPassword,
+  setAdmin,
+  updateAuth,
+} from './auth';
 
 const region = 'europe-west1';
 const app = express().use(cors());
@@ -46,27 +51,6 @@ exports.onUpdateUser = functions
   });
 
 //callable functions test
-exports.resetPassword = functions.https.onCall(
-  (data: any, context: CallableContext) => {
-    if (!context.auth) {
-      // Throwing an HttpsError so that the client gets the error details.
-      throw new functions.https.HttpsError(
-        'failed-precondition',
-        'The function must be called while authenticated.'
-      );
-    }
-    if (!data) {
-      throw new functions.https.HttpsError(
-        'invalid-argument',
-        'The function must be called with a data object.'
-      );
-    }
-    console.log(context.auth?.token);
-    console.log(data);
-    return {
-      amount: 40,
-    };
-  }
-);
+exports.resetPassword = resetPassword;
 
 //export declare type FunctionsErrorCodeCore = 'ok' | 'cancelled' | 'unknown' | 'invalid-argument' | 'deadline-exceeded' | 'not-found' | 'already-exists' | 'permission-denied' | 'resource-exhausted' | 'failed-precondition' | 'aborted' | 'out-of-range' | 'unimplemented' | 'internal' | 'unavailable' | 'data-loss' | 'unauthenticated';

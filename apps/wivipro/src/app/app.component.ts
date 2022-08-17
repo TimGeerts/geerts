@@ -45,26 +45,19 @@ export class AppComponent implements OnInit {
   }
 
   clickTest(): void {
-    this.authFunctions.test().subscribe((r) => {
-      console.log(r);
-    });
+    this.authFunctions
+      .resetPassword({
+        uid: 'aUr2i49TXadE6xTFekARTx0GZm52',
+        password: 'django0000',
+      })
+      .subscribe({
+        next: (r) => console.log(r),
+        error: (error) => this.handleCallableFunctionError(error),
+      });
   }
 
   clickTestError(): void {
-    this.authFunctions.testError().subscribe({
-      next: (r) => {
-        console.log(r);
-      },
-      error: (e) => {
-        // const obj = JSON.parse(JSON.stringify(e));
-        // console.log('error: ', e);
-        // console.log('error object?: ', obj);
-
-        const code = e.code;
-        const message = e.message;
-        const details = e.details;
-      },
-    });
+    console.log('test function to see error response from callable function');
   }
 
   private initMenu(): void {
@@ -90,5 +83,11 @@ export class AppComponent implements OnInit {
         routerLink: '/wholesale',
       },
     ];
+  }
+
+  private handleCallableFunctionError(error: any): void {
+    if (error.code) console.error(error.code);
+    if (error.message) console.error(error.message);
+    if (error.details) console.error(error.details);
   }
 }

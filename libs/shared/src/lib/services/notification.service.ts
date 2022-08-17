@@ -24,6 +24,7 @@ export class NotificationService {
     this.toastr.error(message, title || this.defaults.errorTitle, {
       positionClass: 'toast-top-right',
       disableTimeOut: true,
+      closeButton: true,
     });
     console.error(message || this.defaultErrorMessage);
   }
@@ -63,6 +64,25 @@ export class NotificationService {
     } catch (e) {
       this.error(res.message);
     }
+  }
+
+  handleCallableFunctionError(error: any): void {
+    const errNotification = new Array<string>();
+
+    if (error.details) {
+      // if there's a details object, it "should" contain more info about the function error
+      const errDetails = error.details;
+      if (errDetails.code) errNotification.push(`[${errDetails.code}]`);
+      if (errDetails.message) errNotification.push(errDetails.message);
+    } else {
+      if (error.code) errNotification.push(`[${error.code}]`);
+      if (error.message) errNotification.push(error.message);
+    }
+    // if nothing has been found at this point, add the actual error
+    if (!errNotification.length) {
+      this.error(error);
+    }
+    this.error(errNotification.join(' '));
   }
 
   private showErrorMessageForCode(

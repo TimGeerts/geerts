@@ -17,6 +17,7 @@ import { AdminGuard } from './services/guards/admin.guard';
 import { LoadingbuttonDirective } from './loadingbutton/loadingbutton.directive';
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 import { ConfirmDeleteModalComponent } from './services/modal/templates/confirm-delete.modal';
+import { ConfirmResetModalComponent } from './services/modal/templates/confirm-reset.modal';
 
 export * from './utils';
 export * from './types/menu-item';
@@ -28,11 +29,11 @@ export * from './services/auth.service';
 export * from './services/guards/auth.guard';
 export * from './services/guards/admin.guard';
 export * from './services/interceptors/error.interceptor';
-export * from './services/firestore/users/user.service';
 export * from './services/api/auth/auth.api';
 export * from './services/api/users/user.api';
 
-export * from './services/functions/auth.functions';
+export * from './services/functions/types';
+export * from './services/functions/auth/auth.functions';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ export * from './services/functions/auth.functions';
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
     ConfirmDeleteModalComponent,
+    ConfirmResetModalComponent,
   ],
   exports: [
     HorizontalCardComponent,
