@@ -3,14 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   AppUser,
   AuthApi,
-  AuthUser,
   UserApi,
   NotificationService,
   ModalService,
   AuthFunctions,
+  CreateUserRequest,
+  UpdateUserRequest,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { concatMap, switchMap, Observable, of } from 'rxjs';
+import { concatMap, switchMap } from 'rxjs';
 import { NEVER } from 'rxjs';
 
 @Component({
@@ -78,42 +79,50 @@ export class UserOffCanvasComponent implements OnInit {
   }
 
   // TODO validate form, cause email validator is wrong
-  ok(): void {
+  add(): void {
+    this.loading = this.notificationService.showLoading();
+    const req: CreateUserRequest = {
+      auth: {
+        email: this.form.get('email')?.value,
+        password: this.form.get('password')?.value,
+        displayName: this.form.get('displayName')?.value,
+      },
+      user: {
+        ...this.formToUser(),
+      },
+    };
+    this.authFunctions.createUser(req).subscribe({
+      next: (r) => {
+        this.activeOffCanvas.close(r);
+        this.loading = this.notificationService.hideLoading();
+        this.notificationService.success('Gebruiker aangemaakt');
+      },
+      error: (e) => {
+        this.loading = this.notificationService.hideLoading();
+        this.notificationService.handleCallableFunctionError(e);
+      },
+    });
+  }
+
+  // TODO validate form, cause email validator is wrong
+  update(): void {
     if (this.formHasChanged(this.initialFormValues, this.toArray(this.form))) {
       this.loading = this.notificationService.showLoading();
-      let $uid: Observable<string> = new Observable<string>();
-      const userFromForm: AppUser = this.formToUser();
-      if (this.action === 'create') {
-        // if the action is 'create a user'
-        // first we need to make an actual authentication record for the user
-        const newAuth: AuthUser = {
-          email: this.form.get('email')?.value,
-          password: this.form.get('password')?.value,
-          displayName: this.form.get('displayName')?.value,
-        };
-        $uid = this.authApi.create(newAuth);
-      } else {
-        // update existing user
-        $uid = of(userFromForm.uid);
-      }
-      $uid
-        .pipe(
-          concatMap((uid) => {
-            userFromForm.uid = uid;
-            return this.userApi.create(userFromForm);
-          })
-        )
-        .subscribe({
-          next: (r) => {
-            this.activeOffCanvas.close(r);
-            this.loading = this.notificationService.hideLoading();
-            this.notificationService.success(this.resultMessage);
-          },
-          error: (e) => {
-            this.loading = this.notificationService.hideLoading();
-            this.notificationService.handleApiError(e);
-          },
-        });
+      const req: UpdateUserRequest = {
+        ...this.formToUser(),
+      };
+      this.authFunctions.updateUser(req).subscribe({
+        next: (r) => {
+          console.log(r);
+          this.activeOffCanvas.close(r);
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.success('Gebruiker aangepast');
+        },
+        error: (e) => {
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.handleCallableFunctionError(e);
+        },
+      });
     } else {
       this.cancel();
     }
@@ -162,7 +171,6 @@ export class UserOffCanvasComponent implements OnInit {
       .confirmResetWithTemplate(this.confirmResetPassword)
       .pipe(
         switchMap((r) => {
-          console.log(r);
           if (r.Success) {
             this.loading = this.notificationService.showLoading();
             return this.authFunctions.resetPassword(req);

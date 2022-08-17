@@ -17,15 +17,15 @@ export class AuthApi {
     this.baseUrl = apiBaseUrl;
   }
 
-  create(usr: AuthUser): Observable<string> {
-    const endpoint = `${this.baseUrl}/auth`;
-    return this.http.post(endpoint, usr, { responseType: 'text' });
-  }
+  // create(usr: AuthUser): Observable<string> {
+  //   const endpoint = `${this.baseUrl}/auth`;
+  //   return this.http.post(endpoint, usr, { responseType: 'text' });
+  // }
 
-  update(uid: string, changes: UpdateAuth): Observable<unknown> {
-    const endpoint = `${this.baseUrl}/auth/]${uid}`;
-    return this.http.patch(endpoint, changes);
-  }
+  // update(uid: string, changes: UpdateAuth): Observable<unknown> {
+  //   const endpoint = `${this.baseUrl}/auth/]${uid}`;
+  //   return this.http.patch(endpoint, changes);
+  // }
 
   delete(uid: string): Observable<ApiResponse<null>> {
     const endpoint = `${this.baseUrl}/auth/${uid}`;

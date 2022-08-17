@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  AuthFunctions,
-  AuthService,
-  IMenuItem,
-  NotificationService,
-} from '@geerts/shared';
+import { AuthService, IMenuItem } from '@geerts/shared';
 
 @Component({
   selector: 'wivipro-root',
@@ -17,12 +12,7 @@ export class AppComponent implements OnInit {
   menuItems: IMenuItem[] = new Array<IMenuItem>();
   showMobileMenu = false;
 
-  constructor(
-    public authService: AuthService,
-    private router: Router,
-    private notificationService: NotificationService,
-    private authFunctions: AuthFunctions
-  ) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.initMenu();
@@ -42,22 +32,6 @@ export class AppComponent implements OnInit {
         queryParams: { returnUrl: this.router.url },
       });
     }
-  }
-
-  clickTest(): void {
-    this.authFunctions
-      .resetPassword({
-        uid: 'aUr2i49TXadE6xTFekARTx0GZm52',
-        password: 'django0000',
-      })
-      .subscribe({
-        next: (r) => console.log(r),
-        error: (error) => this.handleCallableFunctionError(error),
-      });
-  }
-
-  clickTestError(): void {
-    console.log('test function to see error response from callable function');
   }
 
   private initMenu(): void {
@@ -83,11 +57,5 @@ export class AppComponent implements OnInit {
         routerLink: '/wholesale',
       },
     ];
-  }
-
-  private handleCallableFunctionError(error: any): void {
-    if (error.code) console.error(error.code);
-    if (error.message) console.error(error.message);
-    if (error.details) console.error(error.details);
   }
 }

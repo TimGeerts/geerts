@@ -4,7 +4,7 @@ import {
   getFunctions,
   httpsCallable,
 } from '@angular/fire/functions';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 
 @Injectable({

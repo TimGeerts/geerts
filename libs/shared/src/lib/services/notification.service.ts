@@ -67,8 +67,8 @@ export class NotificationService {
   }
 
   handleCallableFunctionError(error: any): void {
+    // TODO lookup a "readable" message based on the code of the error if we
     const errNotification = new Array<string>();
-
     if (error.details) {
       // if there's a details object, it "should" contain more info about the function error
       const errDetails = error.details;

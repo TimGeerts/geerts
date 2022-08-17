@@ -74,7 +74,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         },
         {
           path: 'manage',
-          canActivate: [AdminGuard],
+
           loadChildren: () =>
             import('@geerts/wivipro/feat-manage').then(
               (module) => module.FeatManageModule

@@ -8,10 +8,12 @@ import * as cors from 'cors';
 import { addUser, deleteUser, getAllUsers, getUser } from './user';
 import {
   createAuth,
+  createUser,
   deleteAuth,
   resetPassword,
   setAdmin,
   updateAuth,
+  updateUser,
 } from './auth';
 
 const region = 'europe-west1';
@@ -50,7 +52,7 @@ exports.onUpdateUser = functions
     return;
   });
 
-//callable functions test
+// ########## CALLABLE FUNCTIONS ##########
 exports.resetPassword = resetPassword;
-
-//export declare type FunctionsErrorCodeCore = 'ok' | 'cancelled' | 'unknown' | 'invalid-argument' | 'deadline-exceeded' | 'not-found' | 'already-exists' | 'permission-denied' | 'resource-exhausted' | 'failed-precondition' | 'aborted' | 'out-of-range' | 'unimplemented' | 'internal' | 'unavailable' | 'data-loss' | 'unauthenticated';
+exports.createUser = createUser;
+exports.updateUser = updateUser;

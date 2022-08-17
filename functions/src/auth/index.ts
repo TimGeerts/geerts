@@ -2,14 +2,19 @@ import { Response } from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/v1/https';
-import { ResetPasswordRequest } from '../types';
+import {
+  CreateUserRequest,
+  ResetPasswordRequest,
+  UpdateUserRequest,
+} from '../types';
 import {
   region,
   log_error,
   log_info,
   log_notfound,
-  checkAuthentication,
   checkData,
+  checkAdmin,
+  throwInternalServerError,
 } from '../utils';
 
 type AuthUser = {
@@ -42,7 +47,7 @@ const resetPassword = functions
   .region(region)
   .https.onCall(
     async (data: ResetPasswordRequest, context: CallableContext) => {
-      checkAuthentication(context.auth);
+      checkAdmin(context.auth);
       checkData(data);
 
       try {
@@ -51,15 +56,45 @@ const resetPassword = functions
         });
         return updatedUser;
       } catch (error: any) {
-        log_error('Internal server error', error);
-        throw new functions.https.HttpsError(
-          'internal',
-          'Internal server error',
-          error
-        );
+        return throwInternalServerError(error);
       }
     }
   );
+
+const createUser = functions
+  .region(region)
+  .https.onCall(async (data: CreateUserRequest, context: CallableContext) => {
+    checkAdmin(context.auth);
+    checkData(data);
+
+    try {
+      const newAuth = await auth.createUser(data.auth); //create the auth record
+      const userReq = data.user;
+      userReq.uid = newAuth.uid; //set the uid for the new user record
+      await admin.firestore().collection('users').add(userReq); // create the user record (firestore)
+      return userReq;
+    } catch (error) {
+      return throwInternalServerError(error);
+    }
+  });
+
+//TODO should move to user functions, this is not AUTH
+const updateUser = functions
+  .region(region)
+  .https.onCall(async (data: UpdateUserRequest, context: CallableContext) => {
+    checkAdmin(context.auth);
+    checkData(data);
+
+    try {
+      const docRef = admin.firestore().collection('users').doc(data.uid);
+      await docRef.set(data, { merge: true });
+      return docRef.get().then((d) => d.data());
+    } catch (error) {
+      return throwInternalServerError(error);
+    }
+  });
+
+// OLD FUNCTIONS! ---------------------------------------------------
 
 const createAuth = async (req: Request, res: Response) => {
   log_info({ endpoint: 'createAuth', body: req.body });
@@ -165,4 +200,12 @@ const doesUserExist = (uid: string): Promise<boolean> => {
   });
 };
 
-export { resetPassword, createAuth, deleteAuth, updateAuth, setAdmin };
+export {
+  resetPassword,
+  createUser,
+  updateUser,
+  createAuth,
+  deleteAuth,
+  updateAuth,
+  setAdmin,
+};
