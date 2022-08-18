@@ -1,15 +1,6 @@
-<geerts-skeleton-loader [toggle]="users" [count]="5">
+<geerts-skeleton-loader [toggle]="filteredUsers" [count]="5">
   <div class="d-flex justify-content-between mb-3">
     <geerts-search [searchFunction]="filterUsers"></geerts-search>
-    <!-- <div class="form-group">
-      <div class="input-group input-group-sm">
-        <input type="text" class="form-control" placeholder="Zoeken..." />
-        <span class="input-group-text">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-    </div> -->
-
     <button
       class="btn btn-sm btn-outline-secondary rounded px-3"
       (click)="addUser()"
@@ -71,6 +62,12 @@
       </tr>
     </tbody>
   </table>
+  <div
+    *ngIf="filteredUsers && !filteredUsers.length"
+    class="no-filtered-results"
+  >
+    <span>Geen gebruikers gevonden</span>
+  </div>
 </geerts-skeleton-loader>
 
 <ng-template #confirmDeleteUser>

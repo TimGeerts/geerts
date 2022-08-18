@@ -10,7 +10,7 @@ import {
 } from '@geerts/shared';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 import { switchMap } from 'rxjs/operators';
-import { EMPTY, NEVER, Observable, of } from 'rxjs';
+import { NEVER } from 'rxjs';
 
 @Component({
   selector: 'geerts-manage',
