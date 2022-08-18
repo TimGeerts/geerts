@@ -256,6 +256,23 @@ table.table {
   }
 }
 
+// emptystates
+.no-filtered-results {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 2px dashed var(--bs-secondary);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  a {
+    font-size: 0.8rem;
+    padding: 6px 0px 2px 3px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+
 // offcanvas
 .offcanvas {
   width: 600px;

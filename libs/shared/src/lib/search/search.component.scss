@@ -1,0 +1,18 @@
+.input-group {
+  input {
+    border-right: 0;
+  }
+  .input-group-text {
+    border-left: none;
+    background-color: var(--bs-white);
+    i {
+      color: var(--bs-primary);
+    }
+  }
+}
+
+.input-group {
+  input:focus ~ .input-group-text {
+    border-color: var(--bs-primary);
+  }
+}

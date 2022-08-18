@@ -19,7 +19,7 @@ export type UpdateUserRequest = {
   email?: string;
   displayName?: string;
   contactName?: string;
-  customerNumber?: number;
+  customerNumber?: string;
   taxNumber?: string;
   phoneNumber?: string;
 };

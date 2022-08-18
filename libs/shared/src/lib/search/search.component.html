@@ -1,0 +1,21 @@
+<form id="searchForm" class="form-search" novalidate [formGroup]="searchForm">
+  <div class="input-group input-group-sm">
+    <!-- <button ngbDropdownToggle class="btn" ngIf="showFilterDropdown">{{ filterDefault }}</button>
+    <div ngbDropdownMenungIf="showFilterDropdown">
+      <a class="dropdown-item" ngFor="let category of filterItems">{{ category }}</a>
+    </div> -->
+
+    <input
+      #searchField
+      type="text"
+      placeholder="Zoeken..."
+      class="form-control"
+      name="searchText"
+      formControlName="searchText"
+    />
+    <span class="input-group-text">
+      <i class="fas fa-search" *ngIf="!q"></i>
+      <i class="fas fa-close" *ngIf="q" (click)="resetForm()"></i>
+    </span>
+  </div>
+</form>
