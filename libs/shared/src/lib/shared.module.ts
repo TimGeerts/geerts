@@ -29,11 +29,9 @@ export * from './services/auth.service';
 export * from './services/guards/auth.guard';
 export * from './services/guards/admin.guard';
 export * from './services/interceptors/error.interceptor';
-export * from './services/api/auth/auth.api';
-export * from './services/api/users/user.api';
-
 export * from './services/functions/types';
 export * from './services/functions/auth/auth.functions';
+export * from './services/functions/user/user.functions';
 
 @NgModule({
   imports: [

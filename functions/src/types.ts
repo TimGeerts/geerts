@@ -24,6 +24,10 @@ export type UpdateUserRequest = {
   phoneNumber?: string;
 };
 
+export type DeleteUserRequest = {
+  uid: string;
+};
+
 // RESPONSES
 export type UpdateAuthenticationResponse = {
   email: string;

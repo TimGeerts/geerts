@@ -14,10 +14,6 @@ const log_error = (...args: any[]) => {
   functions.logger.error(...args);
 };
 
-const log_notfound = (message: string) => {
-  log_error(message, { statuscode: '404' });
-};
-
 //error handlers
 const checkAuthentication = (auth: AuthData | undefined) => {
   const errCode: FunctionsErrorCode = 'unauthenticated';
@@ -65,7 +61,6 @@ export {
   region,
   log_info,
   log_error,
-  log_notfound,
   throwError,
   throwInternalServerError,
   checkAuthentication,

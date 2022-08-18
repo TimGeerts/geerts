@@ -4,9 +4,9 @@ import { AppUser } from '../../../shared.module';
 import { CallableFunctionService } from '../fb.functions';
 import {
   CreateUserRequest,
+  DeleteUserRequest,
   ResetPasswordRequest,
   UpdateAuthenticationResponse,
-  UpdateUserRequest,
 } from '../types';
 
 @Injectable({
@@ -19,11 +19,6 @@ export class AuthFunctions {
     return this.callFn.call<CreateUserRequest, AppUser>('createUser', req);
   }
 
-  //TODO should move to user functions, this is not AUTH
-  updateUser(req: UpdateUserRequest): Observable<AppUser> {
-    return this.callFn.call<UpdateUserRequest, AppUser>('updateUser', req);
-  }
-
   resetPassword(
     req: ResetPasswordRequest
   ): Observable<UpdateAuthenticationResponse> {
@@ -31,5 +26,9 @@ export class AuthFunctions {
       'resetPassword',
       req
     );
+  }
+
+  deleteUser(req: DeleteUserRequest): Observable<boolean> {
+    return this.callFn.call<DeleteUserRequest, boolean>('deleteUser', req);
   }
 }

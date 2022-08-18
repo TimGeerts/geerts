@@ -2,17 +2,15 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   AppUser,
-  AuthApi,
-  UserApi,
   NotificationService,
   ModalService,
   AuthFunctions,
   CreateUserRequest,
   UpdateUserRequest,
+  UserFunctions,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { concatMap, switchMap } from 'rxjs';
-import { NEVER } from 'rxjs';
+import { NEVER, switchMap } from 'rxjs';
 
 @Component({
   selector: 'geerts-user-offcanvas',
@@ -46,9 +44,8 @@ export class UserOffCanvasComponent implements OnInit {
   constructor(
     private activeOffCanvas: NgbActiveOffcanvas,
     private fb: FormBuilder,
-    private authApi: AuthApi,
-    private userApi: UserApi,
     private authFunctions: AuthFunctions,
+    private userFunctions: UserFunctions,
     private notificationService: NotificationService,
     private modalService: ModalService
   ) {}
@@ -93,6 +90,7 @@ export class UserOffCanvasComponent implements OnInit {
     };
     this.authFunctions.createUser(req).subscribe({
       next: (r) => {
+        console.log('add user ', r);
         this.activeOffCanvas.close(r);
         this.loading = this.notificationService.hideLoading();
         this.notificationService.success('Gebruiker aangemaakt');
@@ -111,9 +109,9 @@ export class UserOffCanvasComponent implements OnInit {
       const req: UpdateUserRequest = {
         ...this.formToUser(),
       };
-      this.authFunctions.updateUser(req).subscribe({
+      this.userFunctions.updateUser(req).subscribe({
         next: (r) => {
-          console.log(r);
+          console.log('updated user ', r);
           this.activeOffCanvas.close(r);
           this.loading = this.notificationService.hideLoading();
           this.notificationService.success('Gebruiker aangepast');
@@ -133,17 +131,16 @@ export class UserOffCanvasComponent implements OnInit {
   }
 
   delete(): void {
+    const req = {
+      uid: this.usr.uid,
+    };
     this.modalService
       .confirmDeleteWithTemplate(this.confirmDeleteUser)
       .pipe(
         switchMap((r) => {
           if (r.Success) {
             this.loading = this.notificationService.showLoading();
-            return this.userApi.delete(this.usr.uid).pipe(
-              concatMap((_) => {
-                return this.authApi.delete(this.usr.uid);
-              })
-            );
+            return this.authFunctions.deleteUser(req);
           } else {
             return NEVER;
           }
@@ -157,7 +154,7 @@ export class UserOffCanvasComponent implements OnInit {
         },
         error: (e) => {
           this.loading = this.notificationService.hideLoading();
-          this.notificationService.handleApiError(e);
+          this.notificationService.handleCallableFunctionError(e);
         },
       });
   }
