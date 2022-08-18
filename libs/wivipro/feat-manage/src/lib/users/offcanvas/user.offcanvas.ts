@@ -7,6 +7,7 @@ import {
   UserApi,
   NotificationService,
   ModalService,
+  AuthFunctions,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { concatMap, switchMap, Observable, of } from 'rxjs';
@@ -18,6 +19,8 @@ import { NEVER } from 'rxjs';
 })
 export class UserOffCanvasComponent implements OnInit {
   @ViewChild('confirmDeleteUser') confirmDeleteUser!: TemplateRef<Element>;
+  @ViewChild('confirmResetPassword')
+  confirmResetPassword!: TemplateRef<Element>;
 
   usr!: AppUser;
   title!: string;
@@ -44,6 +47,7 @@ export class UserOffCanvasComponent implements OnInit {
     private fb: FormBuilder,
     private authApi: AuthApi,
     private userApi: UserApi,
+    private authFunctions: AuthFunctions,
     private notificationService: NotificationService,
     private modalService: ModalService
   ) {}
@@ -119,7 +123,6 @@ export class UserOffCanvasComponent implements OnInit {
     this.activeOffCanvas.dismiss('cancel');
   }
 
-  // TODO confirm delete
   delete(): void {
     this.modalService
       .confirmDeleteWithTemplate(this.confirmDeleteUser)
@@ -146,6 +149,37 @@ export class UserOffCanvasComponent implements OnInit {
         error: (e) => {
           this.loading = this.notificationService.hideLoading();
           this.notificationService.handleApiError(e);
+        },
+      });
+  }
+
+  resetPassword(): void {
+    const req = {
+      uid: this.usr.uid,
+      password: `wi${this.usr.customerNumber}`,
+    };
+    this.modalService
+      .confirmResetWithTemplate(this.confirmResetPassword)
+      .pipe(
+        switchMap((r) => {
+          console.log(r);
+          if (r.Success) {
+            this.loading = this.notificationService.showLoading();
+            return this.authFunctions.resetPassword(req);
+          } else {
+            return NEVER;
+          }
+        })
+      )
+      .subscribe({
+        next: (r) => {
+          this.activeOffCanvas.close(r);
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.success('Paswoord is gereset');
+        },
+        error: (e) => {
+          this.loading = this.notificationService.hideLoading();
+          this.notificationService.handleCallableFunctionError(e);
         },
       });
   }

@@ -1,6 +1,16 @@
 import { Response } from 'express';
 import * as admin from 'firebase-admin';
-import { log_error, log_info, log_notfound } from '../utils';
+import * as functions from 'firebase-functions';
+import { CallableContext } from 'firebase-functions/v1/https';
+import { ResetPasswordRequest } from '../types';
+import {
+  region,
+  log_error,
+  log_info,
+  log_notfound,
+  checkAuthentication,
+  checkData,
+} from '../utils';
 
 type AuthUser = {
   email: string;
@@ -27,6 +37,29 @@ type UpdateAuthRequest = {
 };
 
 const auth = admin.auth();
+
+const resetPassword = functions
+  .region(region)
+  .https.onCall(
+    async (data: ResetPasswordRequest, context: CallableContext) => {
+      checkAuthentication(context.auth);
+      checkData(data);
+
+      try {
+        const updatedUser = await auth.updateUser(data.uid, {
+          password: data.password,
+        });
+        return updatedUser;
+      } catch (error: any) {
+        log_error('Internal server error', error);
+        throw new functions.https.HttpsError(
+          'internal',
+          'Internal server error',
+          error
+        );
+      }
+    }
+  );
 
 const createAuth = async (req: Request, res: Response) => {
   log_info({ endpoint: 'createAuth', body: req.body });
@@ -118,7 +151,6 @@ const setAdmin = async (req: Request, res: Response) => {
   }
 };
 
-// helpers
 // useful helper because auth.getUser doesn't return a DocumentReference you can check for existence but a Promise
 const doesUserExist = (uid: string): Promise<boolean> => {
   return new Promise<boolean>((resolve) => {
@@ -133,4 +165,4 @@ const doesUserExist = (uid: string): Promise<boolean> => {
   });
 };
 
-export { createAuth, deleteAuth, updateAuth, setAdmin };
+export { resetPassword, createAuth, deleteAuth, updateAuth, setAdmin };

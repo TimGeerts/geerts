@@ -7,7 +7,8 @@ import { ManageComponent } from './manage.component';
 import { ManageUsersComponent } from './users/manage-users.component';
 import { ManageOrdersComponent } from './orders/manage-orders.component';
 import { UserOffCanvasComponent } from './users/offcanvas/user.offcanvas';
-import { DeleteUserWarningComponent } from './users/delete-user/delete-user-warning.component';
+import { ConfirmDeleteUserComponent } from './users/confirm-dialogs/confirm-delete.component';
+import { ConfirmResetPasswordComponent } from './users/confirm-dialogs/confirm-passwordreset.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { DeleteUserWarningComponent } from './users/delete-user/delete-user-warn
     ManageUsersComponent,
     ManageOrdersComponent,
     UserOffCanvasComponent,
-    DeleteUserWarningComponent,
+    ConfirmDeleteUserComponent,
+    ConfirmResetPasswordComponent,
   ],
   exports: [ManageComponent],
 })

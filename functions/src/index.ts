@@ -6,7 +6,13 @@ admin.initializeApp();
 import * as express from 'express';
 import * as cors from 'cors';
 import { addUser, deleteUser, getAllUsers, getUser } from './user';
-import { createAuth, deleteAuth, setAdmin, updateAuth } from './auth';
+import {
+  createAuth,
+  deleteAuth,
+  resetPassword,
+  setAdmin,
+  updateAuth,
+} from './auth';
 
 const region = 'europe-west1';
 const app = express().use(cors());
@@ -43,3 +49,8 @@ exports.onUpdateUser = functions
     }
     return;
   });
+
+//callable functions test
+exports.resetPassword = resetPassword;
+
+//export declare type FunctionsErrorCodeCore = 'ok' | 'cancelled' | 'unknown' | 'invalid-argument' | 'deadline-exceeded' | 'not-found' | 'already-exists' | 'permission-denied' | 'resource-exhausted' | 'failed-precondition' | 'aborted' | 'out-of-range' | 'unimplemented' | 'internal' | 'unavailable' | 'data-loss' | 'unauthenticated';

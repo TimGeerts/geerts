@@ -199,7 +199,7 @@ button {
     }
     .btn-outline-primary:hover {
       background-color: var(--bs-secondary);
-      color: var(--bs-primary)
+      color: var(--bs-primary);
     }
   }
   &.btn-close {
@@ -264,7 +264,7 @@ table.table {
 
 // toasts
 .toast-container {
-  &.toast-bottom-center  .ngx-toastr{
+  &.toast-bottom-center .ngx-toastr {
     width: 600px;
   }
   .ngx-toastr {
@@ -280,15 +280,18 @@ table.table {
     pre {
       white-space: pre-wrap;
     }
+    .toast-close-button {
+      color: var(--bs-dark);
+    }
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
     }
-    &:hover{
+    &:hover {
       box-shadow: 0 0 5px var(--bs-gray-500);
     }
     &.toast-loading {
@@ -308,7 +311,7 @@ table.table {
     &.toast-error {
       &:before {
         position: relative;
-        font-family: "Font Awesome 6 Free";
+        font-family: 'Font Awesome 6 Free';
         font-weight: 900;
         font-size: 1.4rem;
         float: left;
@@ -322,7 +325,7 @@ table.table {
       background: linear-gradient(70deg, $blue-100, var(--bs-light));
       &:before {
         color: $blue-600;
-        content: "\f05a";
+        content: '\f05a';
       }
     }
     &.toast-success {
@@ -330,7 +333,7 @@ table.table {
       background: linear-gradient(70deg, $green-100, var(--bs-light));
       &:before {
         color: $green;
-        content: "\f058";
+        content: '\f058';
       }
     }
     &.toast-warning {
@@ -338,7 +341,7 @@ table.table {
       background: linear-gradient(70deg, $yellow-100, var(--bs-light));
       &:before {
         color: $yellow-600;
-        content: "\f071";
+        content: '\f071';
       }
     }
     &.toast-error {
@@ -352,10 +355,11 @@ table.table {
         font-size: 2rem;
         color: $red;
         margin-right: 1.5rem;
-        content: "\f06a";
+        content: '\f06a';
       }
     }
-    .toast-title, .toast-message {
+    .toast-title,
+    .toast-message {
       padding-left: 2.5rem;
     }
     .toast-message {
@@ -367,9 +371,8 @@ table.table {
 
 //modal
 .modal-dialog {
-  .modal-content{
+  .modal-content {
     background-color: var(--bs-light);
-   
   }
   .confirm-delete {
     border: 2px solid var(--bs-danger);
@@ -385,7 +388,7 @@ table.table {
     }
     .btn-outline-danger:hover {
       background-color: $red-100;
-      color: var(--bs-danger)
+      color: var(--bs-danger);
     }
   }
 }
