@@ -80,6 +80,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
               (module) => module.FeatManageModule
             ),
         },
+        {
+          path: 'profile',
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-profile').then(
+              (module) => module.FeatProfileModule
+            ),
+        },
       ],
       {
         initialNavigation: 'enabledBlocking',

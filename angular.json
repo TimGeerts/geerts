@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "gids": {
@@ -314,6 +311,32 @@
             "lintFilePatterns": [
               "libs/wivipro/feat-manage/src/**/*.ts",
               "libs/wivipro/feat-manage/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "wivipro-feat-profile": {
+      "projectType": "library",
+      "root": "libs/wivipro/feat-profile",
+      "sourceRoot": "libs/wivipro/feat-profile/src",
+      "prefix": "geerts",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wivipro/feat-profile"],
+          "options": {
+            "jestConfig": "libs/wivipro/feat-profile/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/wivipro/feat-profile/src/**/*.ts",
+              "libs/wivipro/feat-profile/src/**/*.html"
             ]
           }
         }

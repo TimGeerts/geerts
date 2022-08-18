@@ -22,6 +22,9 @@
       ],
       "@geerts/wivipro/feat-login": ["libs/wivipro/feat-login/src/index.ts"],
       "@geerts/wivipro/feat-manage": ["libs/wivipro/feat-manage/src/index.ts"],
+      "@geerts/wivipro/feat-profile": [
+        "libs/wivipro/feat-profile/src/index.ts"
+      ],
       "@geerts/wivipro/feat-wholesale": [
         "libs/wivipro/feat-wholesale/src/index.ts"
       ],
