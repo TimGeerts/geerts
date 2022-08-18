@@ -18,6 +18,8 @@ import { LoadingbuttonDirective } from './loadingbutton/loadingbutton.directive'
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 import { ConfirmDeleteModalComponent } from './services/modal/templates/confirm-delete.modal';
 import { ConfirmResetModalComponent } from './services/modal/templates/confirm-reset.modal';
+import { SearchComponent } from './search/search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export * from './utils';
 export * from './types/menu-item';
@@ -38,6 +40,7 @@ export * from './services/functions/user/user.functions';
     CommonModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
     NgxSkeletonLoaderModule,
     ToastrModule.forRoot({
       enableHtml: true,
@@ -51,6 +54,7 @@ export * from './services/functions/user/user.functions';
     HamburgerMenuComponent,
     GalleryComponent,
     ImageGridComponent,
+    SearchComponent,
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
     ConfirmDeleteModalComponent,
@@ -62,6 +66,7 @@ export * from './services/functions/user/user.functions';
     HamburgerMenuComponent,
     GalleryComponent,
     ImageGridComponent,
+    SearchComponent,
     SkeletonLoaderComponent,
     LoadingbuttonDirective,
   ],

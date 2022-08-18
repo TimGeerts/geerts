@@ -1,15 +1,19 @@
 <geerts-skeleton-loader [toggle]="users" [count]="5">
   <div class="d-flex justify-content-between mb-3">
-    <div class="form-group">
+    <geerts-search [searchFunction]="filterUsers"></geerts-search>
+    <!-- <div class="form-group">
       <div class="input-group input-group-sm">
         <input type="text" class="form-control" placeholder="Zoeken..." />
         <span class="input-group-text">
           <i class="fas fa-search"></i>
         </span>
       </div>
-    </div>
+    </div> -->
 
-    <button class="btn btn-sm btn-outline-secondary rounded px-3" (click)="addUser()">
+    <button
+      class="btn btn-sm btn-outline-secondary rounded px-3"
+      (click)="addUser()"
+    >
       <i class="fas fa-plus me-2"></i>
       Gebruiker aanmaken
     </button>
@@ -26,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of filteredUsers">
         <td>
           {{ user.customerNumber }}
         </td>
@@ -44,11 +48,22 @@
         </td>
         <td class="text-end">
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" [disabled]="loading" class="btn btn-link" title="Aanpassen" (click)="editUser(user)">
+            <button
+              type="button"
+              [disabled]="loading"
+              class="btn btn-link"
+              title="Aanpassen"
+              (click)="editUser(user)"
+            >
               <i class="fas fa-pen"></i>
             </button>
-            <button type="button" [disabled]="loading" class="btn btn-link" title="Verwijderen"
-              (click)="deleteUser(user)">
+            <button
+              type="button"
+              [disabled]="loading"
+              class="btn btn-link"
+              title="Verwijderen"
+              (click)="deleteUser(user)"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>

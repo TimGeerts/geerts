@@ -6,10 +6,11 @@ import {
   ModalService,
   NotificationService,
   sortByProp,
+  queryByProps,
 } from '@geerts/shared';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
 import { switchMap } from 'rxjs/operators';
-import { NEVER } from 'rxjs';
+import { EMPTY, NEVER, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'geerts-manage',
@@ -20,6 +21,7 @@ export class ManageUsersComponent {
   @ViewChild('confirmDeleteUser') confirmDeleteUser!: TemplateRef<Element>;
 
   users!: AppUser[];
+  filteredUsers!: AppUser[];
   loading = false;
 
   constructor(
@@ -35,6 +37,7 @@ export class ManageUsersComponent {
     this.notificationService.showLoading();
     this.userFunctions.getUsers().subscribe((users) => {
       this.users = sortByProp(users, 'displayName');
+      this.filteredUsers = this.users;
       this.notificationService.hideLoading();
     });
   }
@@ -93,5 +96,18 @@ export class ManageUsersComponent {
           this.notificationService.handleCallableFunctionError(e);
         },
       });
+  };
+
+  filterUsers = (query: string): void => {
+    if (!query || !query.length) {
+      this.filteredUsers = this.users;
+    } else {
+      this.filteredUsers = queryByProps(this.users, query, [
+        'customerNumber',
+        'displayName',
+        'contactName',
+        'email',
+      ]);
+    }
   };
 }
