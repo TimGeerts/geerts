@@ -43,7 +43,7 @@ export class LoginComponent {
         },
         error: (e: FirebaseError) => {
           // TODO handle errorcodes
-          console.log(e.code);
+          console.log(e);
         },
       });
   }

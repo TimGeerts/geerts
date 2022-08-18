@@ -1,14 +1,14 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import {
   AppUser,
-  AuthApi,
+  AuthFunctions,
+  UserFunctions,
   ModalService,
   NotificationService,
   sortByProp,
-  UserApi,
 } from '@geerts/shared';
 import { UserOffCanvasComponent } from './offcanvas/user.offcanvas';
-import { concatMap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { NEVER } from 'rxjs';
 
 @Component({
@@ -23,8 +23,8 @@ export class ManageUsersComponent {
   loading = false;
 
   constructor(
-    private userApi: UserApi,
-    private authApi: AuthApi,
+    private authFunctions: AuthFunctions,
+    private userFunctions: UserFunctions,
     private modalService: ModalService,
     private notificationService: NotificationService
   ) {
@@ -33,7 +33,7 @@ export class ManageUsersComponent {
 
   getUsers(): void {
     this.notificationService.showLoading();
-    this.userApi.getAll().subscribe((users) => {
+    this.userFunctions.getUsers().subscribe((users) => {
       this.users = sortByProp(users, 'displayName');
       this.notificationService.hideLoading();
     });
@@ -67,17 +67,16 @@ export class ManageUsersComponent {
   };
 
   deleteUser = (u: AppUser): void => {
+    const req = {
+      uid: u.uid,
+    };
     this.modalService
       .confirmDeleteWithTemplate(this.confirmDeleteUser)
       .pipe(
         switchMap((r) => {
           if (r.Success) {
             this.loading = this.notificationService.showLoading();
-            return this.userApi.delete(u.uid).pipe(
-              concatMap((_) => {
-                return this.authApi.delete(u.uid);
-              })
-            );
+            return this.authFunctions.deleteUser(req);
           } else {
             return NEVER;
           }
@@ -91,7 +90,7 @@ export class ManageUsersComponent {
         },
         error: (e) => {
           this.loading = this.notificationService.hideLoading();
-          this.notificationService.handleApiError(e);
+          this.notificationService.handleCallableFunctionError(e);
         },
       });
   };
