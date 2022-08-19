@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppUser } from '../../../shared.module';
 import { CallableFunctionService } from '../fb.functions';
-import { UpdateUserRequest } from '../types';
+import { GetDocumentRequest, UpdateUserRequest } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,10 @@ export class UserFunctions {
 
   getUsers(): Observable<AppUser[]> {
     return this.callFn.call<void, AppUser[]>('getUsers');
+  }
+
+  getUser(req: GetDocumentRequest): Observable<AppUser> {
+    return this.callFn.call<GetDocumentRequest, AppUser>('getUser', req);
   }
 
   updateUser(req: UpdateUserRequest): Observable<AppUser> {

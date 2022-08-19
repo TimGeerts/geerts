@@ -1,5 +1,9 @@
 // REQUESTS
 
+export type GetDocumentRequest = {
+  uid: string;
+};
+
 export type ResetPasswordRequest = {
   uid: string;
   password: string;

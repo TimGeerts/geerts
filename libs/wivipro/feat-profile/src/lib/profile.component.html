@@ -1,3 +1,7 @@
 <geerts-horizontal-card cardTitle="Profiel" class="d-block rtl">
-  profiel
+  <geerts-skeleton-loader [toggle]="user" [count]="5">
+    <pre>
+      {{ user | json }}
+    </pre>
+  </geerts-skeleton-loader>
 </geerts-horizontal-card>
