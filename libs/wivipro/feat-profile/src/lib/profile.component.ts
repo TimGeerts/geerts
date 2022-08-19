@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import {
-  AppUser,
+  fsUser,
   AuthService,
   NotificationService,
   UserFunctions,
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnDestroy {
   $userSub: Subscription;
-  user!: AppUser;
+  user!: fsUser;
 
   constructor(
     private authenticationService: AuthService,

@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  AppUser,
+  fsUser,
   NotificationService,
   ModalService,
   AuthFunctions,
@@ -21,7 +21,7 @@ export class UserOffCanvasComponent implements OnInit {
   @ViewChild('confirmResetPassword')
   confirmResetPassword!: TemplateRef<Element>;
 
-  usr!: AppUser;
+  usr!: fsUser;
   title!: string;
   action: 'create' | 'update' = 'create';
   actionLabel: 'Aanmaken' | 'Aanpassen' = 'Aanmaken';
@@ -190,7 +190,7 @@ export class UserOffCanvasComponent implements OnInit {
   }
 
   // helpers
-  private formToUser(): AppUser {
+  private formToUser(): fsUser {
     const newUsr = {
       email: this.form.get('email')?.value,
       displayName: this.form.get('displayName')?.value,
@@ -199,7 +199,7 @@ export class UserOffCanvasComponent implements OnInit {
       taxNumber: this.form.get('taxNumber')?.value,
       phoneNumber: this.form.get('phoneNumber')?.value,
     };
-    const ret: AppUser = { ...this.usr, ...newUsr };
+    const ret: fsUser = { ...this.usr, ...newUsr };
     return ret;
   }
 

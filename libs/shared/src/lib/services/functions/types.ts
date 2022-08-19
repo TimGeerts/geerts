@@ -26,6 +26,22 @@ export type UpdateUserRequest = {
   customerNumber?: string;
   taxNumber?: string;
   phoneNumber?: string;
+  billingAddress?: {
+    street: string;
+    number: string;
+    numberExtra?: string;
+    zipcode: string;
+    city: string;
+    country: string;
+  };
+  shippingAddress?: {
+    street: string;
+    number: string;
+    numberExtra?: string;
+    zipcode: string;
+    city: string;
+    country: string;
+  };
 };
 
 export type DeleteUserRequest = {
