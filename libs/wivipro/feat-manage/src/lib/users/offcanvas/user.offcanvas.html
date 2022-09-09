@@ -9,64 +9,193 @@
 </div>
 <div class="offcanvas-body">
   <form [formGroup]="form">
-    <div class="mb-3">
-      <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputCustomerNumber"
-        ngbAutofocus
-        formControlName="customerNumber"
-      />
+    <h6>
+      <i class="fa-solid fa-user me-2"></i>
+      <span class="text-decoration-underline">Algemeen</span>
+    </h6>
+    <div class="row g-2 px-4 py-3 mt-3 mb-5 bg-secondary">
+      <div class="col-md-3">
+        <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputCustomerNumber"
+          ngbAutofocus
+          formControlName="customerNumber"
+        />
+      </div>
+      <div class="col-md-9">
+        <label for="inputContactName" class="form-label">Naam</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputContactName"
+          ngbAutofocus
+          formControlName="contactName"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="inputTaxNumber" class="form-label">BTW</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputTaxNumber"
+          ngbAutofocus
+          formControlName="taxNumber"
+        />
+      </div>
+      <div class="col-md-9">
+        <label for="inputDisplayName" class="form-label">Bedrijf</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputDisplayName"
+          formControlName="displayName"
+        />
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control form-control-sm"
+          id="inputEmail"
+          formControlName="email"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputPhone" class="form-label">Telefoonnummer</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputPhone"
+          formControlName="phoneNumber"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="inputDisplayName" class="form-label">Bedrijf</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputDisplayName"
-        formControlName="displayName"
-      />
+
+    <h6>
+      <i class="fa-solid fa-location-dot me-2"></i>
+      <span class="text-decoration-underline">Adresgegevens</span>
+    </h6>
+    <div class="row g-2 px-4 py-3 mt-3 bg-secondary">
+      <div class="col-md-8">
+        <label for="inputStreet" class="form-label">Straat</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputStreet"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumber" class="form-label">Nummer</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputNumber"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberExtra" class="form-label">Bus</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputNumberExtra"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputPostalCode" class="form-label">Postcode</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputPostalCode"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Woonplaats</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputCity"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="inputCountry" class="form-label">Land</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputCountry"
+        />
+      </div>
+      <div class="col-md-12 mt-3">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="checkSameDelivery"
+            checked
+            (change)="sameDelivery = !sameDelivery"
+          />
+          <label class="form-check-label" for="checkSameDelivery"
+            >Leveringsadres is hetzelfde</label
+          >
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="inputContactName" class="form-label">Naam</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputContactName"
-        ngbAutofocus
-        formControlName="contactName"
-      />
+    <div *ngIf="!sameDelivery" class="row g-2 p-4 pt-1 bg-secondary">
+      <div class="col-md-8">
+        <label for="inputStreetDelivery" class="form-label">Straat</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputStreetDelivery"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberDelivery" class="form-label">Nummer</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputNumberDelivery"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberExtraDelivery" class="form-label">Bus</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputNumberExtraDelivery"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="inputPostalCodeDelivery" class="form-label">Postcode</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputPostalCodeDelivery"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputCityDelivery" class="form-label">Woonplaats</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputCityDelivery"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="inputCountryDelivery" class="form-label">Land</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="inputCountryDelivery"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="inputTaxNumber" class="form-label">BTW</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputTaxNumber"
-        ngbAutofocus
-        formControlName="taxNumber"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control form-control-sm"
-        id="inputEmail"
-        formControlName="email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputPhone" class="form-label">Telefoonnummer</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputPhone"
-        formControlName="phoneNumber"
-      />
-    </div>
-    <div class="mb-3" *ngIf="action ==='create'">
+
+    <!-- TODO Autogenerate password by using "wi"+customernumber -->
+    <!-- <div class="mb-3" *ngIf="action ==='create'">
       <label for="inputPassword" class="form-label">Paswoord</label>
       <input
         type="password"
@@ -74,7 +203,7 @@
         id="inputPassword"
         formControlName="password"
       />
-    </div>
+    </div> -->
 
     <div class="d-flex justify-content-between mt-5">
       <div class="btn-group" role="group" *ngIf="action ==='update'">

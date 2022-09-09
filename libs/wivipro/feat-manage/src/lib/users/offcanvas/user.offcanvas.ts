@@ -29,6 +29,7 @@ export class UserOffCanvasComponent implements OnInit {
     'Gebruiker aangemaakt';
   loading = false;
   initialFormValues!: string[];
+  sameDelivery = true;
 
   form = this.fb.group({
     email: ['', Validators.email],
