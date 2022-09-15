@@ -19,22 +19,6 @@ export class UserFunctions {
   }
 
   updateUser(req: UpdateUserRequest): Observable<fsUser> {
-    req.billingAddress = {
-      street: 'Spaansemolenstraat',
-      number: '26',
-      numberExtra: '1',
-      zipcode: '2040',
-      city: 'Zandvliet',
-      country: 'België',
-    };
-    req.shippingAddress = {
-      street: 'Spaansemolenstraat',
-      number: '26',
-      numberExtra: '1',
-      zipcode: '2040',
-      city: 'Zandvliet',
-      country: 'België',
-    };
     return this.callFn.call<UpdateUserRequest, fsUser>('updateUser', req);
   }
 }

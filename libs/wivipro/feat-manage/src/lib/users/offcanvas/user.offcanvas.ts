@@ -10,6 +10,8 @@ import {
   UserFunctions,
 } from '@geerts/shared';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import isEqual from 'lodash-es/isEqual';
+
 import { NEVER, switchMap } from 'rxjs';
 
 @Component({
@@ -22,26 +24,35 @@ export class UserOffCanvasComponent implements OnInit {
   confirmResetPassword!: TemplateRef<Element>;
 
   usr!: fsUser;
+  adminProfile = false;
   title!: string;
   action: 'create' | 'update' = 'create';
-  actionLabel: 'Aanmaken' | 'Aanpassen' = 'Aanmaken';
-  resultMessage: 'Gebruiker aangemaakt' | 'Gebruiker aangepast' =
-    'Gebruiker aangemaakt';
   loading = false;
   initialFormValues!: string[];
-  sameDelivery = true;
+  sameShipping = true;
 
   form = this.fb.group({
-    email: ['', Validators.email],
+    email: ['', [Validators.required, Validators.email]],
     displayName: ['', Validators.required],
     contactName: ['', Validators.required],
-    customerNumber: ['', Validators.required],
+    customerNumber: ['', Validators.required], //TODO validator minimum 4 length
     taxNumber: ['', Validators.required],
     phoneNumber: ['', Validators.required],
-    password: ['', Validators.required],
+    // password: ['', Validators.required],
+    billingStreet: ['', Validators.required],
+    billingNumber: ['', Validators.required],
+    billingNumberExtra: [''],
+    billingZipCode: ['', Validators.required],
+    billingCity: ['', Validators.required],
+    billingCountry: ['', Validators.required],
+    shippingStreet: [''],
+    shippingNumber: [''],
+    shippingNumberExtra: [''],
+    shippingZipCode: [''],
+    shippingCity: [''],
+    shippingCountry: [''],
   });
 
-  //TODO usr is not "something" yet in constructor, so formbuilding goes to SHIT!
   constructor(
     private activeOffCanvas: NgbActiveOffcanvas,
     private fb: FormBuilder,
@@ -54,9 +65,19 @@ export class UserOffCanvasComponent implements OnInit {
   ngOnInit(): void {
     if (this.usr && this.usr.email) {
       this.action = 'update';
-      this.actionLabel = 'Aanpassen';
-      this.resultMessage = 'Gebruiker aangepast';
-      this.form.get('password')?.disable(); // this disables the validator
+      this.form.get('customerNumber')?.disable();
+      if (this.usr.customerNumber === '1' || this.usr.customerNumber === '2') {
+        this.adminProfile = true;
+        //disable all fields for the admins
+        Object.keys(this.form.controls).forEach((key) => {
+          this.form.controls[key].disable();
+        });
+      }
+      this.sameShipping = isEqual(
+        this.usr.billingAddress,
+        this.usr.shippingAddress
+      );
+      this.toggleShippingValidators();
     }
     this.usr = this.usr || {};
     this.initForm();
@@ -70,7 +91,18 @@ export class UserOffCanvasComponent implements OnInit {
       customerNumber: this.usr.customerNumber || '',
       taxNumber: this.usr.taxNumber || '',
       phoneNumber: this.usr.phoneNumber || '',
-      password: '',
+      billingStreet: this.usr.billingAddress?.street || '',
+      billingNumber: this.usr.billingAddress?.number || '',
+      billingNumberExtra: this.usr.billingAddress?.numberExtra || '',
+      billingZipCode: this.usr.billingAddress?.zipcode || '',
+      billingCity: this.usr.billingAddress?.city || '',
+      billingCountry: this.usr.billingAddress?.country || '',
+      shippingStreet: this.usr.shippingAddress?.street || '',
+      shippingNumber: this.usr.shippingAddress?.number || '',
+      shippingNumberExtra: this.usr.shippingAddress?.numberExtra || '',
+      shippingZipCode: this.usr.shippingAddress?.zipcode || '',
+      shippingCity: this.usr.shippingAddress?.city || '',
+      shippingCountry: this.usr.shippingAddress?.country || '',
     });
     // used to check changes later on
     this.initialFormValues = this.toArray(this.form);
@@ -82,7 +114,7 @@ export class UserOffCanvasComponent implements OnInit {
     const req: CreateUserRequest = {
       auth: {
         email: this.form.get('email')?.value,
-        password: this.form.get('password')?.value,
+        password: `wi${this.form.get('customerNumber')?.value}`,
         displayName: this.form.get('displayName')?.value,
       },
       user: {
@@ -105,6 +137,7 @@ export class UserOffCanvasComponent implements OnInit {
 
   // TODO validate form, cause email validator is wrong
   update(): void {
+    // TODO formHasChanged should also trigger from "sameShipping" checkbox, to compare those fields
     if (this.formHasChanged(this.initialFormValues, this.toArray(this.form))) {
       this.loading = this.notificationService.showLoading();
       const req: UpdateUserRequest = {
@@ -190,16 +223,42 @@ export class UserOffCanvasComponent implements OnInit {
       });
   }
 
+  //handle "sameShipping" checkbox change
+  sameShippingChanged(): void {
+    this.sameShipping = !this.sameShipping;
+    this.toggleShippingValidators();
+  }
+
   // helpers
   private formToUser(): fsUser {
-    const newUsr = {
+    const newUsr: Partial<fsUser> = {
       email: this.form.get('email')?.value,
       displayName: this.form.get('displayName')?.value,
       contactName: this.form.get('contactName')?.value,
       customerNumber: this.form.get('customerNumber')?.value,
       taxNumber: this.form.get('taxNumber')?.value,
       phoneNumber: this.form.get('phoneNumber')?.value,
+      billingAddress: {
+        street: this.form.get('billingStreet')?.value,
+        number: this.form.get('billingNumber')?.value,
+        numberExtra: this.form.get('billingNumberExtra')?.value,
+        zipcode: this.form.get('billingZipCode')?.value,
+        city: this.form.get('billingCity')?.value,
+        country: this.form.get('billingCountry')?.value,
+      },
     };
+    if (!this.sameShipping) {
+      newUsr.shippingAddress = {
+        street: this.form.get('shippingStreet')?.value,
+        number: this.form.get('shippingNumber')?.value,
+        numberExtra: this.form.get('shippingNumberExtra')?.value,
+        zipcode: this.form.get('shippingZipCode')?.value,
+        city: this.form.get('shippingCity')?.value,
+        country: this.form.get('shippingCountry')?.value,
+      };
+    } else {
+      newUsr.shippingAddress = newUsr.billingAddress;
+    }
     const ret: fsUser = { ...this.usr, ...newUsr };
     return ret;
   }
@@ -217,5 +276,26 @@ export class UserOffCanvasComponent implements OnInit {
       arr.push(form.get(key)?.value);
     });
     return arr;
+  }
+
+  private toggleShippingValidators(): void {
+    if (this.sameShipping) {
+      // disable validators for shipping fields
+      this.form.get('shippingStreet')?.removeValidators(Validators.required);
+      this.form.get('shippingNumber')?.removeValidators(Validators.required);
+      this.form.get('shippingZipCode')?.removeValidators(Validators.required);
+      this.form.get('shippingCity')?.removeValidators(Validators.required);
+      this.form.get('shippingCountry')?.removeValidators(Validators.required);
+    } else {
+      // enable validators for shipping fields
+      this.form.get('shippingStreet')?.addValidators(Validators.required);
+      this.form.get('shippingNumber')?.addValidators(Validators.required);
+      this.form.get('shippingZipCode')?.addValidators(Validators.required);
+      this.form.get('shippingCity')?.addValidators(Validators.required);
+      this.form.get('shippingCountry')?.addValidators(Validators.required);
+    }
+    Object.keys(this.form.controls).forEach((key) => {
+      this.form.get(key)?.updateValueAndValidity();
+    });
   }
 }

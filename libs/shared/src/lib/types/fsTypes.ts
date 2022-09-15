@@ -7,6 +7,8 @@ export type fsUser = {
   customerNumber?: string;
   taxNumber?: string;
   phoneNumber?: string;
+  shippingAddress?: fsAddress;
+  billingAddress?: fsAddress;
 };
 
 export type fsAddress = {
