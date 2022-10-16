@@ -45,7 +45,7 @@ const getUser = functions
 const updateUser = functions
   .region(region)
   .https.onCall(async (data: UpdateUserRequest, context: CallableContext) => {
-    checkAdmin(context.auth);
+    checkAuthentication(context.auth);
     checkData(data);
 
     try {

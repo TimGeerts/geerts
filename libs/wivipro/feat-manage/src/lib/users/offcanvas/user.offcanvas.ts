@@ -35,10 +35,12 @@ export class UserOffCanvasComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     displayName: ['', Validators.required],
     contactName: ['', Validators.required],
-    customerNumber: ['', Validators.required], //TODO validator minimum 4 length
+    customerNumber: [
+      '',
+      [Validators.required, Validators.minLength(4), Validators.maxLength(4)],
+    ],
     taxNumber: ['', Validators.required],
     phoneNumber: ['', Validators.required],
-    // password: ['', Validators.required],
     billingStreet: ['', Validators.required],
     billingNumber: ['', Validators.required],
     billingNumberExtra: [''],
@@ -137,7 +139,6 @@ export class UserOffCanvasComponent implements OnInit {
 
   // TODO validate form, cause email validator is wrong
   update(): void {
-    // TODO formHasChanged should also trigger from "sameShipping" checkbox, to compare those fields
     if (this.formHasChanged(this.initialFormValues, this.toArray(this.form))) {
       this.loading = this.notificationService.showLoading();
       const req: UpdateUserRequest = {
@@ -275,6 +276,8 @@ export class UserOffCanvasComponent implements OnInit {
     Object.keys(form.controls).forEach((key) => {
       arr.push(form.get(key)?.value);
     });
+    // add sameShipping value so we can check if that changed too
+    arr.push(`${this.sameShipping}`);
     return arr;
   }
 

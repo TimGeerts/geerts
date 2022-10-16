@@ -18,7 +18,6 @@ export class NotificationService {
 
   success(message: string): void {
     this.toastr.success(message);
-    console.log(message);
   }
   error(message: string, title: string = ''): void {
     this.toastr.error(message, title || this.defaults.errorTitle, {
@@ -30,11 +29,9 @@ export class NotificationService {
   }
   warning(message: string): void {
     this.toastr.warning(message);
-    console.warn(message);
   }
   info(message: string): void {
     this.toastr.info(message);
-    console.log(message);
   }
 
   showLoading(message: string = ''): boolean {
