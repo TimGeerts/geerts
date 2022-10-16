@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 export * from './utils';
 export * from './types/menu-item';
-export * from './types/user';
+export * from './types/fsTypes';
 export * from './types/gallery-image';
 export * from './services/notification.service';
 export * from './services/modal/modal.service';

@@ -1,6 +1,6 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import {
-  AppUser,
+  fsUser,
   AuthFunctions,
   UserFunctions,
   ModalService,
@@ -20,8 +20,8 @@ import { NEVER } from 'rxjs';
 export class ManageUsersComponent {
   @ViewChild('confirmDeleteUser') confirmDeleteUser!: TemplateRef<Element>;
 
-  users!: AppUser[];
-  filteredUsers!: AppUser[];
+  users!: fsUser[];
+  filteredUsers!: fsUser[];
   loading = false;
 
   constructor(
@@ -45,7 +45,7 @@ export class ManageUsersComponent {
   addUser = (): void => {
     const title = 'Nieuwe gebruiker';
     this.modalService
-      .showOffCanvas<UserOffCanvasComponent, AppUser>(UserOffCanvasComponent, {
+      .showOffCanvas<UserOffCanvasComponent, fsUser>(UserOffCanvasComponent, {
         title,
       })
       .subscribe((res) => {
@@ -55,10 +55,10 @@ export class ManageUsersComponent {
       });
   };
 
-  editUser = (usr: AppUser): void => {
+  editUser = (usr: fsUser): void => {
     const title = `Gebruiker '${usr.displayName}' aanpassen`;
     this.modalService
-      .showOffCanvas<UserOffCanvasComponent, AppUser>(UserOffCanvasComponent, {
+      .showOffCanvas<UserOffCanvasComponent, fsUser>(UserOffCanvasComponent, {
         usr,
         title,
       })
@@ -69,7 +69,7 @@ export class ManageUsersComponent {
       });
   };
 
-  deleteUser = (u: AppUser): void => {
+  deleteUser = (u: fsUser): void => {
     const req = {
       uid: u.uid,
     };

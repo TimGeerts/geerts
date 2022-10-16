@@ -3,7 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { AdminGuard, SharedModule, ErrorInterceptor } from '@geerts/shared';
+import {
+  AdminGuard,
+  SharedModule,
+  ErrorInterceptor,
+  AuthGuard,
+} from '@geerts/shared';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -74,10 +79,18 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         },
         {
           path: 'manage',
-
+          canActivate: [AdminGuard],
           loadChildren: () =>
             import('@geerts/wivipro/feat-manage').then(
               (module) => module.FeatManageModule
+            ),
+        },
+        {
+          path: 'profile',
+          canActivate: [AuthGuard],
+          loadChildren: () =>
+            import('@geerts/wivipro/feat-profile').then(
+              (module) => module.FeatProfileModule
             ),
         },
       ],

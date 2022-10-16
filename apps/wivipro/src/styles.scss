@@ -170,6 +170,20 @@ p > a {
   cursor: pointer;
 }
 
+.form-control.ng-dirty.ng-invalid:not(.ng-pristine):not(:focus) {
+  border-color: var(--bs-danger);
+  + i {
+    display: inline-block;
+  }
+}
+.validation-info {
+  display: none;
+  color: var(--bs-danger);
+  float: right;
+  margin-top: -22px;
+  margin-right: 6px;
+}
+
 // focus
 .no-focus {
   &:focus,
@@ -271,7 +285,6 @@ table.table {
     text-decoration: underline;
   }
 }
-
 
 // offcanvas
 .offcanvas {

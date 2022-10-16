@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 
-import { getUsers, updateUser } from './user';
+import { getUser, getUsers, updateUser } from './user';
 import { createUser, deleteUser, resetPassword } from './auth';
 import { onUpdateUser } from './triggers';
 
@@ -13,7 +13,7 @@ exports.deleteUser = deleteUser;
 // -COLLECTIONS-
 // -- 'users' --
 exports.getUsers = getUsers;
-// exports.getUser = getUser; //TODO comes with 'profile page' task (trello)
+exports.getUser = getUser;
 exports.updateUser = updateUser;
 
 // ########## TRIGGERS ##########

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppUser } from '../../../shared.module';
+import { fsUser } from '../../../shared.module';
 import { CallableFunctionService } from '../fb.functions';
 import {
   CreateUserRequest,
@@ -15,8 +15,8 @@ import {
 export class AuthFunctions {
   constructor(private callFn: CallableFunctionService) {}
 
-  createUser(req: CreateUserRequest): Observable<AppUser> {
-    return this.callFn.call<CreateUserRequest, AppUser>('createUser', req);
+  createUser(req: CreateUserRequest): Observable<fsUser> {
+    return this.callFn.call<CreateUserRequest, fsUser>('createUser', req);
   }
 
   resetPassword(

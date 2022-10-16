@@ -1,135 +1,155 @@
 <div class="offcanvas-header">
   <h5 class="offcanvas-title">{{title}}</h5>
-  <button
-    type="button"
-    class="btn-close text-reset"
-    aria-label="Close"
-    (click)="cancel()"
-  ></button>
+  <button type="button" class="btn-close text-reset" aria-label="Close" (click)="cancel()"></button>
 </div>
 <div class="offcanvas-body">
   <form [formGroup]="form">
-    <div class="mb-3">
-      <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputCustomerNumber"
-        ngbAutofocus
-        formControlName="customerNumber"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputDisplayName" class="form-label">Bedrijf</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputDisplayName"
-        formControlName="displayName"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputContactName" class="form-label">Naam</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputContactName"
-        ngbAutofocus
-        formControlName="contactName"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputTaxNumber" class="form-label">BTW</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputTaxNumber"
-        ngbAutofocus
-        formControlName="taxNumber"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control form-control-sm"
-        id="inputEmail"
-        formControlName="email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputPhone" class="form-label">Telefoonnummer</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="inputPhone"
-        formControlName="phoneNumber"
-      />
-    </div>
-    <div class="mb-3" *ngIf="action ==='create'">
-      <label for="inputPassword" class="form-label">Paswoord</label>
-      <input
-        type="password"
-        class="form-control form-control-sm"
-        id="inputPassword"
-        formControlName="password"
-      />
+    <h6>
+      <i class="fa-solid fa-user me-2"></i>
+      <span class="text-decoration-underline">Algemeen</span>
+    </h6>
+    <div class="row g-2 px-4 py-3 mt-3 mb-5 bg-secondary">
+      <div class="col-md-3">
+        <label for="inputCustomerNumber" class="form-label">Klantnummer</label>
+        <input type="text" class="form-control form-control-sm" id="inputCustomerNumber" ngbAutofocus
+          formControlName="customerNumber" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true"
+          title="Klantnummer is verplicht en moet 4 cijfers lang zijn"></i>
+      </div>
+      <div class="col-md-9">
+        <label for="inputContactName" class="form-label">Naam</label>
+        <input type="text" class="form-control form-control-sm" id="inputContactName" ngbAutofocus
+          formControlName="contactName" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Naam is verplicht"></i>
+      </div>
+      <div class="col-md-3">
+        <label for="inputTaxNumber" class="form-label">BTW</label>
+        <input type="text" class="form-control form-control-sm" id="inputTaxNumber" ngbAutofocus
+          formControlName="taxNumber" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="BTW is verplicht"></i>
+      </div>
+      <div class="col-md-9">
+        <label for="inputDisplayName" class="form-label">Bedrijf</label>
+        <input type="text" class="form-control form-control-sm" id="inputDisplayName" formControlName="displayName" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Bedrijf is verplicht"></i>
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control form-control-sm" id="inputEmail" formControlName="email" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Geen geldig e-mailadres"></i>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPhone" class="form-label">Telefoonnummer</label>
+        <input type="text" class="form-control form-control-sm" id="inputPhone" formControlName="phoneNumber" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Telefoonnummer is verplicht"></i>
+      </div>
     </div>
 
-    <div class="d-flex justify-content-between mt-5">
+    <h6>
+      <i class="fa-solid fa-location-dot me-2"></i>
+      <span class="text-decoration-underline">Adresgegevens</span>
+    </h6>
+    <div class="row g-2 px-4 py-3 mt-3 bg-secondary">
+      <div class="col-md-8">
+        <label for="inputStreet" class="form-label">Straat</label>
+        <input type="text" class="form-control form-control-sm" id="inputStreet" formControlName="billingStreet" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Straat is verplicht"></i>
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumber" class="form-label">Nummer</label>
+        <input type="text" class="form-control form-control-sm" id="inputNumber" formControlName="billingNumber" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Nummer is verplicht"></i>
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberExtra" class="form-label">Bus</label>
+        <input type="text" class="form-control form-control-sm" id="inputNumberExtra"
+          formControlName="billingNumberExtra" />
+      </div>
+      <div class="col-md-2">
+        <label for="inputZipCode" class="form-label">Postcode</label>
+        <input type="text" class="form-control form-control-sm" id="inputZipCode" formControlName="billingZipCode" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Postcode is verplicht"></i>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Woonplaats</label>
+        <input type="text" class="form-control form-control-sm" id="inputCity" formControlName="billingCity" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Woonplaats is verplicht"></i>
+      </div>
+      <div class="col-md-4">
+        <label for="inputCountry" class="form-label">Land</label>
+        <input type="text" class="form-control form-control-sm" id="inputCountry" formControlName="billingCountry" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Land is verplicht"></i>
+      </div>
+      <div class="col-md-12 mt-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="checkSameShipping" [checked]="sameShipping"
+            (change)="sameShippingChanged()" [disabled]="adminProfile" />
+          <label class="form-check-label" for="checkSameShipping">Leveringsadres is hetzelfde</label>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!sameShipping" class="row g-2 p-4 pt-1 bg-secondary">
+      <div class="col-md-8">
+        <label for="inputStreetShipping" class="form-label">Straat</label>
+        <input type="text" class="form-control form-control-sm" id="inputStreetShipping"
+          formControlName="shippingStreet" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Straat is verplicht"></i>
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberShipping" class="form-label">Nummer</label>
+        <input type="text" class="form-control form-control-sm" formControlName="shippingNumber" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Nummer is verplicht"></i>
+      </div>
+      <div class="col-md-2">
+        <label for="inputNumberExtraShipping" class="form-label">Bus</label>
+        <input type="text" class="form-control form-control-sm" id="inputNumberExtraShipping"
+          formControlName="shippingNumberExtra" />
+      </div>
+      <div class="col-md-2">
+        <label for="inputZipCodeShipping" class="form-label">Postcode</label>
+        <input type="text" class="form-control form-control-sm" id="inputZipCodeShipping"
+          formControlName="shippingZipCode" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Postcode is verplicht"></i>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCityShipping" class="form-label">Woonplaats</label>
+        <input type="text" class="form-control form-control-sm" id="inputCityShipping" formControlName="shippingCity" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Woonplaats is verplicht"></i>
+      </div>
+      <div class="col-md-4">
+        <label for="inputCountryShipping" class="form-label">Land</label>
+        <input type="text" class="form-control form-control-sm" id="inputCountryShipping"
+          formControlName="shippingCountry" />
+        <i class="far fa-circle-xmark validation-info" aria-hidden="true" title="Land is verplicht"></i>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-5" *ngIf="!adminProfile">
       <div class="btn-group" role="group" *ngIf="action ==='update'">
-        <button
-          [disabled]="loading"
-          type="button"
-          class="btn btn-sm btn-outline-danger"
-          style="width: 32px"
-          title="Verwijderen"
-          (click)="delete()"
-        >
+        <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-danger" style="width: 32px"
+          title="Verwijderen" (click)="delete()">
           <i class="fas fa-trash"></i>
         </button>
-        <button
-          [disabled]="loading"
-          type="button"
-          class="btn btn-sm btn-outline-danger"
-          title="Reset paswoord"
-          (click)="resetPassword()"
-        >
+        <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-danger" title="Reset paswoord"
+          (click)="resetPassword()">
           <i class="fas fa-key"></i>
         </button>
       </div>
       <div class="w-100 text-end">
-        <button
-          [disabled]="loading"
-          type="button"
-          class="btn btn-sm btn-outline-primary rounded px-3 me-1"
-          (click)="cancel()"
-        >
+        <button [disabled]="loading" type="button" class="btn btn-sm btn-outline-primary rounded px-3 me-1"
+          (click)="cancel()">
           <span>Annuleren</span>
           <i class="fas fa-ban"></i>
         </button>
 
-        <button
-          *ngIf="action ==='update'"
-          geertsLoadingButton
-          [loading]="loading"
-          type="button"
-          class="btn btn-sm btn-primary rounded px-3"
-          [disabled]="!form.valid"
-          (click)="update()"
-        >
+        <button *ngIf="action ==='update'" geertsLoadingButton [loading]="loading" type="button"
+          class="btn btn-sm btn-primary rounded px-3" [disabled]="!form.valid" (click)="update()">
           <span>Aanpassen</span>
           <i class="fas fa-check"></i>
         </button>
-        <button
-          *ngIf="action ==='create'"
-          geertsLoadingButton
-          [loading]="loading"
-          type="button"
-          class="btn btn-sm btn-primary rounded px-3"
-          [disabled]="!form.valid"
-          (click)="add()"
-        >
+        <button *ngIf="action ==='create'" geertsLoadingButton [loading]="loading" type="button"
+          class="btn btn-sm btn-primary rounded px-3" [disabled]="!form.valid" (click)="add()">
           <span>Aanmaken</span>
           <i class="fas fa-check"></i>
         </button>

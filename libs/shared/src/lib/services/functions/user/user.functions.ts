@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppUser } from '../../../shared.module';
+import { fsUser } from '../../../shared.module';
 import { CallableFunctionService } from '../fb.functions';
-import { UpdateUserRequest } from '../types';
+import { GetDocumentRequest, UpdateUserRequest } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +10,15 @@ import { UpdateUserRequest } from '../types';
 export class UserFunctions {
   constructor(private callFn: CallableFunctionService) {}
 
-  getUsers(): Observable<AppUser[]> {
-    return this.callFn.call<void, AppUser[]>('getUsers');
+  getUsers(): Observable<fsUser[]> {
+    return this.callFn.call<void, fsUser[]>('getUsers');
   }
 
-  updateUser(req: UpdateUserRequest): Observable<AppUser> {
-    return this.callFn.call<UpdateUserRequest, AppUser>('updateUser', req);
+  getUser(req: GetDocumentRequest): Observable<fsUser> {
+    return this.callFn.call<GetDocumentRequest, fsUser>('getUser', req);
+  }
+
+  updateUser(req: UpdateUserRequest): Observable<fsUser> {
+    return this.callFn.call<UpdateUserRequest, fsUser>('updateUser', req);
   }
 }
