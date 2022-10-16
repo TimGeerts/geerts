@@ -6,8 +6,10 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
-import { IGalleryImage } from '../shared.module';
+import { IGalleryImage, ModalService } from '../shared.module';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { InfiniteScrolling } from './services/infinite-scrolling.service';
 
 @Component({
@@ -31,8 +33,15 @@ export class ImageGridComponent implements OnInit, OnDestroy {
   imgData: IGalleryImage[] = new Array<IGalleryImage>();
   startLimit = 0;
   endLimit = 10;
+  modalOptions: NgbModalOptions = {
+    size: 'lg',
+    modalDialogClass: 'image-viewer',
+  };
 
-  constructor(private scrollService: InfiniteScrolling) {}
+  constructor(
+    private scrollService: InfiniteScrolling,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.getImages(this.startLimit, this.endLimit);
@@ -87,5 +96,19 @@ export class ImageGridComponent implements OnInit, OnDestroy {
 
   delete(img: IGalleryImage): void {
     this.deleteImage.emit(img);
+  }
+
+  show(img: IGalleryImage): void {
+    console.log(img);
+
+    const config = {
+      img,
+    };
+
+    this.modalService.show<ImageViewerComponent, boolean>(
+      ImageViewerComponent,
+      config,
+      this.modalOptions
+    );
   }
 }

@@ -94,6 +94,9 @@ export class GalleryComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       this.gallery.push({
         fileName: `https://picsum.photos/150?random=${i}`,
+        fileLarge: `https://picsum.photos/500?random=${i}`,
+        description:
+          'This is a short description of the picture you are currently viewing.',
       });
     }
   }

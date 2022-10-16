@@ -422,3 +422,39 @@ table.table {
     }
   }
 }
+
+.modal-dialog.image-viewer {
+  .modal-content {
+    border: 0;
+    background: var(--bs-dark);
+  }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    border: 0;
+    color: #fff;
+  }
+  .modal-body {
+    button {
+      color: currentColor;
+      background-color: transparent;
+      &:hover {
+        border-color: currentColor;
+      }
+    }
+    .prev > button:hover > i {
+      transform: scale(1.2);
+      transform: translateX(-0.2rem);
+      transition: 250ms ease-in-out;
+    }
+    .next > button:hover > i {
+      transform: scale(1.2);
+      transform: translateX(0.2rem);
+      transition: 250ms ease-in-out;
+    }
+  }
+  .modal-footer {
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+}
