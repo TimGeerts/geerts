@@ -98,11 +98,12 @@ export class ImageGridComponent implements OnInit, OnDestroy {
     this.deleteImage.emit(img);
   }
 
-  show(img: IGalleryImage): void {
-    console.log(img);
+  show(index: number): void {
+    console.log(index);
 
     const config = {
-      img,
+      images: this.imgData,
+      index,
     };
 
     this.modalService.show<ImageViewerComponent, boolean>(

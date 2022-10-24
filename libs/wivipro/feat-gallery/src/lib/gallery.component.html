@@ -13,9 +13,9 @@
   </div>
   <p class="mb-5"></p>
   <geerts-image-grid
-    *ngIf="assetsfolder"
+    *ngIf="imgFolder"
     [images]="gallery"
-    [path]="assetsfolder"
+    [path]="imgFolder"
     [manage]="canmanage"
     (addImage)="addImage()"
     (editImage)="editImage($event)"

@@ -20,6 +20,7 @@ import { ConfirmDeleteModalComponent } from './services/modal/templates/confirm-
 import { ConfirmResetModalComponent } from './services/modal/templates/confirm-reset.modal';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageViewerComponent } from './image-grid/image-viewer/image-viewer.component';
 
 export * from './utils';
 export * from './types/menu-item';
@@ -59,6 +60,7 @@ export * from './services/functions/user/user.functions';
     LoadingbuttonDirective,
     ConfirmDeleteModalComponent,
     ConfirmResetModalComponent,
+    ImageViewerComponent,
   ],
   exports: [
     HorizontalCardComponent,

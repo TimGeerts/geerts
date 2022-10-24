@@ -1,14 +1,25 @@
-<div class="image-grid" [ngClass]="{'manage': manage}">
+<div class="image-grid" [ngClass]="{ manage: manage }">
   <div *ngIf="manage" class="gallery-image addnew" (click)="add()">
     <i class="fas fa-plus"></i>
   </div>
   <ng-container *ngFor="let image of imgData; let i = index">
-    <div class="gallery-image" id="gimg{{ i + 1 }}" (click)="show(image)">
+    <div class="gallery-image" id="gimg{{ i + 1 }}" (click)="show(i)">
       <!-- <img src="{{ path }}thumb_{{ image.fileName }}" /> -->
-      <img src="{{image.fileName}}" />
-      <div *ngIf="manage" class="actions w-100 d-flex justify-content-between align-items-center">
-        <i class="fas fa-pen my-2 mx-4" (click)="edit(image)" title="Editeren"></i>
-        <i class="fas fa-trash my-2 mx-4" (click)="delete(image)" title="Verwijderen"></i>
+      <img src="{{ image.fileName }}" />
+      <div
+        *ngIf="manage"
+        class="actions w-100 d-flex justify-content-between align-items-center"
+      >
+        <i
+          class="fas fa-pen my-2 mx-4"
+          (click)="edit(image)"
+          title="Editeren"
+        ></i>
+        <i
+          class="fas fa-trash my-2 mx-4"
+          (click)="delete(image)"
+          title="Verwijderen"
+        ></i>
       </div>
     </div>
   </ng-container>
